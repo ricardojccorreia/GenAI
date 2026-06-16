@@ -237,7 +237,7 @@
   </div>
   <div class="agenda-block">
     <div class="agenda-time">11h00</div>
-    <div><div class="agenda-title">M3 · Prompt Engineering + Casos Práticos</div><div class="agenda-desc">4 técnicas · 3 temas à escolha (Processo / Reunião / Números) · 90 min</div></div>
+    <div><div class="agenda-title">M3 · Iniciação + Prompt Engineering</div><div class="agenda-desc">Fundamentos · Contexto/Papel/Expectativa · Padrões · Personalização · Exercícios práticos · 90 min</div></div>
   </div>
 
   <div class="divider-label">ALMOÇO · 12h30 – 14h30</div>
@@ -424,104 +424,358 @@
 ══════════════════════════════════════════════ -->
 <section id="m3">
   <div class="sec-header">
-    <div class="label">Bloco M3 · 11h00 – 12h30 · 90 min · NÚCLEO DO DIA</div>
-    <h2>Prompt Engineering + Casos Práticos</h2>
-    <p>Escolhe o teu tema e aplica as 4 técnicas ao longo do bloco.</p>
+    <div class="label">Bloco M3 · 11h00 – 12h30 · 90 min · Núcleo do workshop</div>
+    <h2>Iniciação + Prompt Engineering</h2>
+    <p>Este bloco introduz princípios práticos de engenharia de prompts para trabalho administrativo em contexto universitário. O objetivo é reduzir respostas genéricas, controlar melhor o formato de saída e transformar pedidos vagos em instruções claras, reutilizáveis e orientadas à decisão.</p>
   </div>
 
-  <div class="grid3" style="margin-bottom:1rem">
-    <div class="card" style="border-top:3px solid var(--cyan)">
-      <span class="badge badge-cyan">TEMA 1</span>
-      <h3>O Processo que nunca acaba</h3>
-      <p>Despachos · checklists · templates · arquivo</p>
+  <div class="alert alert-cyan">
+    🎯 <strong>No final do bloco</strong>, cada participante deve conseguir construir um prompt aplicável ao seu contexto real, escolher uma técnica adequada ao problema e refinar o output até ficar utilizável.
+  </div>
+
+  <!-- ── 1. O que é Engenharia de Prompts ── -->
+  <div class="divider-label">O QUE É ENGENHARIA DE PROMPTS</div>
+  <div class="card">
+    <h3>O que é Engenharia de Prompts</h3>
+    <p>A engenharia de prompts é a prática de formular instruções claras, contextualizadas e verificáveis para obter respostas mais úteis de modelos de IA generativa.</p>
+    <p style="margin-top:.5rem">Não elimina totalmente a imprevisibilidade dos modelos, mas ajuda a reduzi-la através de contexto, papel, formato, critérios e limites explícitos.</p>
+    <div class="alert alert-amber" style="margin-top:.75rem">
+      💡 <strong>Ideia-chave:</strong> conversar com IA não é apenas fazer perguntas. É orientar contexto, tarefa, critérios de qualidade e formato de resposta.
     </div>
-    <div class="card" style="border-top:3px solid var(--amber)">
-      <span class="badge badge-amber">TEMA 2</span>
-      <h3>A Reunião de Segunda-feira</h3>
-      <p>Atas · emails · ordens de trabalho · follow-ups</p>
+  </div>
+
+  <!-- ── 2. Porque importa ── -->
+  <div class="divider-label">PORQUE IMPORTA: O INPUT DETERMINA O OUTPUT</div>
+  <div class="grid2">
+    <div class="card" style="border-top:3px solid var(--red)">
+      <span class="badge badge-red">❌ PROMPT FRACO</span>
+      <div class="prompt-box" style="border-left-color:var(--red)">
+        <pre>Faz-me um email sobre a reunião.</pre>
+      </div>
+      <p style="font-size:.85rem;color:var(--slate6);margin-top:.5rem"><strong>Problemas:</strong> falta contexto · não define destinatário · não indica decisões · não define tom nem estrutura · gera várias iterações.</p>
     </div>
     <div class="card" style="border-top:3px solid var(--green)">
-      <span class="badge badge-green">TEMA 3</span>
-      <h3>Os Números do Serviço</h3>
-      <p>Relatórios · indicadores · texto a partir de tabelas</p>
+      <span class="badge badge-green">✅ PROMPT MELHOR</span>
+      <div class="prompt-box" style="border-left-color:var(--green)">
+        <pre>Redige um email formal de follow-up da reunião de serviço de hoje para os 4 participantes. Agenda: orçamento, turnos e formação. Decisões: orçamento revisto em julho; turnos reduzem em setembro. Tom: institucional, adequado à U.Porto. Formato: saudação, 3 bullets de decisões e próximos passos.</pre>
+      </div>
+      <p style="font-size:.85rem;color:var(--slate6);margin-top:.5rem"><strong>Vantagens:</strong> tom adequado · estrutura clara · contexto suficiente · menos reescrita.</p>
     </div>
   </div>
-
-  <div class="divider-label">TÉCNICA 1 · PROMPT LONGO ESTRUTURADO</div>
-
-  <div class="grid3">
-    <div class="card">
-      <span class="badge badge-cyan">TEMA 1</span>
-      <div class="prompt-box">
-        <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
-        <pre>És um assistente administrativo especializado em processos universitários.
-
-Tenho um pedido de um funcionário para alteração do regime de horário de trabalho. O processo já passou pela chefia direta (aprovou) e está agora em análise nos RH.
-
-Preciso de um despacho de resposta formal, com linguagem institucional adequada à U.Porto, que indique que o pedido foi deferido e produz efeitos a partir do próximo mês.
-
-Formato: despacho com cabeçalho, corpo e assinatura.</pre>
-      </div>
-    </div>
-    <div class="card">
-      <span class="badge badge-amber">TEMA 2</span>
-      <div class="prompt-box">
-        <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
-        <pre>És um assistente especializado em comunicação institucional universitária.
-
-Tive uma reunião de serviço com 4 pontos: (1) aprovação da ata anterior, (2) orçamento do 1.º semestre, (3) reorganização de turnos de atendimento, (4) diversos.
-
-Decisões: orçamento 12% abaixo do previsto, revisto em julho; turnos passam de 3 para 2 por dia a partir de setembro; pendente proposta de formação interna.
-
-Preciso de um resumo executivo com pontos de ação e responsáveis para enviar por email.
-
-Formato: email formal com lista de ações no final.</pre>
-      </div>
-    </div>
-    <div class="card">
-      <span class="badge badge-green">TEMA 3</span>
-      <div class="prompt-box">
-        <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
-        <pre>És um assistente de análise e comunicação de dados para serviços universitários.
-
-Tenho uma tabela com as faculdades da U.Porto, cursos de licenciatura e número de vagas em 2026.
-[tabela a anexar]
-
-Preciso de 2 parágrafos narrativos para incluir num relatório de atividade — sem jargão técnico, adequados para leitura por um dirigente.
-
-Formato: 2 parágrafos corridos, sem bullets, com os números mais relevantes em contexto.</pre>
-      </div>
-    </div>
+  <div class="card" style="background:var(--navy);border-color:var(--navy);color:var(--white);text-align:center;padding:.6rem">
+    <p style="font-size:.95rem;font-weight:700;margin:0">Mais tempo no prompt = menos tempo nas iterações.</p>
   </div>
 
-  <div class="divider-label">TÉCNICA 2 · INTERAÇÃO INVERTIDA</div>
+  <!-- ── 3. Formatos de saída ── -->
+  <div class="divider-label">FORMATOS DE SAÍDA</div>
   <div class="card">
-    <h3>Deixa a IA fazer as perguntas</h3>
+    <h3>Formatos de saída</h3>
+    <p>A IA torna-se mais útil quando o formato de saída é definido antes da resposta. O formato certo reduz trabalho manual e facilita a integração nos fluxos administrativos.</p>
+    <div class="grid3" style="margin-top:.75rem">
+      <div class="tool-card">
+        <div class="tc-name">Estrutura de dados</div>
+        <div class="tc-desc">Listas hierárquicas, tabelas, bullets, secções</div>
+      </div>
+      <div class="tool-card">
+        <div class="tc-name">Apresentações</div>
+        <div class="tc-desc">Estrutura, número de slides, tempo de apresentação</div>
+      </div>
+      <div class="tool-card">
+        <div class="tc-name">Formatos de escrita</div>
+        <div class="tc-desc">Markdown, HTML, texto institucional, wikitext</div>
+      </div>
+      <div class="tool-card">
+        <div class="tc-name">Código e automação</div>
+        <div class="tc-desc">Python, fórmulas Excel, scripts simples</div>
+      </div>
+      <div class="tool-card">
+        <div class="tc-name">Documentação técnica</div>
+        <div class="tc-desc">LaTeX, referências estruturadas, resumos técnicos</div>
+      </div>
+      <div class="tool-card">
+        <div class="tc-name">Enriquecimento visual</div>
+        <div class="tc-desc">Emojis, ícones ou sinalética simples quando fizer sentido</div>
+      </div>
+    </div>
+    <p style="font-size:.85rem;color:var(--slate6);margin-top:.75rem;font-style:italic">Definir o formato não é detalhe estético. É parte da tarefa.</p>
+  </div>
+
+  <!-- ── 4. A tríade base ── -->
+  <div class="divider-label">A TRÍADE BASE: CONTEXTO · PAPEL · EXPECTATIVA</div>
+  <div class="card">
+    <h3>A tríade base: Contexto · Papel · Expectativa</h3>
+    <p>Um bom prompt separa claramente o que o modelo precisa de saber, que função deve assumir e que resultado deve entregar.</p>
+    <div class="grid3" style="margin-top:.75rem">
+      <div class="card" style="border-top:3px solid var(--cyan);margin-bottom:0">
+        <span class="badge badge-cyan">CONTEXTO</span>
+        <p style="font-size:.85rem">O que está em causa, para quem, com que fontes e limites.</p>
+      </div>
+      <div class="card" style="border-top:3px solid var(--amber);margin-bottom:0">
+        <span class="badge badge-amber">PAPEL</span>
+        <p style="font-size:.85rem">Que função o modelo deve assumir, com que domínio, perspetiva e critérios.</p>
+      </div>
+      <div class="card" style="border-top:3px solid var(--green);margin-bottom:0">
+        <span class="badge badge-green">EXPECTATIVA</span>
+        <p style="font-size:.85rem">Que tarefa deve executar, em que formato, com que extensão e critérios de qualidade.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="badge badge-navy">TEMPLATE — copia e adapta</span>
     <div class="prompt-box">
       <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
-      <pre>Quero que me ajudes a [descreve brevemente o documento do teu tema].
+      <pre>## Contexto
+[Qual é o material, qual é o objetivo, quem é o público-alvo, que fontes contam e quais são os limites.]
 
-Antes de começares, faz-me as perguntas que precisas de ter respondidas para produzir um resultado de qualidade. Pergunta uma de cada vez e espera pela minha resposta antes de passares à próxima.</pre>
+## Papel
+[Que função o modelo deve assumir, em que domínio, com que critérios de julgamento, para que destinatário e com que estilo.]
+
+## Expectativa
+[Que tarefa deve executar, em que formato, com que extensão, com que secções obrigatórias, com que critérios de qualidade e o que deve fazer se faltar informação.]</pre>
     </div>
   </div>
 
-  <div class="divider-label">TÉCNICA 3 · ESCOLHA MÚLTIPLA</div>
   <div class="card">
-    <h3>3 versões, depois refina</h3>
+    <span class="badge badge-cyan">EXEMPLO COMPLETO — Síntese de ata para direção</span>
+    <div class="prompt-box">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>## Contexto
+Vou fornecer uma ata de reunião sobre implementação de uma solução de IA num serviço. O objetivo é preparar uma síntese para uma reunião de direção. Usa apenas o conteúdo da ata. Não inventes decisões, datas ou responsáveis.
+
+## Papel
+Atua como consultor em transformação digital, com experiência em governação de IA, adoção organizacional e gestão de mudança. Prioriza segurança, viabilidade operacional e clareza decisória.
+
+## Expectativa
+Produz uma síntese executiva em português europeu, com no máximo 500 palavras. Inclui: decisões tomadas, riscos identificados, responsáveis, pontos em aberto e 5 próximos passos priorizados. Se houver informação insuficiente, inclui uma secção final chamada "Lacunas a esclarecer".</pre>
+    </div>
+  </div>
+
+  <!-- ── 5. Prompt estruturado aplicado à U.Porto ── -->
+  <div class="divider-label">PROMPT ESTRUTURADO APLICADO À U.PORTO</div>
+  <p style="font-size:.9rem;color:var(--slate6);margin-bottom:1rem">Os exemplos seguintes mantêm os três temas práticos, mas usam a estrutura Contexto · Papel · Expectativa.</p>
+
+  <div class="card" style="border-top:3px solid var(--cyan)">
+    <span class="badge badge-cyan">TEMA 1 · O Processo que nunca acaba</span>
+    <div class="prompt-box">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>## Contexto
+Tenho um pedido de um funcionário para alteração do regime de horário de trabalho. O processo já passou pela chefia direta, que aprovou, e está agora em análise nos RH. O pedido foi deferido e produz efeitos a partir do próximo mês.
+
+## Papel
+Atua como assistente administrativo especializado em processos universitários e comunicação institucional, com foco em clareza, rigor e linguagem adequada à U.Porto.
+
+## Expectativa
+Redige um despacho de resposta formal. Usa estrutura com cabeçalho, corpo e assinatura. Não inventes normas, artigos legais ou responsáveis. Se faltar alguma informação obrigatória, assinala como "[a completar]".</pre>
+    </div>
+  </div>
+
+  <div class="card" style="border-top:3px solid var(--amber)">
+    <span class="badge badge-amber">TEMA 2 · A Reunião de Segunda-feira</span>
+    <div class="prompt-box">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>## Contexto
+Tive uma reunião de serviço com 4 pontos: aprovação da ata anterior, orçamento do 1.º semestre, reorganização de turnos de atendimento e diversos.
+
+Decisões: orçamento 12% abaixo do previsto, revisto em julho; turnos passam de 3 para 2 por dia a partir de setembro; fica pendente uma proposta de formação interna.
+
+## Papel
+Atua como assistente especializado em comunicação institucional universitária, com foco em clareza, seguimento de decisões e utilidade para equipas administrativas.
+
+## Expectativa
+Produz um email formal de resumo executivo para os participantes. Inclui decisões, pontos de ação, responsáveis quando existirem e assuntos pendentes. Se faltarem responsáveis, assinala como "a definir".</pre>
+    </div>
+  </div>
+
+  <div class="card" style="border-top:3px solid var(--green)">
+    <span class="badge badge-green">TEMA 3 · Os Números do Serviço</span>
+    <div class="prompt-box">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>## Contexto
+Tenho uma tabela com faculdades da U.Porto, cursos de licenciatura e número de vagas em 2026.
+[tabela a anexar]
+
+## Papel
+Atua como assistente de análise e comunicação de dados para serviços universitários. A tua função é transformar dados em texto claro para leitura por dirigentes.
+
+## Expectativa
+Produz 2 parágrafos narrativos para incluir num relatório de atividade. Não uses jargão técnico. Inclui apenas os números mais relevantes e evita conclusões que os dados não sustentem.</pre>
+    </div>
+  </div>
+
+  <!-- ── 6. Padrões de Prompts ── -->
+  <div class="divider-label">PADRÕES DE PROMPTS</div>
+  <div class="card">
+    <p>Padrões de prompts são estruturas repetíveis para comunicar melhor com modelos de IA. Ajudam a reduzir ambiguidades, aumentar consistência e controlar melhor o resultado.</p>
+  </div>
+
+  <div class="card">
+    <span class="badge badge-cyan">PERSONA</span>
+    <h3>Define o papel que o modelo deve assumir</h3>
+    <p style="font-size:.85rem;color:var(--slate6);margin-bottom:.6rem">Orienta perspetiva, linguagem, critérios de análise e tipo de raciocínio esperado. Funciona melhor quando está ligada a uma tarefa concreta.</p>
+    <div class="prompt-box">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>Atua como consultor sénior em administração universitária, gestão de processos e preparação de informação executiva.
+
+Transforma informação dispersa em outputs claros, rigorosos e acionáveis, adequados a dirigentes, equipas de gestão e serviços administrativos.
+
+Prioriza clareza, objetividade, consistência, identificação de riscos, opções de decisão e próximos passos.
+
+Não inventes dados, normas internas, decisões institucionais ou enquadramentos legais. Quando houver incerteza, explicita pressupostos.</pre>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="badge badge-amber">ONE-SHOT E FEW-SHOT</span>
+    <h3>Ensina pelo exemplo</h3>
+    <p style="font-size:.85rem;color:var(--slate6)">No <strong>one-shot</strong>, é dado um exemplo único de entrada e saída. No <strong>few-shot</strong>, são dados 2 a 4 exemplos para mostrar estrutura, tom, nível de detalhe, critérios e formato.</p>
+    <p style="font-size:.85rem;color:var(--slate6);margin-top:.4rem"><strong>Quando usar:</strong> quando o formato da resposta é específico, quando há uma rubrica de avaliação, quando o tom é difícil de explicar ou quando se pretende classificar casos de forma consistente.</p>
+  </div>
+
+  <div class="card">
+    <span class="badge badge-green">PERSONA-AUDIÊNCIA</span>
+    <h3>Ajusta a explicação ao destinatário</h3>
+    <p style="font-size:.85rem;color:var(--slate6);margin-bottom:.6rem">Define cargo, nível de literacia, contexto institucional, objetivo e decisão a apoiar.</p>
+    <div class="prompt-box">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>Explica este tema para uma equipa administrativa universitária sem formação técnica em IA. Usa linguagem institucional, exemplos do trabalho administrativo e evita jargão técnico. O objetivo é apoiar uma decisão prática, não produzir uma explicação académica.</pre>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="badge badge-cyan">FLIPPED INTERACTION — INTERAÇÃO INVERTIDA</span>
+    <h3>A IA faz perguntas antes de produzir o output</h3>
+    <div class="prompt-box">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>Quero que me ajudes a redigir um [tipo de documento].
+
+Antes de começares, faz-me as perguntas que precisas de ter respondidas para produzir um resultado de qualidade.
+
+Pergunta uma de cada vez e espera pela minha resposta antes de passares à próxima.</pre>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="badge badge-navy">CHAIN-OF-THOUGHT — RACIOCÍNIO ESTRUTURADO</span>
+    <h3>Análise por etapas com resposta final estruturada</h3>
+    <p style="font-size:.85rem;color:var(--slate6);margin-bottom:.6rem">Não pedir ao modelo para mostrar raciocínio interno extenso. Pedir uma resposta final estruturada por síntese, critérios, pressupostos, riscos e recomendação.</p>
+    <div class="prompt-box">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>Analisa o problema por etapas antes de responder.
+
+Na resposta final, apresenta apenas:
+1. síntese;
+2. critérios usados;
+3. pressupostos;
+4. riscos;
+5. recomendação.</pre>
+    </div>
+  </div>
+
+  <!-- ── 7. Personalização do chatbot ── -->
+  <div class="divider-label">PERSONALIZAÇÃO DO CHATBOT</div>
+  <div class="card">
+    <h3>Personalização do chatbot</h3>
+    <p>A personalização eficaz permite que a IA compreenda contexto recorrente sem obrigar o utilizador a repetir a mesma informação em todas as conversas.</p>
+    <div class="alert alert-amber" style="margin-top:.75rem">
+      💡 <strong>Regra:</strong> contexto estável deve ir para a configuração. Contexto específico da tarefa deve ir para o prompt da conversa.
+    </div>
+    <div class="grid2" style="margin-top:.75rem">
+      <div class="card" style="border-left:4px solid var(--cyan);margin-bottom:0">
+        <h3 style="font-size:.9rem;color:var(--cyan)">INSTRUÇÕES PERSONALIZADAS</h3>
+        <p style="font-size:.82rem;color:var(--slate6)">Função profissional · Serviço ou unidade · Preferência por PT-PT e tom institucional · Tipo de outputs frequentes</p>
+      </div>
+      <div class="card" style="border-left:4px solid var(--amber);margin-bottom:0">
+        <h3 style="font-size:.9rem;color:var(--amber)">PROMPT DA CONVERSA</h3>
+        <p style="font-size:.82rem;color:var(--slate6)">Ata, tabela, email ou tarefa do dia · Datas, nomes e decisões pontuais</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="badge badge-amber">TEMPLATE DE PERSONALIZAÇÃO — copia e cola nas definições do teu chatbot</span>
+    <div class="prompt-box">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>Sou [cargo] no [nome do serviço] da Universidade do Porto, na [faculdade/unidade].
+
+O meu trabalho inclui principalmente: [gestão de processos académicos, apoio a candidaturas, elaboração de documentação institucional, gestão orçamental, comunicação com estudantes e docentes].
+
+Quando me ajudas a redigir documentos, usa sempre:
+- linguagem formal e institucional, em português europeu;
+- tom neutro e profissional, adequado a correspondência oficial da U.Porto;
+- estrutura clara, com parágrafos curtos e conclusão objetiva.
+
+Evita expressões coloquiais, anglicismos desnecessários e linguagem de marketing.
+
+Se precisares de informação que não te dei, pergunta antes de avançar.
+Se não souberes algo, como regulamentos, datas ou nomes, diz que não sabes. Não inventes.</pre>
+    </div>
+    <p style="font-size:.82rem;color:var(--slate6);margin-top:.5rem"><strong>Onde configurar:</strong> ChatGPT: Definições → Personalização · Claude: Preferências / Projects → Instruções · Copilot: Personalizar o Copilot → Sobre mim</p>
+  </div>
+
+  <!-- ── 8. Erros comuns ── -->
+  <div class="divider-label">ERROS COMUNS</div>
+  <div class="card">
+    <h3>Erros comuns</h3>
+    <div class="grid2" style="margin-top:.5rem">
+      <div class="tool-card">
+        <div class="tc-name">Instruções vagas</div>
+        <div class="tc-desc">Fraco: "Responde bem." · Melhor: "Usa estrutura clara, foco prático, riscos e próximos passos."</div>
+      </div>
+      <div class="tool-card">
+        <div class="tc-name">Memória mal usada</div>
+        <div class="tc-desc">Evitar guardar datas pontuais, tarefas únicas ou decisões temporárias como se fossem contexto estável.</div>
+      </div>
+      <div class="tool-card">
+        <div class="tc-name">Contexto misturado</div>
+        <div class="tc-desc">Separar identidade profissional (configuração) de pedidos específicos da conversa (prompt).</div>
+      </div>
+      <div class="tool-card">
+        <div class="tc-name">Formato indefinido</div>
+        <div class="tc-desc">Definir sempre o formato quando o output tiver finalidade prática.</div>
+      </div>
+      <div class="tool-card">
+        <div class="tc-name">Ausência de guardrails</div>
+        <div class="tc-desc">Indicar o que o modelo deve fazer quando faltam dados, fontes, datas ou responsáveis.</div>
+      </div>
+    </div>
+    <p style="font-size:.85rem;color:var(--slate6);margin-top:.75rem;font-style:italic">Personalizar bem não significa controlar tudo. Significa configurar o suficiente para reduzir fricção sem criar rigidez.</p>
+  </div>
+
+  <!-- ── 9. Exercícios guiados ── -->
+  <div class="divider-label">EXERCÍCIOS GUIADOS</div>
+
+  <div class="card">
+    <span class="badge badge-cyan">EXERCÍCIO 1 · DEIXA A IA CONDUZIR</span>
+    <h3>Interação invertida</h3>
+    <div class="prompt-box">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>Quero redigir um [tipo de documento do teu tema].
+
+Antes de o escreveres, faz-me as perguntas que precisas.
+Pergunta uma de cada vez.</pre>
+    </div>
+    <p style="font-size:.85rem;color:var(--slate6);margin-top:.5rem">1. Responde a cada pergunta com a informação que tens. · 2. Se não souberes algo, responde "não sei, adapta". · 3. Avalia se o resultado ficou melhor do que se tivesses dado tudo de uma vez.</p>
+  </div>
+
+  <div class="card">
+    <span class="badge badge-amber">EXERCÍCIO 2 · TRÊS OPÇÕES, DEPOIS REFINA</span>
+    <h3>Escolha múltipla iterativa</h3>
     <div class="prompt-box">
       <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
       <pre>Apresenta-me 3 versões diferentes de [output do teu tema]:
-— Versão A: formal e institucional
-— Versão B: profissional mas direto
-— Versão C: curto e telegráfico
+A. formal e institucional;
+B. profissional e direto;
+C. curto e telegráfico.
 
-Não escolhas — apresenta as 3. Depois digo qual desenvolver.</pre>
+Não escolhas. Apresenta as 3. Depois digo qual desenvolver.</pre>
     </div>
+    <p style="font-size:.85rem;color:var(--slate6);margin-top:.5rem">Depois: <em>"Escolho a versão [X]. Agora desenvolve mais o ponto sobre [Y] e ajusta o tom para [Z]."</em></p>
   </div>
 
-  <div class="divider-label">TÉCNICA 4 · ITERAÇÃO</div>
   <div class="card">
-    <h3>Afinar o resultado — frases úteis</h3>
+    <span class="badge badge-green">EXERCÍCIO 3 · ITERAÇÃO E REFINAMENTO</span>
+    <h3>Frases úteis para afinar o resultado</h3>
     <div class="prompt-box">
       <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
       <pre>Reduz para metade, mantendo as ideias principais.
@@ -532,8 +786,83 @@ Reorganiza: coloca a conclusão no início.
 
 Substitui "colaboradores" por "Técnicos Superiores" em todo o texto.
 
-Só muda o parágrafo 2. O resto fica igual.</pre>
+Só muda o parágrafo 2. O resto fica igual.
+
+Acrescenta uma secção final com próximos passos.
+
+Transforma isto numa tabela com responsáveis, prazos e estado.</pre>
     </div>
+  </div>
+
+  <!-- ── 10. Casos práticos U.Porto ── -->
+  <div class="divider-label">CASOS PRÁTICOS DO DIA-A-DIA U.PORTO</div>
+  <div class="card">
+    <h3>Quando usar cada técnica</h3>
+    <table style="width:100%;border-collapse:collapse;font-size:.85rem;margin-top:.5rem">
+      <tr style="background:var(--navy);color:white">
+        <th style="padding:.5rem .75rem;text-align:left;font-weight:600">Caso</th>
+        <th style="padding:.5rem .75rem;text-align:left;font-weight:600">Técnica recomendada</th>
+      </tr>
+      <tr style="background:var(--white)"><td style="padding:.4rem .75rem;border-bottom:1px solid var(--slate2)">Redigir um ofício institucional</td><td style="padding:.4rem .75rem;border-bottom:1px solid var(--slate2);color:var(--cyan);font-weight:600;font-style:italic">Prompt estruturado + persona</td></tr>
+      <tr style="background:var(--slate1)"><td style="padding:.4rem .75rem;border-bottom:1px solid var(--slate2)">Resumir uma ata de reunião extensa</td><td style="padding:.4rem .75rem;border-bottom:1px solid var(--slate2);color:var(--cyan);font-weight:600;font-style:italic">Ficheiro anexado + formato específico</td></tr>
+      <tr style="background:var(--white)"><td style="padding:.4rem .75rem;border-bottom:1px solid var(--slate2)">Responder a um email difícil</td><td style="padding:.4rem .75rem;border-bottom:1px solid var(--slate2);color:var(--cyan);font-weight:600;font-style:italic">Interação invertida</td></tr>
+      <tr style="background:var(--slate1)"><td style="padding:.4rem .75rem;border-bottom:1px solid var(--slate2)">Preparar a apresentação de um serviço</td><td style="padding:.4rem .75rem;border-bottom:1px solid var(--slate2);color:var(--cyan);font-weight:600;font-style:italic">Escolha múltipla iterativa</td></tr>
+      <tr style="background:var(--white)"><td style="padding:.4rem .75rem;border-bottom:1px solid var(--slate2)">Redigir um despacho interno</td><td style="padding:.4rem .75rem;border-bottom:1px solid var(--slate2);color:var(--cyan);font-weight:600;font-style:italic">Prompt estruturado + iteração</td></tr>
+      <tr style="background:var(--slate1)"><td style="padding:.4rem .75rem;border-bottom:1px solid var(--slate2)">Análise comparativa de candidaturas</td><td style="padding:.4rem .75rem;border-bottom:1px solid var(--slate2);color:var(--cyan);font-weight:600;font-style:italic">Ficheiro + critérios + comparação</td></tr>
+      <tr style="background:var(--white)"><td style="padding:.4rem .75rem;border-bottom:1px solid var(--slate2)">Comunicação para newsletter interna</td><td style="padding:.4rem .75rem;border-bottom:1px solid var(--slate2);color:var(--cyan);font-weight:600;font-style:italic">Escolha múltipla + iteração</td></tr>
+      <tr style="background:var(--slate1)"><td style="padding:.4rem .75rem">Resumo executivo para a tutela</td><td style="padding:.4rem .75rem;color:var(--cyan);font-weight:600;font-style:italic">Prompt estruturado + interação invertida</td></tr>
+    </table>
+  </div>
+
+  <!-- ── 11. Exercício final ── -->
+  <div class="divider-label">EXERCÍCIO FINAL</div>
+  <div class="card">
+    <span class="badge badge-amber">EXERCÍCIO FINAL · APLICA TUDO A UM CASO TEU</span>
+    <h3>Escolhe uma tarefa real do teu dia-a-dia</h3>
+    <p style="margin-bottom:.75rem">Aplica pelo menos duas técnicas.</p>
+    <div class="grid2">
+      <div class="tool-card">
+        <div class="tc-name">1. Escolhe</div>
+        <div class="tc-desc">Uma tarefa concreta que tenhas de fazer esta semana.</div>
+      </div>
+      <div class="tool-card">
+        <div class="tc-name">2. Aplica</div>
+        <div class="tc-desc">Pelo menos duas técnicas: prompt estruturado, interação invertida, escolha múltipla ou iteração.</div>
+      </div>
+      <div class="tool-card">
+        <div class="tc-name">3. Avalia</div>
+        <div class="tc-desc">Está pronto para usar? Que ajustes faria? Quanto tempo poupaste?</div>
+      </div>
+      <div class="tool-card">
+        <div class="tc-name">4. Partilha</div>
+        <div class="tc-desc">No Meet: o caso (1 frase), as técnicas (1 frase), uma reflexão (1 frase).</div>
+      </div>
+    </div>
+    <p style="font-size:.82rem;color:var(--slate6);margin-top:.75rem;font-style:italic"><strong>Plano B sem rede:</strong> escreve o prompt em papel e antecipa a resposta esperada.</p>
+  </div>
+
+  <!-- ── 12. Síntese ── -->
+  <div class="divider-label">SÍNTESE: QUANDO USAR CADA TÉCNICA</div>
+  <div class="grid2">
+    <div class="card" style="border-left:4px solid var(--cyan)">
+      <h3 style="font-size:.95rem">Prompt estruturado</h3>
+      <p style="font-size:.85rem;color:var(--slate6)">Quando sabes exatamente o que queres e tens informação suficiente para dar.</p>
+    </div>
+    <div class="card" style="border-left:4px solid var(--amber)">
+      <h3 style="font-size:.95rem">Interação invertida</h3>
+      <p style="font-size:.85rem;color:var(--slate6)">Quando o pedido é complexo, sensível ou quando podes estar a esquecer detalhes relevantes.</p>
+    </div>
+    <div class="card" style="border-left:4px solid var(--green)">
+      <h3 style="font-size:.95rem">Escolha múltipla</h3>
+      <p style="font-size:.85rem;color:var(--slate6)">Quando ainda não tens a certeza do registo, abordagem ou estrutura mais adequada.</p>
+    </div>
+    <div class="card" style="border-left:4px solid var(--navy)">
+      <h3 style="font-size:.95rem">Iteração</h3>
+      <p style="font-size:.85rem;color:var(--slate6)">Usar sempre que a primeira resposta ainda não esteja pronta para uso.</p>
+    </div>
+  </div>
+  <div class="card" style="background:var(--navy);border-color:var(--navy);color:var(--white);text-align:center;padding:.6rem">
+    <p style="font-size:.95rem;margin:0">Não há uma técnica certa para todos os casos. Há padrões que se reconhecem com prática.</p>
   </div>
 </section>
 

@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IA no Trabalho Administrativo · U.Porto · 16 jun 2026</title>
+<style>
+  :root {
+    --navy:   #0D2D52;
+    --cyan:   #0891B2;
+    --amber:  #F59E0B;
+    --green:  #10B981;
+    --red:    #DC2626;
+    --slate9: #1E293B;
+    --slate6: #475569;
+    --slate2: #E2E8F0;
+    --slate1: #F1F5F9;
+    --white:  #FFFFFF;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--slate1); color: var(--slate9); line-height: 1.6; }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--navy);
+    color: var(--white);
+    padding: 2rem 1.5rem 1.5rem;
+    text-align: center;
+  }
+  header .tag {
+    font-size: .75rem; font-weight: 700; letter-spacing: .2em;
+    color: var(--cyan); text-transform: uppercase; margin-bottom: .5rem;
+  }
+  header h1 { font-size: clamp(1.4rem, 4vw, 2.2rem); font-weight: 800; line-height: 1.2; margin-bottom: .5rem; }
+  header p  { font-size: .95rem; color: #B8D4E8; }
+
+  /* ── NAV TABS ── */
+  nav {
+    background: var(--navy);
+    border-top: 1px solid rgba(255,255,255,.1);
+    display: flex; flex-wrap: wrap; justify-content: center; gap: .25rem;
+    padding: .6rem 1rem;
+    position: sticky; top: 0; z-index: 100;
+  }
+  nav a {
+    color: #B8D4E8; font-size: .8rem; font-weight: 600;
+    text-decoration: none; padding: .35rem .75rem;
+    border-radius: 99px; border: 1px solid transparent;
+    transition: all .15s;
+  }
+  nav a:hover, nav a.active { background: var(--cyan); color: var(--white); border-color: var(--cyan); }
+
+  /* ── MAIN ── */
+  main { max-width: 960px; margin: 0 auto; padding: 1.5rem 1rem 4rem; }
+
+  /* ── SECTIONS ── */
+  section { display: none; }
+  section.active { display: block; }
+
+  /* ── SECTION HEADER ── */
+  .sec-header { margin-bottom: 1.25rem; }
+  .sec-header .label {
+    font-size: .7rem; font-weight: 700; letter-spacing: .2em;
+    color: var(--cyan); text-transform: uppercase; margin-bottom: .25rem;
+  }
+  .sec-header h2 { font-size: 1.6rem; font-weight: 800; color: var(--navy); }
+  .sec-header p  { font-size: .9rem; color: var(--slate6); margin-top: .25rem; }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--white); border-radius: .75rem;
+    border: 1px solid var(--slate2); padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,.06);
+  }
+  .card h3 { font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: .4rem; }
+  .card p  { font-size: .88rem; color: var(--slate6); }
+
+  /* ── GRID ── */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  @media(max-width:640px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  /* ── TOOL CARD ── */
+  .tool-card {
+    background: var(--white); border-radius: .75rem;
+    border: 1px solid var(--slate2); padding: 1rem 1.25rem;
+    display: flex; flex-direction: column; gap: .3rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,.06);
+  }
+  .tool-card .tc-name { font-size: .95rem; font-weight: 700; color: var(--navy); }
+  .tool-card .tc-desc { font-size: .82rem; color: var(--slate6); }
+  .tool-card a {
+    display: inline-block; margin-top: .4rem;
+    font-size: .8rem; font-weight: 600; color: var(--cyan);
+    text-decoration: none; border: 1px solid var(--cyan);
+    padding: .2rem .65rem; border-radius: 99px;
+  }
+  .tool-card a:hover { background: var(--cyan); color: var(--white); }
+
+  /* ── BADGE ── */
+  .badge {
+    display: inline-block; font-size: .7rem; font-weight: 700;
+    padding: .15rem .5rem; border-radius: 99px; margin-bottom: .35rem;
+    letter-spacing: .05em; text-transform: uppercase;
+  }
+  .badge-cyan   { background: #E0F2FE; color: #0369A1; }
+  .badge-amber  { background: #FEF3C7; color: #92400E; }
+  .badge-green  { background: #D1FAE5; color: #065F46; }
+  .badge-navy   { background: #DBEAFE; color: var(--navy); }
+  .badge-red    { background: #FEE2E2; color: #991B1B; }
+
+  /* ── PROMPT BOX ── */
+  .prompt-box {
+    background: var(--slate1); border-left: 4px solid var(--cyan);
+    border-radius: 0 .5rem .5rem 0; padding: .9rem 1rem;
+    margin: .75rem 0; position: relative;
+  }
+  .prompt-box pre {
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: .82rem; color: var(--slate9);
+    white-space: pre-wrap; word-break: break-word;
+  }
+  .copy-btn {
+    position: absolute; top: .5rem; right: .5rem;
+    background: var(--cyan); color: var(--white);
+    border: none; cursor: pointer; border-radius: .35rem;
+    font-size: .72rem; font-weight: 600; padding: .2rem .55rem;
+  }
+  .copy-btn:hover { background: var(--navy); }
+
+  /* ── AGENDA ── */
+  .agenda-block {
+    display: flex; gap: 1rem; align-items: flex-start;
+    padding: .8rem 1rem; background: var(--white);
+    border-radius: .6rem; border: 1px solid var(--slate2);
+    margin-bottom: .5rem;
+  }
+  .agenda-time {
+    min-width: 3.2rem; font-size: .9rem; font-weight: 800;
+    color: var(--cyan); padding-top: .1rem;
+  }
+  .agenda-time.amber { color: var(--amber); }
+  .agenda-title  { font-size: .92rem; font-weight: 700; color: var(--navy); }
+  .agenda-desc   { font-size: .82rem; color: var(--slate6); }
+  .agenda-pause  { background: var(--slate1); }
+  .agenda-pause .agenda-title { color: var(--slate6); font-weight: 500; font-style: italic; }
+
+  /* ── DIVIDER ── */
+  .divider { border: none; border-top: 1px solid var(--slate2); margin: 1.5rem 0; }
+  .divider-label {
+    text-align: center; margin: 1.25rem 0 1rem;
+    font-size: .75rem; font-weight: 700; color: var(--slate6);
+    letter-spacing: .15em; text-transform: uppercase;
+  }
+
+  /* ── ALERT ── */
+  .alert {
+    padding: .75rem 1rem; border-radius: .5rem; margin-bottom: 1rem;
+    font-size: .85rem; font-weight: 600;
+  }
+  .alert-amber { background: #FEF3C7; color: #92400E; border: 1px solid var(--amber); }
+  .alert-red   { background: #FEE2E2; color: #991B1B; border: 1px solid var(--red); }
+  .alert-cyan  { background: #E0F2FE; color: #0369A1; border: 1px solid var(--cyan); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy); color: #8AA9C4;
+    text-align: center; font-size: .8rem; padding: 1.5rem;
+    margin-top: 3rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="tag">Universidade do Porto · 16 de junho de 2026</div>
+  <h1>IA Aplicada ao Trabalho<br>Administrativo</h1>
+  <p>Hub de recursos · Prompts · Ferramentas · Agenda</p>
+</header>
+
+<nav>
+  <a href="#" class="active" data-sec="agenda">Agenda</a>
+  <a href="#" data-sec="ferramentas">Ferramentas</a>
+  <a href="#" data-sec="m1">M1</a>
+  <a href="#" data-sec="m2">M2</a>
+  <a href="#" data-sec="m3">M3</a>
+  <a href="#" data-sec="t1">T1</a>
+  <a href="#" data-sec="t2">T2</a>
+  <a href="#" data-sec="t3">T3</a>
+  <a href="#" data-sec="recursos">Recursos</a>
+</nav>
+
+<main>
+
+<!-- ══════════════════════════════════════════════
+     AGENDA
+══════════════════════════════════════════════ -->
+<section id="agenda" class="active">
+  <div class="sec-header">
+    <div class="label">Programa do dia</div>
+    <h2>Agenda — 16 jun 2026</h2>
+    <p>Auditório Ruy Luís Gomes · Sala 462 · Universidade do Porto</p>
+  </div>
+
+  <div class="alert alert-cyan" style="text-align:center;font-size:1rem">
+    📹 <strong>Google Meet do workshop:</strong> &nbsp;
+    <a href="https://meet.google.com/wct-qgbu-tkf" id="meet-link" style="color:var(--navy);font-weight:700" target="_blank">meet.google.com/wct-qgbu-tkf</a>
+    &nbsp;— usa para partilhar prompts e outputs durante o dia
+  </div>
+
+  <div class="card" style="background:var(--navy);color:var(--white);border-color:var(--navy);">
+    <p style="font-size:.85rem;color:#B8D4E8;margin-bottom:.25rem;">ANTES DE COMEÇAR</p>
+    <p style="font-size:.9rem;">Liga-te ao <strong style="color:var(--cyan)">Eduroam</strong> · Abre o teu chatbot · Responde ao questionário pré (QR code nos slides)</p>
+  </div>
+
+  <div class="divider-label">MANHÃ · 09h30 – 12h30</div>
+
+  <div class="agenda-block">
+    <div class="agenda-time">09h30</div>
+    <div><div class="agenda-title">Acolhimento e questionário pré</div><div class="agenda-desc">Apresentações · ligação ao hub · questionário inicial (QR code)</div></div>
+  </div>
+  <div class="agenda-block">
+    <div class="agenda-time">09h45</div>
+    <div><div class="agenda-title">M1 · Enquadramento e primeira experiência</div><div class="agenda-desc">O que a IA já faz · panorama de ferramentas · primeira pergunta ao chatbot</div></div>
+  </div>
+  <div class="agenda-block">
+    <div class="agenda-time">10h15</div>
+    <div><div class="agenda-title">M2 · Limites, alucinações e fake news</div><div class="agenda-desc">Como funcionam os LLMs · privacidade · AI Slop · exercícios práticos</div></div>
+  </div>
+  <div class="agenda-block agenda-pause">
+    <div class="agenda-time">10h45</div>
+    <div><div class="agenda-title">Pausa</div></div>
+  </div>
+  <div class="agenda-block">
+    <div class="agenda-time">11h00</div>
+    <div><div class="agenda-title">M3 · Prompt Engineering + Casos Práticos</div><div class="agenda-desc">4 técnicas · 3 temas à escolha (Processo / Reunião / Números) · 90 min</div></div>
+  </div>
+
+  <div class="divider-label">ALMOÇO · 12h30 – 14h30</div>
+
+  <div class="divider-label">TARDE · 14h30 – 17h30</div>
+
+  <div class="agenda-block">
+    <div class="agenda-time amber">14h30</div>
+    <div><div class="agenda-title">T1 · IA e Folhas de Cálculo</div><div class="agenda-desc">Live demo com os vossos dados do questionário · análise ao vivo</div></div>
+  </div>
+  <div class="agenda-block">
+    <div class="agenda-time amber">15h30</div>
+    <div><div class="agenda-title">T2 · Ferramentas Avançadas</div><div class="agenda-desc">NotebookLM · Procurar vs Deep Research · PDFs · Projects · Copilot</div></div>
+  </div>
+  <div class="agenda-block agenda-pause">
+    <div class="agenda-time amber">16h00</div>
+    <div><div class="agenda-title">Pausa</div></div>
+  </div>
+  <div class="agenda-block">
+    <div class="agenda-time amber">16h15</div>
+    <div><div class="agenda-title">T3 · Atelier por Perfil</div><div class="agenda-desc">Grupos: Documentos · Dados · Processos · aplica ao teu caso real</div></div>
+  </div>
+  <div class="agenda-block">
+    <div class="agenda-time amber">17h00</div>
+    <div><div class="agenda-title">T4 · Encerramento e questionário pós</div><div class="agenda-desc">Ética · recursos para continuar · Q&A · questionário final (QR code)</div></div>
+  </div>
+
+  <div style="margin-top:1.5rem" class="alert alert-cyan">
+    💡 Usa o menu no topo para navegar entre blocos e aceder aos prompts de cada exercício.
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     FERRAMENTAS
+══════════════════════════════════════════════ -->
+<section id="ferramentas">
+  <div class="sec-header">
+    <div class="label">Links rápidos</div>
+    <h2>Ferramentas do dia</h2>
+    <p>Abre já as que vais usar. Sessão iniciada, sem popups no meio dos exercícios.</p>
+  </div>
+
+  <div class="divider-label">CHATBOTS GENERALISTAS</div>
+  <div class="grid3">
+    <div class="tool-card">
+      <div class="tc-name">ChatGPT</div>
+      <div class="tc-desc">OpenAI · gratuito e Plus · o mais conhecido</div>
+      <a href="https://chatgpt.com" target="_blank">Abrir →</a>
+    </div>
+    <div class="tool-card">
+      <div class="tc-name">Claude</div>
+      <div class="tc-desc">Anthropic · Projects e Skills · Cowork</div>
+      <a href="https://claude.ai" target="_blank">Abrir →</a>
+    </div>
+    <div class="tool-card">
+      <div class="tc-name">Copilot</div>
+      <div class="tc-desc">Microsoft · integrado no M365 · disponível na U.Porto (alguns)</div>
+      <a href="https://copilot.microsoft.com" target="_blank">Abrir →</a>
+    </div>
+    <div class="tool-card">
+      <div class="tc-name">Gemini</div>
+      <div class="tc-desc">Google · integrado com Drive e Docs</div>
+      <a href="https://gemini.google.com" target="_blank">Abrir →</a>
+    </div>
+    <div class="tool-card">
+      <div class="tc-name">Perplexity</div>
+      <div class="tc-desc">Pesquisa web com IA · bom para investigação com fontes</div>
+      <a href="https://perplexity.ai" target="_blank">Abrir →</a>
+    </div>
+  </div>
+
+  <div class="divider-label">FERRAMENTAS ESPECIALIZADAS</div>
+  <div class="grid3">
+    <div class="tool-card">
+      <div class="tc-name">NotebookLM</div>
+      <div class="tc-desc">Google · análise de documentos · grounding · podcasts</div>
+      <a href="https://notebooklm.google.com" target="_blank">Abrir →</a>
+    </div>
+    <div class="tool-card">
+      <div class="tc-name">DeepL Write</div>
+      <div class="tc-desc">Escrita assistida · tradução de alta qualidade</div>
+      <a href="https://www.deepl.com/write" target="_blank">Abrir →</a>
+    </div>
+    <div class="tool-card">
+      <div class="tc-name">Gamma</div>
+      <div class="tc-desc">Apresentações com IA em minutos</div>
+      <a href="https://gamma.app" target="_blank">Abrir →</a>
+    </div>
+  </div>
+
+  <div class="divider-label">QUESTIONÁRIOS</div>
+  <div class="grid2">
+    <div class="tool-card">
+      <div class="tc-name">📋 Questionário Pré-formação</div>
+      <div class="tc-desc">Preenche antes das 09h45 · anónimo · 3 min</div>
+      <a href="https://forms.gle/fD4tykXthSUvnRvN6" target="_blank">Abrir formulário →</a>
+    </div>
+    <div class="tool-card">
+      <div class="tc-name">📋 Questionário Pós-formação</div>
+      <div class="tc-desc">Preenche no final · avaliação + o que levas daqui</div>
+      <a href="https://forms.gle/Bb611q29QpPcN9BSA" target="_blank">Abrir formulário →</a>
+    </div>
+  </div>
+
+  <div class="divider-label">QR CODES — digitaliza com o telemóvel</div>
+  <div class="grid3" style="max-width:600px;margin:0 auto">
+    <div style="text-align:center">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgQAAAIECAIAAADpYKHBAAAKU0lEQVR4nO3c27EjyREFwbi0+V5RqAzlpDIUhQpgNRhr4xQTWYC7AOhG4xFWP+fn9XoFwHf7x7tvAID3EwMAxAAAMQAgMQAgMQAgMQAgMQAgMQAgMQAgMQAgMQAgMQAgMQAgMQAgMQAgMQAgMQAgMQAgMQAgMQAgMQAgMQAgMQAgMQAgMQAgMQAgMQAgMQAgMQAgMQAgMQAgMQAgMQAgMQCg+jV5sb/++a/Jy63y3//8e+xap57zk3ue/ExP3c/k+9p2z5Ovc4r/jRlOBgCIAQBiAEBiAEBiAEBiAEBiAEBiAEBiAEBiAEBiAEDD20RPTG5xnHJqO+XGTZgb94u2XetTX2fy+/zN/xunOBkAIAYAiAEAiQEAiQEAiQEAiQEAiQEAiQEAiQEAiQEALdwmeuJTt24mbdsUOuXUHs6nfu6nPtMbn4//jd9zMgBADAAQAwASAwASAwASAwASAwASAwASAwASAwASAwC6dJvom53aVzm14XPjftETp57PqWs9sW0PZ9v98HtOBgCIAQBiAEBiAEBiAEBiAEBiAEBiAEBiAEBiAEBiAEC2ia5zai9ocjfGxtGea01+7tvuh99zMgBADAAQAwASAwASAwASAwASAwASAwASAwASAwASAwC6dJvom/dMTm3dnHqdya2kyZ2fG7ebJp/hjb/BG+95kpMBAGIAgBgAkBgAkBgAkBgAkBgAkBgAkBgAkBgAkBgA0MJtosn9mRvduGMzadvz+dTX2ebGe97GyQAAMQBADABIDABIDABIDABIDABIDABIDABIDABIDACofl6v17vvgTc4teWybTPnyes8MXmtbSZ3fj71Gd7IyQAAMQBADABIDABIDABIDABIDABIDABIDABIDABIDADo0m2ibRs1k7ZtAW0zuXVz437Rtk2qbdeatO274WQAgBgAIAYAJAYAJAYAJAYAJAYAJAYAJAYAJAYAJAYANLxNNLlVcsrkzs+Ne0o33vM2257hp36fb9xTmvyvczIAQAwAEAMAEgMAEgMAEgMAEgMAEgMAEgMAEgMAEgMAql/vvoH/xeSmx+TGyLatksltmW07Nk9sez6T341TvnkLaBsnAwDEAAAxACAxACAxACAxACAxACAxACAxACAxACAxAKD6eb1e776Ht9m2izJp25bLN28KbdvM2XY/T2y7523384STAQBiAIAYAJAYAJAYAJAYAJAYAJAYAJAYAJAYAJAYANDCbaIbNz0+daPmm9ll+nOTv4sntv0Gt/3enQwAEAMAxACAxACAxACAxACAxACAxACAxACAxACAxACAFm4TPXHj5skp23ZaTl3riW2f+xPb7ueb3fg9tE0EwCgxAEAMABADABIDABIDABIDABIDABIDABIDABIDAKpfkxfbtqtjq+TPr/Xknk+9r23P8MZNoW3vfdv93PiZnuJkAIAYACAGACQGACQGACQGACQGACQGACQGACQGACQGAFQ/r9dr7GLbdj8md36e2LbddOO1nvjULalt72vb7/2UG7/zTzgZACAGAIgBAIkBAIkBAIkBAIkBAIkBAIkBAIkBAIkBANWvd9/AO23bYJncIZnc+Tnl1Oe1bZPqickdpG3f+Rt/XzdyMgBADAAQAwASAwASAwASAwASAwASAwASAwASAwASAwAa3iaa3MNxLf7fbtx3emLb/dxocnPpFCcDAMQAADEAIDEAIDEAIDEAIDEAIDEAIDEAIDEAIDEAoOFtolO2bQGd2hjZdq1J2z7TG237Hm57zpO/923v/QknAwDEAAAxACAxACAxACAxACAxACAxACAxACAxACAxAKDhbaJT2ylPTG6DbNsUenKtyX2Vyd2hydeZfD6Tn9fk73Tbf8I37xc5GQAgBgCIAQCJAQCJAQCJAQCJAQCJAQCJAQCJAQCJAQANbxOdsm0bZNu1nti2izLpm9/7E9v2r27c0bqRkwEAYgCAGACQGACQGACQGACQGACQGACQGACQGACQGABQ/bxer3ffw9vcuPOzbQfJ5tLvnXpfk7btBW37bty4ufSEkwEAYgCAGACQGACQGACQGACQGACQGACQGACQGACQGABQ/Zq82LaNkVO2bYw8MbmZs+35TL73bZ/7pFOf+6mdn23fw22cDAAQAwDEAIDEAIDEAIDEAIDEAIDEAIDEAIDEAIDEAICGt4meOLVDcmrz5JQb73nb85l06r1P7nFt2/761Gc4+TqTnAwAEAMAxACAxACAxACAxACAxACAxACAxACAxACAxACAhreJtm3dbNt72bYt88S2LZfJTZgb92dO2fZZ8OecDAAQAwDEAIDEAIDEAIDEAIDEAIDEAIDEAIDEAIDEAICGt4kmTW6ebNsdOnWtG1/nmz/3ydeZNPmcn7hxR+sJJwMAxAAAMQAgMQAgMQAgMQAgMQAgMQAgMQAgMQAgMQCg4W2iyf2QJz51Y+TUtbZ9Xk9su+cbt4Bu3NH65u2mU5wMABADAMQAgMQAgMQAgMQAgMQAgMQAgMQAgMQAgMQAgIa3iSZ3P05tnkzuF32zbc9w2/1se+/bfOrO2CQnAwDEAAAxACAxACAxACAxACAxACAxACAxACAxACAxAKD6eb1eYxc7ta8yuTFy4ybM5L7Kpz6fU7Z9V298ht9scgfJyQAAMQBADABIDABIDABIDABIDABIDABIDABIDABIDACofk1ebHJn49S1Ju95297Lts2cye2dJ775u3HKjc/wU/ednAwAEAMAxACAxACAxACAxACAxACAxACAxACAxACAxACAhreJtm1xTLpxM+fUXtAT2/aLnrzOqWtNPucnJp/hE9s2qbbdzylOBgCIAQBiAEBiAEBiAEBiAEBiAEBiAEBiAEBiAEBiAEDD20RP3LjpMbkbc+MGy+SWy7adnye23c+2Z7jtP2Hbd/4UJwMAxAAAMQAgMQAgMQAgMQAgMQAgMQAgMQAgMQAgMQCghdtET3zqLsqpa03uopz6LCZ3kJ7Y9ny27diccuMu06dyMgBADAAQAwASAwASAwASAwASAwASAwASAwASAwASAwC6dJuIP3fjFtC2zaVT19q2h/Ope0rbNs0mv2NPOBkAIAYAiAEAiQEAiQEAiQEAiQEAiQEAiQEAiQEAiQEA2SZaZdt2yuTrTG4lTe69bHs+n+rUb2fbZtckJwMAxAAAMQAgMQAgMQAgMQAgMQAgMQAgMQAgMQAgMQCgS7eJPnWDZXLH5sYtoG37PDduSU1ea9vOz7ZrbeNkAIAYACAGACQGACQGACQGACQGACQGACQGACQGACQGAFQ/r9dr7GKTWy7bfPPeyynbvj+Tz/mUyb2pGzeFntj2Wz7FyQAAMQBADABIDABIDABIDABIDABIDABIDABIDABIDABoeJsIgJ2cDAAQAwDEAIDEAIDEAIDEAIDEAIDEAIDEAIDEAIDEAIDEAIDEAIDEAIDEAIDEAIDEAIDEAIDEAIDEAIDEAIDEAIDEAIDEAIDEAIDEAIDEAIDEAIDEAIDEAIDEAIDEAIDEAIDEAIDEAIDqb3gZzkX/uRHQAAAAAElFTkSuQmCC" style="width:140px;height:140px;border-radius:.5rem;border:2px solid var(--slate2)">
+      <p style="font-size:.8rem;font-weight:700;color:var(--cyan);margin-top:.4rem">HUB DO WORKSHOP</p>
+      <p style="font-size:.7rem;color:var(--slate6)">ricardojccorreia.github.io/GenAI</p>
+    </div>
+    <div style="text-align:center">
+      <img src="data:image/png;base64,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" style="width:140px;height:140px;border-radius:.5rem;border:2px solid var(--amber)">
+      <p style="font-size:.8rem;font-weight:700;color:var(--amber);margin-top:.4rem">QUESTIONÁRIO PRÉ</p>
+      <p style="font-size:.7rem;color:var(--slate6)">Preenche antes das 09h45</p>
+    </div>
+    <div style="text-align:center">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgQAAAIECAIAAADpYKHBAAAKZklEQVR4nO3cwW3kzBVG0Stj1g7FyThOJ+NQnEB77X8xoDGFp1fUOQE0yW5KF7X5vj6fTwD8bH/77hsA4PuJAQBiAIAYAJAYAJAYAJAYAJAYAJAYAJAYAJAYAJAYAJAYAJAYAJAYAJAYAJAYAJAYAJAYAJAYAJAYAJAYAJAYAJAYAJAYAJAYAJAYAJAYAJAYAJAYAJAYAJAYAJAYAJAYAJAYAFD9mrzY3//xz8nLrfKff//ryOdMfodP7vnU/Zz6fp7Y9h0+se17nrwf/zdmOBkAIAYAiAEAiQEAiQEAiQEAiQEAiQEAiQEAiQEAiQEADW8TPTG5xXHKtu2UbZtCT661bXvnJ1/ryW+xbVPI/40/52QAgBgAIAYAJAYAJAYAJAYAJAYAJAYAJAYAJAYAJAYAtHCb6AmbJ3/u1LbMW/d5brRtb2rb7+X/xu85GQAgBgCIAQCJAQCJAQCJAQCJAQCJAQCJAQCJAQCJAQBduk3E753ajTm1UfPEto2jU881ueFz6rlu3B3izzkZACAGAIgBAIkBAIkBAIkBAIkBAIkBAIkBAIkBAIkBANkmWuXUJsyp/ZknbNTM2LY3Zb/ofZwMABADAMQAgMQAgMQAgMQAgMQAgMQAgMQAgMQAgMQAgC7dJnrr5smp5zq1P3PqfrZda5vJTaon/H39TE4GAIgBAGIAQGIAQGIAQGIAQGIAQGIAQGIAQGIAQGIAQAu3iW7cljllcqNm237RE9uea9um0BPbnusnb1Jt42QAgBgAIAYAJAYAJAYAJAYAJAYAJAYAJAYAJAYAJAYANLxNNLljw5/btjt0yo3v4bbvZ9v98OecDAAQAwDEAIDEAIDEAIDEAIDEAIDEAIDEAIDEAIDEAICGt4lOObWLcmrzZHKn5YlT2zI/eRNm8vuZ3ALa9rtP/i1ve/ZtnAwAEAMAxACAxACAxACAxACAxACAxACAxACAxACAxACAFm4TTe6HnLrW5P1s20Ha9nv95P2ZU/s8296xUyb3i258D50MABADAMQAgMQAgMQAgMQAgMQAgMQAgMQAgMQAgMQAgOrr8/mMXWxy92Obbc914/088dZ345Rt2zv+J+zhZACAGAAgBgAkBgAkBgAkBgAkBgAkBgAkBgAkBgAkBgBUvyYvtm2rZNvnnHJq8+TGzZwn3rqDdOp+bnxXT11r2286yckAADEAQAwASAwASAwASAwASAwASAwASAwASAwASAwAaHibaNLkjs2pPZPJzZzJTZhTbtyNmdy/mnTjzo+/099zMgBADAAQAwASAwASAwASAwASAwASAwASAwASAwASAwAa3ibatsVxyuRWySnbdmMmnXoPb9wd2rYpNPkdTn7OjZwMABADAMQAgMQAgMQAgMQAgMQAgMQAgMQAgMQAgMQAgIa3iW7ccjm1Q7Jt62bb5zwx+Vucsu07fGLb39db94K27bA5GQAgBgCIAQCJAQCJAQCJAQCJAQCJAQCJAQCJAQCJAQDV1+fzGbvYth2SbdsgT/zkZ39i2zv2xI37RTduW/F7TgYAiAEAYgBAYgBAYgBAYgBAYgBAYgBAYgBAYgBAYgBAC7eJnti2wfLEtnt+697Ltk2hbX7yu/HET35/nAwAEAMAxACAxACAxACAxACAxACAxACAxACAxACAxACA6td338BfPdnrmNwLunFT6NR3uO1znjj1e526n23f8ymTv9e2Z598xyafy8kAADEAQAwASAwASAwASAwASAwASAwASAwASAwASAwAaOE20aRtuzHbrnXKjbtDN27mnPqet9n2u5+61jZOBgCIAQBiAEBiAEBiAEBiAEBiAEBiAEBiAEBiAEBiAEDD20STOy2TJp9rcjPnxi2Xtz77tns+dT+nbPsOt30/TzgZACAGAIgBAIkBAIkBAIkBAIkBAIkBAIkBAIkBAIkBANXX5/P57nv4H6f2OrZt+DyxbX9m8lo3mtyW2bYBte3v4olt97ONkwEAYgCAGACQGACQGACQGACQGACQGACQGACQGACQGABQ/fruG/irbTskT9x4z0/c+Fxv3Y15Ytv2zqn9ohv3lLb9Fk84GQAgBgCIAQCJAQCJAQCJAQCJAQCJAQCJAQCJAQCJAQAt3CZ6sumxbTvl1LXeup1y48bRtp2oJybfn1NO3fO2Z79xI8vJAAAxAEAMAEgMAEgMAEgMAEgMAEgMAEgMAEgMAEgMAGh4m2hyY2RyG8S1Zmy7nye23fO2naht7/OT53rr/zEnAwDEAAAxACAxACAxACAxACAxACAxACAxACAxACAxAKDhbaJTOxs37pm81U9+9kmTW0CT2zvb9nl+8t+7kwEAYgCAGACQGACQGACQGACQGACQGACQGACQGACQGADQ8DbREzdusExup5xyajdmm8nfnd+b3PmZ/E3f+m44GQAgBgCIAQCJAQCJAQCJAQCJAQCJAQCJAQCJAQCJAQAt3CY6ZXLz5Im37pk8MbkXNPk529z4jk3e8+RveuOmmZMBAGIAgBgAkBgAkBgAkBgAkBgAkBgAkBgAkBgAkBgA0PA20andmFNuvJ8ntm2evHV36MZ344ltv8W293nb/ZziZACAGAAgBgAkBgAkBgAkBgAkBgAkBgAkBgAkBgAkBgBUX5/P57vv4f92407LKdt2Y25046bQqXue3AK68f156+7QE04GAIgBAGIAQGIAQGIAQGIAQGIAQGIAQGIAQGIAQGIAQJduE73Vto2jJyZ3kCb3lLZ9P6eu9cSN3/MTtpJ+z8kAADEAQAwASAwASAwASAwASAwASAwASAwASAwASAwAqH5NXuzGbZBTTm2MnNqNmfwt3rpf9MTktsy2TaFT15rcd3pi2zt2ipMBAGIAgBgAkBgAkBgAkBgAkBgAkBgAkBgAkBgAkBgA0PA20ROTGyOnbNt7mfycJ7bttEy+Y9t2kG7c1bnxf8KN37OTAQBiAIAYAJAYAJAYAJAYAJAYAJAYAJAYAJAYAJAYANDCbaIntu29THrrftGkyeea3Hc69Vzb7vlGNz6XkwEAYgCAGACQGACQGACQGACQGACQGACQGACQGACQGADQpdtEbzW5Z3LqWpOfc2pPadLkXtDkFtC2jaNtbtzscjIAQAwAEAMAEgMAEgMAEgMAEgMAEgMAEgMAEgMAEgMAsk30Sjfuokxu5pza8Hnr9s6N78/kbtXkuzrJyQAAMQBADABIDABIDABIDABIDABIDABIDABIDABIDADo0m2ibZsep7z1ud7qxo2abTtIk/czuSV149+ykwEAYgCAGACQGACQGACQGACQGACQGACQGACQGACQGADQwm2ibdspb3VqX+WtOy2TOzY/2al37JRT17pxt8rJAAAxAEAMAEgMAEgMAEgMAEgMAEgMAEgMAEgMAEgMAKi+Pp/Pd98DAN/MyQAAMQBADABIDABIDABIDABIDABIDABIDABIDABIDABIDABIDABIDABIDABIDABIDABIDABIDABIDABIDABIDABIDABIDABIDABIDABIDABIDABIDABIDABIDABIDABIDABIDABIDACo/gumUq3siMNGUQAAAABJRU5ErkJggg==" style="width:140px;height:140px;border-radius:.5rem;border:2px solid var(--green)">
+      <p style="font-size:.8rem;font-weight:700;color:var(--green);margin-top:.4rem">QUESTIONÁRIO PÓS</p>
+      <p style="font-size:.7rem;color:var(--slate6)">Preenche no final do dia</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     M1
+══════════════════════════════════════════════ -->
+<section id="m1">
+  <div class="sec-header">
+    <div class="label">Bloco M1 · 09h45 – 10h15 · 30 min</div>
+    <h2>Enquadramento e Primeira Experiência</h2>
+    <p>O que a IA já faz bem — e onde tropeça.</p>
+  </div>
+
+  <div class="alert alert-cyan">🎯 Objetivo: criar desde o início um instinto de verificação.</div>
+
+  <div class="card">
+    <span class="badge badge-amber">EXERCÍCIO · 15 MIN</span>
+    <h3>A Primeira Pergunta Difícil</h3>
+    <p>Faz ao teu chatbot uma pergunta com resposta curta e verificável. Depois partilha no Meet: acertou? errou? o que disse exatamente?</p>
+    <div class="prompt-box">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>Em que edifício fica o Auditório Ruy Luís Gomes na Universidade do Porto?</pre>
+    </div>
+    <p style="font-size:.82rem;color:var(--slate6);margin-top:.5rem;">💡 Podes inventar a tua própria pergunta — sobre a tua faculdade, o teu serviço, uma data importante.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     M2
+══════════════════════════════════════════════ -->
+<section id="m2">
+  <div class="sec-header">
+    <div class="label">Bloco M2 · 10h15 – 10h45 · 30 min</div>
+    <h2>Limites, Alucinações e Fake News</h2>
+    <p>Como funciona a IA por dentro — e porque é tão fácil acreditar nela.</p>
+  </div>
+
+  <div class="alert alert-red">⚠️ Exercício de consciencialização. Os conteúdos gerados ficam no teu chat — não partilhar fora da sala.</div>
+
+  <div class="card">
+    <span class="badge badge-amber">EXERCÍCIO PARTE 1 · 8 MIN</span>
+    <h3>Apanha a IA a mentir</h3>
+    <p>Tenta fazer o teu chatbot inventar um facto verificável. Partilha no Meet: a pergunta, a "mentira" gerada, e como percebeste que era falsa.</p>
+    <div class="prompt-box">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>Apresenta-me uma bibliografia com 3 artigos científicos sobre gestão administrativa universitária em Portugal, publicados entre 2020 e 2024. Inclui título, autores, revista e DOI.</pre>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="badge badge-red">EXERCÍCIO PARTE 2 · 8 MIN</span>
+    <h3>Gera uma fake news credível</h3>
+    <p>Pede ao chatbot uma notícia falsa mas plausível sobre a U.Porto. Objetivo: perceber a facilidade — e a responsabilidade que isso implica.</p>
+    <div class="prompt-box">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>Escreve uma notícia curta no estilo de um jornal nacional sobre uma decisão chocante e polémica do Professor Ricardo Correia. Ele é conhecido pelas sessões de ensino de GenAI junto dos funcionários da Universidade do Porto. Por vezes ele arrisca muito na promoção de novas tecnologias. Sê credível: usa datas, números e citações realistas.</pre>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     M3
+══════════════════════════════════════════════ -->
+<section id="m3">
+  <div class="sec-header">
+    <div class="label">Bloco M3 · 11h00 – 12h30 · 90 min · NÚCLEO DO DIA</div>
+    <h2>Prompt Engineering + Casos Práticos</h2>
+    <p>Escolhe o teu tema e aplica as 4 técnicas ao longo do bloco.</p>
+  </div>
+
+  <div class="grid3" style="margin-bottom:1rem">
+    <div class="card" style="border-top:3px solid var(--cyan)">
+      <span class="badge badge-cyan">TEMA 1</span>
+      <h3>O Processo que nunca acaba</h3>
+      <p>Despachos · checklists · templates · arquivo</p>
+    </div>
+    <div class="card" style="border-top:3px solid var(--amber)">
+      <span class="badge badge-amber">TEMA 2</span>
+      <h3>A Reunião de Segunda-feira</h3>
+      <p>Atas · emails · ordens de trabalho · follow-ups</p>
+    </div>
+    <div class="card" style="border-top:3px solid var(--green)">
+      <span class="badge badge-green">TEMA 3</span>
+      <h3>Os Números do Serviço</h3>
+      <p>Relatórios · indicadores · texto a partir de tabelas</p>
+    </div>
+  </div>
+
+  <div class="divider-label">TÉCNICA 1 · PROMPT LONGO ESTRUTURADO</div>
+
+  <div class="grid3">
+    <div class="card">
+      <span class="badge badge-cyan">TEMA 1</span>
+      <div class="prompt-box">
+        <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+        <pre>És um assistente administrativo especializado em processos universitários.
+
+Tenho um pedido de um funcionário para alteração do regime de horário de trabalho. O processo já passou pela chefia direta (aprovou) e está agora em análise nos RH.
+
+Preciso de um despacho de resposta formal, com linguagem institucional adequada à U.Porto, que indique que o pedido foi deferido e produz efeitos a partir do próximo mês.
+
+Formato: despacho com cabeçalho, corpo e assinatura.</pre>
+      </div>
+    </div>
+    <div class="card">
+      <span class="badge badge-amber">TEMA 2</span>
+      <div class="prompt-box">
+        <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+        <pre>És um assistente especializado em comunicação institucional universitária.
+
+Tive uma reunião de serviço com 4 pontos: (1) aprovação da ata anterior, (2) orçamento do 1.º semestre, (3) reorganização de turnos de atendimento, (4) diversos.
+
+Decisões: orçamento 12% abaixo do previsto, revisto em julho; turnos passam de 3 para 2 por dia a partir de setembro; pendente proposta de formação interna.
+
+Preciso de um resumo executivo com pontos de ação e responsáveis para enviar por email.
+
+Formato: email formal com lista de ações no final.</pre>
+      </div>
+    </div>
+    <div class="card">
+      <span class="badge badge-green">TEMA 3</span>
+      <div class="prompt-box">
+        <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+        <pre>És um assistente de análise e comunicação de dados para serviços universitários.
+
+Tenho uma tabela com as faculdades da U.Porto, cursos de licenciatura e número de vagas em 2026.
+[tabela a anexar]
+
+Preciso de 2 parágrafos narrativos para incluir num relatório de atividade — sem jargão técnico, adequados para leitura por um dirigente.
+
+Formato: 2 parágrafos corridos, sem bullets, com os números mais relevantes em contexto.</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider-label">TÉCNICA 2 · INTERAÇÃO INVERTIDA</div>
+  <div class="card">
+    <h3>Deixa a IA fazer as perguntas</h3>
+    <div class="prompt-box">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>Quero que me ajudes a [descreve brevemente o documento do teu tema].
+
+Antes de começares, faz-me as perguntas que precisas de ter respondidas para produzir um resultado de qualidade. Pergunta uma de cada vez e espera pela minha resposta antes de passares à próxima.</pre>
+    </div>
+  </div>
+
+  <div class="divider-label">TÉCNICA 3 · ESCOLHA MÚLTIPLA</div>
+  <div class="card">
+    <h3>3 versões, depois refina</h3>
+    <div class="prompt-box">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>Apresenta-me 3 versões diferentes de [output do teu tema]:
+— Versão A: formal e institucional
+— Versão B: profissional mas direto
+— Versão C: curto e telegráfico
+
+Não escolhas — apresenta as 3. Depois digo qual desenvolver.</pre>
+    </div>
+  </div>
+
+  <div class="divider-label">TÉCNICA 4 · ITERAÇÃO</div>
+  <div class="card">
+    <h3>Afinar o resultado — frases úteis</h3>
+    <div class="prompt-box">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>Reduz para metade, mantendo as ideias principais.
+
+Sobe o registo para linguagem mais formal e institucional.
+
+Reorganiza: coloca a conclusão no início.
+
+Substitui "colaboradores" por "Técnicos Superiores" em todo o texto.
+
+Só muda o parágrafo 2. O resto fica igual.</pre>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     T1
+══════════════════════════════════════════════ -->
+<section id="t1">
+  <div class="sec-header">
+    <div class="label">Bloco T1 · 14h30 – 15h30 · 60 min</div>
+    <h2>IA e Folhas de Cálculo</h2>
+    <p>Live demo com os dados do questionário + exercícios práticos.</p>
+  </div>
+
+  <div class="alert alert-amber">📊 O formador vai partilhar o ficheiro aqui durante a tarde — fica atento ao chat do Meet.</div>
+
+  <div class="divider-label">PROMPTS DA LIVE DEMO (dados do questionário)</div>
+
+  <div class="card">
+    <span class="badge badge-cyan">PROMPT 1 · Resumo do grupo</span>
+    <div class="prompt-box">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>És um analista de dados de formação. Em anexo tens as respostas anónimas de um questionário aplicado a funcionários da Universidade do Porto antes de um workshop sobre IA.
+
+Faz um resumo em 5 pontos: quem são, que experiência têm com IA, o que esperam aprender. Cada ponto com 1 número concreto que sustente a afirmação.</pre>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="badge badge-cyan">PROMPT 2 · Análise por perfil</span>
+    <div class="prompt-box">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>Olhando para os mesmos dados:
+1. Há diferenças no uso de IA entre Técnicos Superiores e Assistentes Técnicos?
+2. Quem tem mais experiência: pessoas com menos de 5 anos ou mais de 15 anos na U.Porto?
+3. Que % do grupo já tem acesso ao Copilot mas não o usa?
+
+Responde com números, sem opiniões.</pre>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="badge badge-cyan">PROMPT 3 · Análise dos campos abertos</span>
+    <div class="prompt-box">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>As perguntas abertas recolheram o que entusiasma e o que assusta cada participante na IA.
+
+Agrupa as respostas em 3 a 5 temas principais por cada pergunta. Indica quantas pessoas mencionaram cada tema. Cita 1 frase representativa de cada tema (anónima).</pre>
+    </div>
+  </div>
+
+  <div class="divider-label">EXERCÍCIO · DADOS DAS FACULDADES</div>
+  <div class="card">
+    <h3>Usa a folha partilhada</h3>
+    <p style="margin-bottom:.75rem">Quando o formador partilhar a folha, usa estes prompts para a analisar:</p>
+    <div class="prompt-box">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>Tens em anexo uma folha com as faculdades da U.Porto, cursos e vagas em 2026.
+
+Qual a faculdade com mais vagas? E menos? Que cursos têm menos de 30 vagas? Apresenta um resumo em 5 bullets com os dados mais relevantes.</pre>
+    </div>
+    <div class="prompt-box">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>Cria uma fórmula Excel que conte quantos cursos cada faculdade oferece, e outra que some o total de vagas por faculdade. Explica como aplicar passo a passo.</pre>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     T2
+══════════════════════════════════════════════ -->
+<section id="t2">
+  <div class="sec-header">
+    <div class="label">Bloco T2 · 15h30 – 16h00 · 30 min</div>
+    <h2>Ferramentas Avançadas</h2>
+    <p>NotebookLM · Procurar vs Deep Research · PDFs · Projects · Copilot</p>
+  </div>
+
+  <div class="divider-label">NOTEBOOKLM</div>
+  <div class="card">
+    <h3>Experimenta o NotebookLM</h3>
+    <p style="margin-bottom:.75rem">Vai a <a href="https://notebooklm.google.com" target="_blank" style="color:var(--cyan)">notebooklm.google.com</a> → cria um Notebook → carrega um PDF (regulamento, ata, relatório) → faz estas perguntas:</p>
+    <div class="prompt-box">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>Resume este documento em 5 pontos principais. Para cada ponto, indica em que página ou secção encontraste a informação.</pre>
+    </div>
+    <div class="prompt-box">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>O que mudou em relação à versão anterior deste regulamento? (carrega as duas versões)</pre>
+    </div>
+  </div>
+
+  <div class="divider-label">CRIAR UM PROJECT (Claude / ChatGPT / Copilot)</div>
+  <div class="card">
+    <h3>Exercício · Cria o teu primeiro Project</h3>
+    <p style="margin-bottom:.75rem">Claude: <em>claude.ai → Projects → + New project</em><br>ChatGPT: <em>Explore → + Create GPT</em><br>Copilot: <em>Agentes</em></p>
+    <div class="prompt-box">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>És um assistente para o [nome do teu serviço/departamento] da Universidade do Porto.
+
+Conheces a estrutura da U.Porto e os seus procedimentos administrativos. Usas sempre linguagem institucional formal em PT-PT.
+
+Quando te faltar informação para responder corretamente, pergunta antes de avançar. Nunca inventes factos, datas ou regulamentos — se não souberes, diz que não sabes.</pre>
+    </div>
+    <p style="font-size:.82rem;color:var(--slate6);margin-top:.5rem;">Depois de criar: faz a mesma pergunta com e sem este contexto. Nota a diferença.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     T3
+══════════════════════════════════════════════ -->
+<section id="t3">
+  <div class="sec-header">
+    <div class="label">Bloco T3 · 16h15 – 17h00 · 45 min</div>
+    <h2>Atelier — "O Meu Projeto IA"</h2>
+    <p>8 passos guiados para criar o esboço de um projeto real na tua unidade. A sequência é igual para todos — o resultado será diferente em cada grupo.</p>
+  </div>
+
+  <div class="alert alert-cyan">📍 Grupos por unidade — junta-te às pessoas da tua faculdade ou serviço.</div>
+
+  <div class="grid2" style="margin-bottom:1rem">
+    <div class="card" style="border-left:4px solid var(--cyan)">
+      <span class="badge badge-cyan">GRUPO 1</span>
+      <h3>FMUP · ICBAS · ESEP</h3>
+      <p>Unidades de saúde e ciências biomédicas</p>
+    </div>
+    <div class="card" style="border-left:4px solid var(--amber)">
+      <span class="badge badge-amber">GRUPO 2</span>
+      <h3>FEUP · FCUP · FCNAUP · FAUP</h3>
+      <p>Unidades de engenharia e ciências exatas</p>
+    </div>
+    <div class="card" style="border-left:4px solid var(--green)">
+      <span class="badge badge-green">GRUPO 3</span>
+      <h3>FEP · FDUP · FBAUP · FPCEUP</h3>
+      <p>Unidades de ciências sociais e humanidades</p>
+    </div>
+    <div class="card" style="border-left:4px solid var(--navy)">
+      <span class="badge badge-navy">GRUPO 4</span>
+      <h3>REIT · SASUP · SPUP · Outros</h3>
+      <p>Serviços centrais e reitoria</p>
+    </div>
+  </div>
+
+  <div class="divider-label">PASSOS 1–5 · OBRIGATÓRIOS</div>
+
+  <div class="card">
+    <span class="badge badge-cyan">PASSO 1 · 5 MIN · DEFINIR O PROJETO</span>
+    <h3>Qual é o vosso projeto?</h3>
+    <p style="margin-bottom:.6rem;font-size:.85rem;color:var(--slate6)">💡 Substituam [NOME DA UNIDADE] pelo nome da vossa faculdade ou serviço.</p>
+    <div class="prompt-box">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>Vou criar um projeto-piloto de uso de IA generativa nos serviços 
+administrativos da [NOME DA UNIDADE / FACULDADE].
+
+O objetivo principal é melhorar a eficiência em [tipo de tarefa 
+administrativa mais comum no vosso serviço].
+
+Ajuda-me a formular:
+1. Um título para o projeto (curto, institucional)
+2. Um objetivo claro (1 frase)
+3. Três benefícios esperados (bullets)
+
+Linguagem formal, adequada à Universidade do Porto.</pre>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="badge badge-cyan">PASSO 2 · 3 MIN · CONTEXTO E RECURSOS</span>
+    <h3>Quem somos e o que fazemos</h3>
+    <p style="margin-bottom:.6rem;font-size:.85rem;color:var(--slate6)">💡 Preencham os campos com a realidade do vosso serviço — mesmo que aproximada.</p>
+    <div class="prompt-box">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>O nosso serviço tem as seguintes características:
+— Número aproximado de colaboradores: [X]
+— Principais tarefas administrativas: [lista de 3 a 5]
+— Ferramentas que já usamos: [ex: Outlook, Excel, SIGARRA]
+— Maior dificuldade no dia-a-dia: [descrever em 1 frase]
+
+Com base nisto, que uso de IA seria mais impactante 
+para o nosso contexto específico?
+Dá 3 sugestões concretas, ordenadas por impacto.</pre>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="badge badge-cyan">PASSO 3 · 5 MIN · PLANO DE EXECUÇÃO</span>
+    <h3>Como vamos implementar?</h3>
+    <p style="margin-bottom:.6rem;font-size:.85rem;color:var(--slate6)">💡 A IA vai propor 3 fases. Se algo não fizer sentido para o vosso contexto, peçam para ajustar.</p>
+    <div class="prompt-box">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>Cria um plano de implementação faseado para este projeto, 
+em 3 fases ao longo de 6 meses:
+— Fase 1 (mês 1–2): preparação e testes internos
+— Fase 2 (mês 3–4): piloto com grupo restrito
+— Fase 3 (mês 5–6): avaliação e decisão de escalar
+
+Para cada fase: objetivo · atividades principais · responsável 
+(usa funções genéricas, não nomes) · indicador de sucesso.
+Formato: tabela simples.</pre>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="badge badge-amber">PASSO 4 · 8 MIN · PEDIDO DE AUTORIZAÇÃO</span>
+    <h3>O ofício para a Reitoria</h3>
+    <p style="margin-bottom:.6rem;font-size:.85rem;color:var(--slate6)">💡 Este é o entregável principal. Revejam o resultado e iterem se necessário.</p>
+    <div class="prompt-box">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>Redige um pedido formal de autorização dirigido à Reitoria 
+da Universidade do Porto para implementar este projeto-piloto.
+
+O pedido deve incluir:
+— Identificação da unidade e do serviço
+— Descrição do projeto (2 parágrafos)
+— Justificação (eficiência, modernização, alinhamento estratégico U.Porto)
+— Recursos necessários (humanos e tecnológicos já disponíveis)
+— Duração proposta: 6 meses
+— Indicadores de sucesso (3 métricas)
+
+Tom: formal e institucional, PT-PT.
+Formato: ofício com cabeçalho, corpo e fecho.</pre>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="badge badge-amber">PASSO 5 · 5 MIN · RESUMO EXECUTIVO</span>
+    <h3>Uma página para o dirigente</h3>
+    <p style="margin-bottom:.6rem;font-size:.85rem;color:var(--slate6)">💡 Sem jargão técnico. Se a IA usar termos muito técnicos, peçam para simplificar.</p>
+    <div class="prompt-box">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>Com base em tudo o que definimos, cria um resumo executivo 
+de uma página para apresentar a um dirigente.
+
+Deve:
+— Ser legível em menos de 2 minutos
+— Incluir o problema, a solução proposta e os benefícios
+— Referir os recursos necessários (mínimos)
+— Terminar com uma recomendação clara de aprovação
+
+Sem jargão técnico. 
+Formato: parágrafos curtos, máximo 400 palavras.</pre>
+    </div>
+  </div>
+
+  <div class="divider-label">PASSOS 6–8 · BÓNUS — só se chegarem aqui</div>
+
+  <div class="card">
+    <span class="badge badge-green">PASSO 6 · 5 MIN · LISTA DE DESPESAS</span>
+    <h3>O que vai custar?</h3>
+    <p style="margin-bottom:.6rem;font-size:.85rem;color:var(--slate6)">💡 Foquem em soluções gratuitas ou já disponíveis na U.Porto.</p>
+    <div class="prompt-box">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>Estima as despesas associadas a este projeto-piloto.
+
+Considera:
+— Subscrições de ferramentas de IA (prioriza gratuitas/institucionais)
+— Horas de formação interna (valoriza a 20€/hora)
+— Materiais de comunicação interna (folhetos, emails, etc.)
+— Eventuais custos de consultoria externa (opcional)
+
+Formato: tabela com colunas:
+Item · Quantidade · Custo unitário · Custo total · Observações
+
+Nota: este é um projeto de baixo custo — maximiza o uso de 
+ferramentas já disponíveis na U.Porto (Copilot M365, etc.).</pre>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="badge badge-green">PASSO 7 · 4 MIN · FONTES DE FINANCIAMENTO</span>
+    <h3>Quem pode financiar?</h3>
+    <p style="margin-bottom:.6rem;font-size:.85rem;color:var(--slate6)">💡 A IA pode sugerir programas que não conhecem — vale verificar depois.</p>
+    <div class="prompt-box">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>Identifica possíveis fontes de financiamento para este projeto, 
+no contexto universitário público português.
+
+Para cada fonte indica:
+— Nome do programa / fundo
+— Entidade gestora
+— Elegibilidade (universidades públicas?)
+— Tipo de apoio (subsídio, co-financiamento, etc.)
+— Prazo típico de candidatura
+— Observação relevante
+
+Inclui: fundos internos U.Porto · PRR · FCT · 
+Erasmus+ · Horizon Europe · parcerias com empresas tech.</pre>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="badge badge-navy">PASSO 8 · 5 MIN · PITCH DE 1 MINUTO</span>
+    <h3>Como convencer o vosso dirigente</h3>
+    <p style="margin-bottom:.6rem;font-size:.85rem;color:var(--slate6)">💡 Se chegaram aqui, leem este pitch em voz alta no plenário final.</p>
+    <div class="prompt-box">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>Escreve um pitch de 1 minuto (máximo 150 palavras) que um 
+colaborador desta unidade poderia dizer ao seu dirigente 
+para convencê-lo a apoiar este projeto.
+
+Deve:
+— Começar com o problema concreto que resolve
+— Referir 2 benefícios tangíveis (tempo, qualidade, custo)
+— Mencionar que outras unidades da U.Porto já estão a explorar
+— Terminar com um pedido concreto de aprovação 
+  para avançar com a fase piloto
+
+Tom: entusiasta mas profissional. Direto.
+Sem jargão técnico.</pre>
+    </div>
+  </div>
+
+  <div class="divider-label">PARTILHA FINAL · 5 MIN</div>
+  <div class="card">
+    <h3>Cada grupo partilha no chat do Meet — 3 frases</h3>
+    <div class="prompt-box" style="border-left-color:var(--navy)">
+      <pre>1. O nosso projeto chama-se [título] e o objetivo é [1 frase].
+2. O passo que nos surpreendeu mais foi [passo X] porque [razão].
+3. Se avançássemos, o primeiro passo real seria [ação concreta].</pre>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     RECURSOS
+══════════════════════════════════════════════ -->
+<section id="recursos">
+  <div class="sec-header">
+    <div class="label">Para continuar</div>
+    <h2>Recursos e próximos passos</h2>
+    <p>O que levas daqui + onde aprender mais.</p>
+  </div>
+
+  <div class="divider-label">SLIDES DO WORKSHOP</div>
+  <div class="grid3">
+    <div class="tool-card"><div class="tc-name">M0 · Acolhimento</div><a href="#" target="_blank">Download →</a></div>
+    <div class="tool-card"><div class="tc-name">M1 · Enquadramento</div><a href="#" target="_blank">Download →</a></div>
+    <div class="tool-card"><div class="tc-name">M2 · Limites e Alucinações</div><a href="#" target="_blank">Download →</a></div>
+    <div class="tool-card"><div class="tc-name">M3 · Prompt Engineering</div><a href="#" target="_blank">Download →</a></div>
+    <div class="tool-card"><div class="tc-name">T1 · Folhas de Cálculo</div><a href="#" target="_blank">Download →</a></div>
+    <div class="tool-card"><div class="tc-name">T2 · Ferramentas Avançadas</div><a href="#" target="_blank">Download →</a></div>
+    <div class="tool-card"><div class="tc-name">T3 · Atelier</div><a href="#" target="_blank">Download →</a></div>
+    <div class="tool-card"><div class="tc-name">T4 · Encerramento</div><a href="#" target="_blank">Download →</a></div>
+  </div>
+
+  <div class="divider-label">PARA APRENDER MAIS</div>
+  <div class="grid2">
+    <div class="tool-card">
+      <div class="tc-name">Prompt Engineering Guide</div>
+      <div class="tc-desc">Guia oficial da Anthropic sobre como escrever bons prompts</div>
+      <a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview" target="_blank">Ver →</a>
+    </div>
+    <div class="tool-card">
+      <div class="tc-name">Sistemas de IA na U.Porto</div>
+      <div class="tc-desc">Página oficial UPDIGITAL sobre IA generativa</div>
+      <a href="https://www.up.pt/portal/pt/updigital/software/sistemas-inteligencia-artificial-generativa/" target="_blank">Ver →</a>
+    </div>
+    <div class="tool-card">
+      <div class="tc-name">NotebookLM — Tutorial</div>
+      <div class="tc-desc">Google · como usar o NotebookLM passo a passo</div>
+      <a href="https://support.google.com/notebooklm" target="_blank">Ver →</a>
+    </div>
+    <div class="tool-card">
+      <div class="tc-name">Copilot na U.Porto</div>
+      <div class="tc-desc">Microsoft 365 · como aceder e usar o Copilot institucional</div>
+      <a href="https://www.up.pt/portal/pt/updigital/servicos/contas-passwords/office-uporto/" target="_blank">Ver →</a>
+    </div>
+  </div>
+
+  <div class="divider-label">REGRA DE OURO</div>
+  <div class="card" style="background:var(--navy);border-color:var(--navy);color:var(--white)">
+    <p style="font-size:1.05rem;line-height:1.7">
+      <strong style="color:var(--cyan)">Verificar</strong> — tudo o que pode ser verificado deve ser verificado.<br>
+      <strong style="color:var(--cyan)">Proteger</strong> — nunca dados pessoais ou confidenciais num chatbot público.<br>
+      <strong style="color:var(--cyan)">Atribuir</strong> — quando usas IA, dizer-se.<br>
+      <strong style="color:var(--cyan)">Decidir</strong> — a responsabilidade final é sempre tua.
+    </p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>IA Aplicada ao Trabalho Administrativo · Universidade do Porto · 16 jun 2026</p>
+  <p style="margin-top:.3rem">Ricardo Correia · Helder Palheira · Jannine Nascimento</p>
+</footer>
+
+<script>
+// Tab navigation
+document.querySelectorAll('nav a').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const target = link.dataset.sec;
+    document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+    document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+    link.classList.add('active');
+    document.getElementById(target).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+
+// Copy prompt
+function copyPrompt(btn) {
+  const text = btn.nextElementSibling.textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = '✓ Copiado';
+    setTimeout(() => btn.textContent = 'Copiar', 2000);
+  });
+}
+</script>
+</body>
+</html>

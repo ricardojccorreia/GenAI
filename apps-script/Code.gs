@@ -16,13 +16,13 @@
 
 // ID da Google Sheet onde os pedidos são registados.
 // (Está no URL da folha: docs.google.com/spreadsheets/d/<ISTO_AQUI>/edit)
-const SHEET_ID = "COLA_AQUI_O_ID_DA_GOOGLE_SHEET";
+const SHEET_ID = "1cDuBS7EOKxGN0T89ZVYBhec-Hn18rnPPDQSZCsi8xnE";
 
 // Nome da aba/folha dentro da Sheet.
 const SHEET_NAME = "Pedidos";
 
 // Email que recebe a notificação de cada pedido (deixa "" para não notificar).
-const NOTIFY_EMAIL = "ricardo.jc.correia@gmail.com";
+const NOTIFY_EMAIL = "o.seu.email@exemplo.com"; // TODO: Substituir pelo seu email
 
 // Nome que aparece como remetente nos emails enviados.
 const SENDER_NAME = "Ricardo Correia";
@@ -34,9 +34,9 @@ const SENDER_NAME = "Ricardo Correia";
 //    Apps Script (script.google.com). NÃO faças commit dos links reais neste
 //    ficheiro: o repositório GitHub é público e o link deixaria de ser privado.
 //    No repositório, deixa sempre os placeholders.
-const DOWNLOAD_LINKS = {
-  "ufba-2026-06-03": "COLA_AQUI_O_LINK_DE_PARTILHA_DO_DRIVE",
-  "icimth-2026-ai-health-education": "COLA_AQUI_O_LINK_DE_PARTILHA_DO_DRIVE"
+const DOWNLOAD_LINKS = { // TODO: Substituir pelos seus links de partilha do Google Drive
+  "ufba-2026-06-03": "COLA_AQUI_O_LINK_DE_PARTILHA_DO_DRIVE_PARA_UFBA",
+  "icimth-2026-ai-health-education": "COLA_AQUI_O_LINK_DE_PARTILHA_DO_DRIVE_PARA_ICIMTH"
   // "outro-id": "https://drive.google.com/file/d/.../view?usp=sharing"
 };
 

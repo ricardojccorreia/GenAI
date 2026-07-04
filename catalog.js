@@ -19,11 +19,13 @@
 const CONFIG = {
   // Cola aqui o URL da Web App do Apps Script depois de a publicares.
   // Ex.: "https://script.google.com/macros/s/AKfycb..../exec"
-  appsScriptUrl: "PASTE_YOUR_WEB_APP_URL_HERE",
+  // Substitui pelo URL da tua implementação do Google Apps Script.
+  appsScriptUrl: "https://script.google.com/macros/s/AKfycbzMsL-bJCm8qouiiky_m1p_3CGQLeD4P-ldsRL6Xn_-oc5c-QstGOINspnqm3XmQBFp5Q/exec",
 
   // Base pública do site (usada nas citações por defeito)
-  siteUrl: "https://ricardojccorreia.github.io/GenAI/",
-  author:  "Correia, R. J. C."
+  // Substitui <SEU-USER> e <SEU-REPO> pelos teus dados do GitHub.
+  siteUrl: "https://<SEU-USER>.github.io/<SEU-REPO>/", // TODO: Substituir
+  author:  "O Teu Nome (Sobrenome, N.)" // TODO: Substituir
 };
 
 const PRESENTATIONS = [
@@ -36,9 +38,9 @@ const PRESENTATIONS = [
     date:  "2026-06-16",
     access: "public",
     url:   "workshop.html",
-    tags:  ["GenAI", "Formação"],
-    citation: 'Correia, R. J. C. (2026). <i>IA no Trabalho Administrativo</i> [Apresentação]. Universidade do Porto. https://ricardojccorreia.github.io/GenAI/',
-    citation_en: 'Correia, R. J. C. (2026). <i>AI in Administrative Work</i> [Presentation slides]. University of Porto. https://ricardojccorreia.github.io/GenAI/'
+    tags:  ["GenAI", "Formação"]
+    // A citação será gerada automaticamente a partir dos campos acima.
+    // Podes adicionar uma `citation` ou `citation_en` aqui para substituir a automática.
   },
 
   /* ---- EXEMPLO de apresentação "por pedido" (editar / substituir) ----
@@ -53,8 +55,6 @@ const PRESENTATIONS = [
     date:  "2026-06-03",
     access: "form",
     tags:  ["GenAI", "Saúde Digital"],
-    citation: 'Correia, R. J. C. (2026). <i>GenAI na Saúde</i> [Apresentação]. Universidade Federal da Bahia. https://ricardojccorreia.github.io/GenAI/',
-    citation_en: 'Correia, R. J. C. (2026). <i>GenAI in Healthcare</i> [Presentation slides]. Federal University of Bahia. https://ricardojccorreia.github.io/GenAI/'
   },
 
   {
@@ -66,14 +66,36 @@ const PRESENTATIONS = [
     date:  "2026-07-03",
     access: "form",
     tags:  ["GenAI", "Educação"],
-    citation: 'Correia, R. J. C. (2026). <i>IA na Educação em Saúde</i> [Apresentação convidada]. ICIMTH 2026 — International Conference on Informatics, Management and Technology in Healthcare, Atenas, Grécia. https://ricardojccorreia.github.io/GenAI/',
-    citation_en: 'Correia, R. J. C. (2026). <i>AI in Health Education</i> [Invited presentation]. ICIMTH 2026 — International Conference on Informatics, Management and Technology in Healthcare, Athens, Greece. https://ricardojccorreia.github.io/GenAI/'
+    // Exemplo de citação manual para casos mais complexos.
+    citation: 'Correia, R. J. C. (2026). <i>IA na Educação em Saúde</i> [Apresentação convidada]. ICIMTH 2026 — International Conference on Informatics, Management and Technology in Healthcare, Atenas, Grécia. ' + CONFIG.siteUrl,
+    citation_en: 'Correia, R. J. C. (2026). <i>AI in Health Education</i> [Invited presentation]. ICIMTH 2026 — International Conference on Informatics, Management and Technology in Healthcare, Athens, Greece. ' + CONFIG.siteUrl
   }
 ];
 
 /* ---- utilidades partilhadas ---- */
+
+// Gera uma citação por defeito se não for fornecida.
+function generateCitation(p, lang = 'pt') {
+  const year = p.date.substring(0, 4);
+  const author = CONFIG.author;
+  const siteUrl = CONFIG.siteUrl;
+
+  if (lang === 'en') {
+    const title = p.title_en || p.title;
+    const event = p.event_en || p.event;
+    return `${author} (${year}). <i>${title}</i> [Presentation slides]. ${event}. ${siteUrl}`;
+  }
+  
+  const title = p.title;
+  const event = p.event;
+  return `${author} (${year}). <i>${title}</i> [Apresentação]. ${event}. ${siteUrl}`;
+}
+
 function getPresentation(id) {
-  return PRESENTATIONS.find(p => p.id === id) || null;
+  const p = PRESENTATIONS.find(p => p.id === id);
+  if (!p) return null;
+  // Adiciona citações geradas se não existirem
+  return { ...p }; // Retorna uma cópia para não modificar o original
 }
 function fmtDate(iso) {
   if (!iso) return "";

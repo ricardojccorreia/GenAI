@@ -106,7 +106,8 @@ function getLang() {
   let s = null;
   try { s = localStorage.getItem("site_lang"); } catch (e) {}
   if (s === "en" || s === "pt") return s;
-  return (navigator.language || "pt").toLowerCase().indexOf("en") === 0 ? "en" : "pt";
+  // Por defeito, mostra em inglês, a não ser que o browser esteja em português.
+  return (navigator.language || "en").toLowerCase().startsWith("pt") ? "pt" : "en";
 }
 
 // Muda de idioma recarregando a página com ?lang=… (preserva ?slides)
@@ -126,7 +127,15 @@ function t(key) {
 function pField(p, field) {
   const L = getLang();
   if (L === "en" && p[field + "_en"] != null) return p[field + "_en"];
-  return p[field];
+  // Caso especial para a citação: gerar se não existir
+  if (field === 'citation') {
+    if (L === 'en' && p.citation_en) return p.citation_en;
+    if (L === 'pt' && p.citation) return p.citation;
+    // Se não houver citação específica, gera uma por defeito
+    return generateCitation(p, L);
+  }
+
+  return p[field] || '';
 }
 
 function pTags(p) {

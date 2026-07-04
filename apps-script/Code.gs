@@ -35,7 +35,6 @@ const SENDER_NAME = "Ricardo Correia";
 //    ficheiro: o repositório GitHub é público e o link deixaria de ser privado.
 //    No repositório, deixa sempre os placeholders.
 const DOWNLOAD_LINKS = { // TODO: Substituir pelos seus links de partilha do Google Drive
-  "ufba-2026-06-03": "COLA_AQUI_O_LINK_DE_PARTILHA_DO_DRIVE_PARA_UFBA",
   "icimth-2026-ai-health-education": "COLA_AQUI_O_LINK_DE_PARTILHA_DO_DRIVE_PARA_ICIMTH"
   // "outro-id": "https://drive.google.com/file/d/.../view?usp=sharing"
 };

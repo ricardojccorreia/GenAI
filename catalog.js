@@ -24,8 +24,8 @@ const CONFIG = {
 
   // Base pública do site (usada nas citações por defeito)
   // Substitui <SEU-USER> e <SEU-REPO> pelos teus dados do GitHub.
-  siteUrl: "https://<SEU-USER>.github.io/<SEU-REPO>/", // TODO: Substituir
-  author:  "O Teu Nome (Sobrenome, N.)" // TODO: Substituir
+  siteUrl: "https://ricardojccorreia.github.io/GenAI/", // TODO: Substituir
+  author:  "(Cruz-Correia, R.)" // TODO: Substituir
 };
 
 const PRESENTATIONS = [
@@ -43,20 +43,6 @@ const PRESENTATIONS = [
     // Podes adicionar uma `citation` ou `citation_en` aqui para substituir a automática.
   },
 
-  /* ---- EXEMPLO de apresentação "por pedido" (editar / substituir) ----
-     Para o conteúdo novo: sem "url" público. O download é enviado por email
-     pelo Apps Script, que guarda o link privado associado a este mesmo "id". */
-  {
-    id:    "ufba-2026-06-03",
-    title: "GenAI na Saúde",
-    title_en: "GenAI in Healthcare",
-    event: "Universidade Federal da Bahia",
-    event_en: "Federal University of Bahia",
-    date:  "2026-06-03",
-    access: "form",
-    tags:  ["GenAI", "Saúde Digital"],
-  },
-
   {
     id:    "icimth-2026-ai-health-education",
     title: "IA na Educação em Saúde",
@@ -67,8 +53,8 @@ const PRESENTATIONS = [
     access: "form",
     tags:  ["GenAI", "Educação"],
     // Exemplo de citação manual para casos mais complexos.
-    citation: 'Correia, R. J. C. (2026). <i>IA na Educação em Saúde</i> [Apresentação convidada]. ICIMTH 2026 — International Conference on Informatics, Management and Technology in Healthcare, Atenas, Grécia. ' + CONFIG.siteUrl,
-    citation_en: 'Correia, R. J. C. (2026). <i>AI in Health Education</i> [Invited presentation]. ICIMTH 2026 — International Conference on Informatics, Management and Technology in Healthcare, Athens, Greece. ' + CONFIG.siteUrl
+    citation: 'Cruz-Correia, R. (2026). <i>IA na Educação em Saúde</i> [Apresentação convidada]. ICIMTH 2026 — International Conference on Informatics, Management and Technology in Healthcare, Atenas, Grécia. ' + CONFIG.siteUrl,
+    citation_en: 'Cruz-Correia, R. (2026). <i>AI in Health Education</i> [Invited presentation]. ICIMTH 2026 — International Conference on Informatics, Management and Technology in Healthcare, Athens, Greece. ' + CONFIG.siteUrl
   }
 ];
 

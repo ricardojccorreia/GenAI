@@ -14,13 +14,21 @@
         <button type="button" data-lang-btn="pt" onclick="switchLang('pt')">PT</button>
         <button type="button" data-lang-btn="en" onclick="switchLang('en')">EN</button>
       </div>
-      <p class="name">Ricardo Correia</p>
-      <p class="role" data-i18n="role">Professor de Informática Médica · FMUP / MEDCIDS · Universidade do Porto</p>
-      <p class="tagline" data-i18n="tagline">Apresentações e materiais de formação em Inteligência Artificial e Saúde Digital. Pode consultar os materiais públicos ou pedir uma apresentação — recebe-a por email com uma proposta de citação.</p>
+      <!-- TODO: Substituir 'ricardo.jpg' pelo caminho para a sua foto -->
+      <img src="ricardo.jpg" alt="Ricardo Correia" class="profile-pic">
+      <div class="header-text">
+        <p class="name">Ricardo Correia</p>
+        <p class="role" data-i18n="role">Professor de Informática Médica · FMUP / MEDCIDS · Universidade do Porto</p>
+        <p class="tagline" data-i18n="tagline">Apresentações e materiais de formação em Inteligência Artificial e Saúde Digital. Pode consultar os materiais públicos ou pedir uma apresentação — recebe-a por email com uma proposta de citação.</p>
+      </div>
     </div>
   </header>
 
   <main class="wrap">
+    <div class="filters" id="tag-filters">
+      <!-- Os botões de filtro serão inseridos aqui pelo JavaScript -->
+    </div>
+
     <section class="section" id="publicas">
       <h2 data-i18n="pub_h">📂 Materiais públicos</h2>
       <p class="section-note" data-i18n="pub_note">Acesso direto, sem necessidade de pedido.</p>
@@ -32,6 +40,34 @@
       <p class="section-note" data-i18n="form_note">Preencha um formulário curto (30 segundos) e recebe o ficheiro por email, com a citação sugerida. Assim consigo saber quem usa os materiais e como.</p>
       <div class="grid" id="grid-form"></div>
     </section>
+
+    <div class="grid-bio">
+      <section class="section">
+        <h2>Perfis Académicos & Publicações</h2>
+        <div class="link-list">
+          <a href="https://www.cienciavitae.pt/pt/7F17-9F23-61E9" target="_blank">Ciência Vitae</a>
+          <a href="https://www.researchgate.net/profile/Ricardo_Cruz-Correia/" target="_blank">ResearchGate</a>
+          <a href="https://orcid.org/0000-0002-3764-5158" target="_blank">OrcID</a>
+          <a href="https://www.authenticus.pt/R-000-FBK" target="_blank">Authenticus</a>
+          <a href="https://www.researcherid.com/rid/A-2756-2009" target="_blank">ResearcherID</a>
+          <a href="https://lattes.cnpq.br/8710216330372410" target="_blank">Lattes</a>
+          <a href="https://pt.linkedin.com/in/ricardojccorreia" target="_blank">LinkedIn</a>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Empresas & Projetos</h2>
+        <div class="link-list">
+          <a href="https://www.virtualcare.pt/" target="_blank">VirtualCare</a>
+          <a href="https://www.ciencia-letras.pt/" target="_blank">Ciência e Letras</a>
+          <a href="https://www.hltsys.pt/" target="_blank">HLTSys</a>
+          <a href="https://www.pharmadatahub.com/" target="_blank">PharmaDataHub</a>
+          <a href="https://www.opvance.com/" target="_blank">Opvance</a>
+          <a href="https://synapthia.com.br/" target="_blank">Synapthia</a>
+        </div>
+      </section>
+    </div>
+
   </main>
 
   <footer class="site-footer">
@@ -45,6 +81,7 @@
   <script src="catalog.js"></script>
   <script>
     (function () {
+      const allCards = [];
       function card(p) {
         const isPublic = p.access === "public";
         const lang = getLang();
@@ -55,7 +92,7 @@
           ? '<span class="badge public">' + t("badge_pub") + '</span>'
           : '<span class="badge form">' + t("badge_form") + '</span>';
         const cta = isPublic ? t("cta_open") : t("cta_req");
-        const tags = pTags(p).map(x => '<span class="tag">' + x + '</span>').join("");
+        const tags = pTags(p).map(x => `<span class="tag" data-tag="${x}">${x}</span>`).join("");
         return `<a class="card" href="${href}">
           ${badge}
           <span class="meta">${fmtDate(p.date)}</span>
@@ -66,15 +103,48 @@
         </a>`;
       }
 
+      function renderCards(presentations) {
+        const pub  = presentations.filter(p => p.access === "public");
+        const form = presentations.filter(p => p.access === "form");
+        const gp = document.getElementById("grid-public");
+        const gf = document.getElementById("grid-form");
+
+        if (pub.length)  { gp.innerHTML = pub.map(card).join(""); document.getElementById("publicas").style.display = "block"; } else { document.getElementById("publicas").style.display = "none"; }
+        if (form.length) { gf.innerHTML = form.map(card).join(""); document.getElementById("pedido").style.display = "block"; } else { document.getElementById("pedido").style.display = "none"; }
+      }
+
+      function setupFilters() {
+        const allTags = [...new Set(PRESENTATIONS.flatMap(p => pTags(p)))];
+        const filtersContainer = document.getElementById("tag-filters");
+        if (!allTags.length || !filtersContainer) return;
+
+        let buttonsHTML = `<button class="tag-filter active" data-tag="all">${t('Todos') || 'Todos'}</button>`;
+        buttonsHTML += allTags.map(tag => `<button class="tag-filter" data-tag="${tag}">${tag}</button>`).join('');
+        filtersContainer.innerHTML = buttonsHTML;
+
+        let activeTag = "all";
+
+        filtersContainer.addEventListener('click', e => {
+          if (e.target.tagName !== 'BUTTON') return;
+          
+          activeTag = e.target.dataset.tag;
+
+          filtersContainer.querySelectorAll('.tag-filter').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.tag === activeTag);
+          });
+
+          const filteredPresentations = (activeTag === 'all')
+            ? PRESENTATIONS
+            : PRESENTATIONS.filter(p => pTags(p).includes(activeTag));
+          
+          renderCards(filteredPresentations);
+        });
+      }
+
       applyI18n();
+      renderCards(PRESENTATIONS);
+      setupFilters();
 
-      const pub  = PRESENTATIONS.filter(p => p.access === "public");
-      const form = PRESENTATIONS.filter(p => p.access === "form");
-      const gp = document.getElementById("grid-public");
-      const gf = document.getElementById("grid-form");
-
-      if (pub.length)  gp.innerHTML = pub.map(card).join("");  else document.getElementById("publicas").style.display = "none";
-      if (form.length) gf.innerHTML = form.map(card).join(""); else document.getElementById("pedido").style.display = "none";
     })();
   </script>
 </body>

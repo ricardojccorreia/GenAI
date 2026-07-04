@@ -1,0 +1,7 @@
+# Slides "a pedido": NÃO publicar no site. Vão para o Google Drive e o link
+# privado fica só no Apps Script. Esta pasta nunca deve ser enviada para o GitHub.
+slides-privados/
+
+# Auxiliares locais
+.claude/
+.DS_Store

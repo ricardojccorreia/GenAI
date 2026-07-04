@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pedir apresentação · Ricardo Correia</title>
+  <meta name="description" content="Peça uma apresentação de Ricardo Correia. Preencha o formulário e recebe o ficheiro por email.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <div class="lang-switch">
+        <button type="button" data-lang-btn="pt" onclick="switchLang('pt')">PT</button>
+        <button type="button" data-lang-btn="en" onclick="switchLang('en')">EN</button>
+      </div>
+      <p class="name" data-i18n="page_title">Pedir apresentação</p>
+      <p class="role"><a href="index.html" id="back-all" data-i18n="back_all">← voltar a todas as apresentações</a></p>
+    </div>
+  </header>
+
+  <main class="wrap" style="padding-top:32px;">
+    <div class="panel">
+
+      <!-- Formulário -->
+      <div id="form-view">
+        <h1 data-i18n="get_h">Receber a apresentação</h1>
+        <p class="sub" data-i18n="get_sub">Preencha os campos abaixo e recebe o ficheiro por email em poucos minutos.</p>
+
+        <div class="requested-box" id="requested-box">
+          <span data-i18n="req_label">Apresentação:</span> <strong id="req-title">—</strong>
+        </div>
+
+        <form id="req-form" novalidate>
+          <input type="hidden" name="slides" id="f-slides">
+          <input type="hidden" name="citation" id="f-citation">
+          <input type="hidden" name="lang" id="f-lang">
+
+          <div class="field">
+            <label for="f-name"><span data-i18n="f_name">Nome</span> <span class="hint" data-i18n="hint_req">(obrigatório)</span></label>
+            <input type="text" id="f-name" name="nome" autocomplete="name" required>
+          </div>
+
+          <div class="field">
+            <label for="f-email"><span data-i18n="f_email">Email</span> <span class="hint" data-i18n="hint_email">(para onde enviamos o ficheiro)</span></label>
+            <input type="email" id="f-email" name="email" autocomplete="email" required>
+          </div>
+
+          <div class="field">
+            <label for="f-org"><span data-i18n="f_org">Instituição / organização</span> <span class="hint" data-i18n="hint_opt">(opcional)</span></label>
+            <input type="text" id="f-org" name="instituicao" autocomplete="organization">
+          </div>
+
+          <div class="field">
+            <label for="f-use"><span data-i18n="f_use">Como pretende usar a apresentação?</span> <span class="hint" data-i18n="hint_req">(obrigatório)</span></label>
+            <textarea id="f-use" name="uso" data-i18n-ph="use_ph" placeholder="Ex.: aula, formação interna, referência num artigo, partilha com colegas…" required></textarea>
+          </div>
+
+          <div class="field">
+            <label class="check">
+              <input type="checkbox" id="f-consent" required>
+              <span data-i18n="consent">Autorizo o registo do meu nome, email e finalidade indicada, para acompanhamento da utilização dos materiais. Os dados não são partilhados com terceiros.</span>
+            </label>
+          </div>
+
+          <button type="submit" class="btn" id="submit-btn" data-i18n="btn_send">Receber por email</button>
+          <p class="error-msg" id="error-msg"></p>
+        </form>
+      </div>
+
+      <!-- Sucesso -->
+      <div id="success-view" class="success">
+        <div class="check-icon">✓</div>
+        <h1 data-i18n="ok_h">Pedido registado!</h1>
+        <p class="sub"><span data-i18n="ok_sub_a">Vai receber</span> <strong id="ok-title"></strong> <span data-i18n="ok_sub_b">no email indicado dentro de poucos minutos. Verifique também a pasta de spam.</span></p>
+        <div style="text-align:left;">
+          <p style="font-weight:600;color:var(--navy);margin-bottom:4px;" data-i18n="ok_cite">Como citar esta apresentação:</p>
+          <div class="citation"><span id="ok-citation"></span></div>
+        </div>
+        <p style="margin-top:22px;"><a href="index.html" id="back-list" data-i18n="back_list">← voltar às apresentações</a></p>
+      </div>
+
+      <!-- Slides inválido -->
+      <div id="notfound-view" style="display:none;">
+        <h1 data-i18n="nf_h">Apresentação não encontrada</h1>
+        <p class="sub" data-i18n="nf_sub">O link parece incompleto. Veja a lista de apresentações disponíveis.</p>
+        <p><a class="btn" href="index.html" style="text-decoration:none;" data-i18n="nf_btn">Ver apresentações</a></p>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      Ricardo João Cruz Correia · FMUP / MEDCIDS · Universidade do Porto
+    </div>
+  </footer>
+
+  <script src="i18n.js"></script>
+  <script src="catalog.js"></script>
+  <script>
+    (function () {
+      const lang = getLang();
+      applyI18n();
+
+      // preservar idioma nos links de navegação
+      ["back-all", "back-list"].forEach(function (id) {
+        const a = document.getElementById(id);
+        if (a) a.href = "index.html?lang=" + lang;
+      });
+
+      const params = new URLSearchParams(location.search);
+      const id = params.get("slides");
+      const p = id ? getPresentation(id) : null;
+
+      const formView = document.getElementById("form-view");
+      const notFound = document.getElementById("notfound-view");
+
+      if (!p) {
+        formView.style.display = "none";
+        notFound.style.display = "block";
+        return;
+      }
+
+      const title = pField(p, "title");
+      const citation = pField(p, "citation") || "";
+
+      document.getElementById("req-title").innerHTML = title + " — " + (pField(p, "event") || "") + " · " + fmtDate(p.date);
+      document.getElementById("f-slides").value = p.id;
+      document.getElementById("f-citation").value = citation;
+      document.getElementById("f-lang").value = lang;
+
+      const form = document.getElementById("req-form");
+      const btn = document.getElementById("submit-btn");
+      const errBox = document.getElementById("error-msg");
+
+      form.addEventListener("submit", function (ev) {
+        ev.preventDefault();
+        errBox.style.display = "none";
+
+        if (!form.nome.value.trim() || !form.email.value.trim() ||
+            !form.uso.value.trim() || !document.getElementById("f-consent").checked) {
+          errBox.textContent = t("err_fields");
+          errBox.style.display = "block";
+          return;
+        }
+        if (CONFIG.appsScriptUrl.indexOf("PASTE_YOUR") === 0) {
+          errBox.textContent = t("err_config");
+          errBox.style.display = "block";
+          return;
+        }
+
+        btn.disabled = true;
+        btn.textContent = t("btn_sending");
+
+        const body = new URLSearchParams();
+        body.append("slides", form.slides.value);
+        body.append("citation", form.citation.value);
+        body.append("lang", lang);
+        body.append("nome", form.nome.value.trim());
+        body.append("email", form.email.value.trim());
+        body.append("instituicao", form.instituicao.value.trim());
+        body.append("uso", form.uso.value.trim());
+        body.append("origem", location.href);
+
+        // Envio "fire-and-forget": evita problemas de CORS do Apps Script.
+        fetch(CONFIG.appsScriptUrl, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
+          body: body.toString()
+        }).then(showSuccess).catch(showSuccess);
+      });
+
+      function showSuccess() {
+        formView.style.display = "none";
+        const sv = document.getElementById("success-view");
+        document.getElementById("ok-title").textContent = title;
+        document.getElementById("ok-citation").innerHTML = citation;
+        sv.style.display = "block";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    })();
+  </script>
+</body>
+</html>

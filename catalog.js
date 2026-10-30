@@ -28,7 +28,10 @@ const CONFIG = {
   author:  "(Cruz-Correia, R.)" // TODO: Substituir
 };
 
-const PRESENTATIONS = [
+/* Desde out. 2026 a fonte única é o registo de intervenções do site principal
+   (/data/intervencoes.js), carregado antes deste ficheiro. A lista abaixo só é
+   usada se esse ficheiro não carregar. */
+const PRESENTATIONS_FALLBACK = [
   {
     id:    "u-porto-admin-2026-06-16",
     title: "IA no Trabalho Administrativo",
@@ -57,6 +60,10 @@ const PRESENTATIONS = [
     citation_en: 'Cruz-Correia, R. (2026). <i>AI in Health Education</i> [Invited presentation]. ICIMTH 2026 — International Conference on Informatics, Management and Technology in Healthcare, Athens, Greece. ' + CONFIG.siteUrl
   }
 ];
+
+const PRESENTATIONS = (typeof INTERVENTIONS !== "undefined" ? INTERVENTIONS : PRESENTATIONS_FALLBACK)
+  .filter(p => p.access === "public" || p.access === "form")
+  .map(p => ({ ...p, url: p.url && p.url.startsWith("GenAI/") ? p.url.slice(6) : p.url }));
 
 /* ---- utilidades partilhadas ---- */
 

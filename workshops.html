@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Workshops IA · U.Porto</title>
+<meta name="description" content="Edições do workshop IA Aplicada ao Trabalho Administrativo na Universidade do Porto.">
+<style>
+  :root {
+    --navy:#0D2D52; --cyan:#0891B2; --amber:#F59E0B; --green:#10B981;
+    --slate9:#1E293B; --slate6:#475569; --slate2:#E2E8F0; --slate1:#F1F5F9; --white:#FFFFFF;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Segoe UI', system-ui, sans-serif; background:var(--slate1); color:var(--slate9); line-height:1.6; }
+  header { background:var(--navy); color:var(--white); padding:2.5rem 1rem 2rem; text-align:center; }
+  header .tag { font-size:.75rem; font-weight:700; letter-spacing:.2em; color:var(--cyan); text-transform:uppercase; margin-bottom:.5rem; }
+  header h1 { font-size:clamp(1.5rem,4.5vw,2.4rem); font-weight:800; line-height:1.2; margin-bottom:.5rem; }
+  header p { font-size:.95rem; color:#B8D4E8; max-width:620px; margin:0 auto; }
+  main { max-width:960px; margin:0 auto; padding:2rem 1rem 4rem; }
+  .label { font-size:.7rem; font-weight:700; letter-spacing:.2em; color:var(--cyan); text-transform:uppercase; margin:0 0 .75rem; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+  @media(max-width:700px){ .grid { grid-template-columns:1fr; } }
+  .ed { display:flex; flex-direction:column; background:var(--white); border:1px solid var(--slate2); border-radius:.75rem; padding:1.4rem 1.5rem; box-shadow:0 1px 4px rgba(0,0,0,.06); text-decoration:none; color:inherit; transition:transform .15s, box-shadow .15s; }
+  .ed:hover { transform:translateY(-2px); box-shadow:0 6px 18px rgba(13,45,82,.12); }
+  .ed.current { border-top:4px solid var(--cyan); }
+  .ed.past { border-top:4px solid var(--slate2); }
+  .badge { align-self:flex-start; font-size:.68rem; font-weight:800; padding:.15rem .55rem; border-radius:99px; letter-spacing:.06em; text-transform:uppercase; margin-bottom:.6rem; }
+  .b-now { background:#D1FAE5; color:#065F46; }
+  .b-past { background:var(--slate1); color:var(--slate6); border:1px solid var(--slate2); }
+  .ed .date { font-size:.85rem; font-weight:700; color:var(--cyan); }
+  .ed h2 { font-size:1.2rem; font-weight:800; color:var(--navy); margin:.15rem 0 .4rem; line-height:1.3; }
+  .ed p { font-size:.87rem; color:var(--slate6); }
+  .ed ul { list-style:none; margin:.75rem 0 0; font-size:.82rem; color:var(--slate6); }
+  .ed li { padding:.2rem 0; border-top:1px solid var(--slate1); }
+  .ed li strong { color:var(--slate9); }
+  .ed .cta { margin-top:auto; padding-top:1rem; font-size:.85rem; font-weight:700; color:var(--cyan); }
+  .turmas { display:flex; gap:.5rem; flex-wrap:wrap; margin-top:1rem; }
+  .turmas a { font-size:.8rem; font-weight:700; color:var(--white); background:var(--cyan); padding:.35rem .9rem; border-radius:99px; text-decoration:none; }
+  .turmas a.alt { background:var(--navy); }
+  .turmas a:hover { opacity:.88; }
+  .note { margin-top:2rem; background:var(--white); border:1px solid var(--slate2); border-left:4px solid var(--amber); border-radius:.5rem; padding:1rem 1.25rem; font-size:.87rem; color:var(--slate6); }
+  footer { background:var(--navy); color:#8AA9C4; text-align:center; font-size:.8rem; padding:1.5rem 1rem; }
+  footer a { color:#B8D4E8; }
+</style>
+</head>
+<body>
+<header>
+  <div class="tag">Universidade do Porto · Formação em IA Generativa</div>
+  <h1>IA Aplicada ao Trabalho Administrativo</h1>
+  <p>Workshops práticos para técnicos e dirigentes dos serviços da U.Porto. Cada edição tem o seu hub com agenda, ferramentas e todos os prompts dos exercícios.</p>
+</header>
+
+<main>
+  <div class="label">Edições</div>
+  <div class="grid">
+    <div class="ed current">
+      <span class="badge b-now">2.ª edição · a decorrer</span>
+      <div class="date">6 e 13 de novembro de 2026</div>
+      <h2>Reitoria da U.Porto</h2>
+      <p>60 participantes em duas turmas de dia inteiro, com o mesmo programa. Conteúdos atualizados: agentes, instruções reutilizáveis, prompt injection e o AI Act em vigor.</p>
+      <ul>
+        <li><strong>Turma A</strong> · sexta, 6 nov 2026</li>
+        <li><strong>Turma B</strong> · sexta, 13 nov 2026</li>
+      </ul>
+      <div class="turmas">
+        <a href="workshop-nov2026.html?turma=A">Hub Turma A →</a>
+        <a class="alt" href="workshop-nov2026.html?turma=B">Hub Turma B →</a>
+      </div>
+    </div>
+
+    <a class="ed past" href="workshop.html">
+      <span class="badge b-past">1.ª edição · concluída</span>
+      <div class="date">16 de junho de 2026</div>
+      <h2>Auditório Ruy Luís Gomes</h2>
+      <p>Primeira edição do workshop, num dia: enquadramento, limites e alucinações, prompt engineering, folhas de cálculo, ferramentas avançadas e atelier por unidade.</p>
+      <ul>
+        <li><strong>Manhã</strong> · M1 Enquadramento · M2 Limites · M3 Prompt Engineering</li>
+        <li><strong>Tarde</strong> · T1 Folhas de cálculo · T2 Ferramentas · T3 Atelier · T4 Encerramento</li>
+      </ul>
+      <span class="cta">Abrir hub de junho →</span>
+    </a>
+  </div>
+
+  <div class="note">
+    💡 Os prompts das duas edições podem ser copiados e adaptados livremente. Regra de ouro: <strong>verificar, proteger, atribuir, supervisionar, decidir</strong>.
+  </div>
+</main>
+
+<footer>
+  <p>Ricardo Correia · Helder Palheira · Jannine Nascimento</p>
+  <p style="margin-top:.3rem"><a href="../intervencoes/?tema=GenAI">Outras apresentações e intervenções →</a></p>
+</footer>
+</body>
+</html>

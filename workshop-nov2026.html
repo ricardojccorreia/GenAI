@@ -192,6 +192,17 @@
   table.simple tr:nth-child(odd) td { background:var(--slate1); }
   @media(max-width:640px){ .back-link{ position:static; display:block; margin-bottom:.5rem; } }
 </style>
+<style>
+  .phase .theory { margin:.5rem 0 .2rem 1.1rem; font-size:.86rem; color:var(--slate9); }
+  .phase .theory li { margin:.15rem 0; }
+  .phase .ref { font-size:.78rem; color:var(--slate6); font-style:italic; }
+  .verify { background:#F0FDF4; border:1px solid #A7F3D0; border-radius:.5rem; padding:.6rem .9rem; margin-top:.75rem; font-size:.84rem; }
+  .verify ul { list-style:none; margin-top:.3rem; }
+  .verify li { margin:.2rem 0; }
+  .verify input { margin-right:.35rem; accent-color:var(--green); }
+  .cardnote { font-size:.8rem; color:var(--slate6); margin-top:.5rem; }
+  #sim code { background:rgba(0,0,0,.06); padding:0 .25rem; border-radius:.2rem; }
+</style>
 </head>
 <body>
 <header>
@@ -211,6 +222,7 @@
   <a href="#m1" data-sec="m1">M1</a>
   <a href="#m2" data-sec="m2">M2</a>
   <a href="#m3" data-sec="m3">M3</a>
+  <a href="#sim" data-sec="sim">Sessão 2 ★</a>
   <a href="#t1" data-sec="t1">T1</a>
   <a href="#t2" data-sec="t2">T2</a>
   <a href="#t3" data-sec="t3">T3</a>
@@ -267,31 +279,47 @@
     <div><div class="agenda-title">Síntese e trabalho para casa</div><div class="agenda-desc">Escolhe uma tarefa real do teu serviço para trazer para a sessão 2 (atelier)</div></div>
   </div>
 
-  <div class="divider-label">SESSÃO 2 · SEXTA, 13 NOV · 09h30 – 12h30 · APLICAÇÃO</div>
-
+  <div class="divider-label">SESSÃO 2 · SEXTA, 13 NOV · 09h30 – 12h30 · SIMULAÇÃO PRÁTICA EM 7 FASES</div>
+  <div class="alert alert-amber" style="font-size:.85rem">Formato novo: cada um constrói o seu projeto numa só conversa com a IA. <a href="#sim" data-goto="sim" style="color:#92400E;font-weight:800">Ver a simulação →</a></div>
   <div class="agenda-block">
     <div class="agenda-time amber">09h30</div>
-    <div><div class="agenda-title">Recapitular a sessão 1</div><div class="agenda-desc">O que experimentaram durante a semana · dúvidas</div></div>
+    <div><div class="agenda-title">Arranque · retomar a Tríade</div><div class="agenda-desc">Slide 9 do M3 · Contexto, Papel, Expectativa · prompt inicial · cartão do projeto</div></div>
   </div>
   <div class="agenda-block">
-    <div class="agenda-time amber">09h45</div>
-    <div><div class="agenda-title">T1 · IA e Folhas de Cálculo</div><div class="agenda-desc">Live demo com os dados (anónimos) do questionário pré · exercícios práticos</div></div>
+    <div class="agenda-time amber">09h55</div>
+    <div><div class="agenda-title">Fase 1 · Ideação</div><div class="agenda-desc">Escolha múltipla + iteração</div></div>
+  </div>
+  <div class="agenda-block">
+    <div class="agenda-time amber">10h10</div>
+    <div><div class="agenda-title">Fase 2 · Pedidos de autorização</div><div class="agenda-desc">Persona-audiência · chefia, EPD, ética</div></div>
   </div>
   <div class="agenda-block">
     <div class="agenda-time amber">10h30</div>
-    <div><div class="agenda-title">T2 · Ferramentas Avançadas</div><div class="agenda-desc">NotebookLM · Deep Research · Projects · Agentes — o que delegar e o que não</div></div>
+    <div><div class="agenda-title">Fase 3 · SWOT, recursos, orçamento, calendário</div><div class="agenda-desc">Chain-of-thought · tabelas · verificar contas</div></div>
   </div>
   <div class="agenda-block agenda-pause">
-    <div class="agenda-time amber">11h00</div>
+    <div class="agenda-time amber">10h50</div>
     <div><div class="agenda-title">Pausa</div></div>
   </div>
   <div class="agenda-block">
-    <div class="agenda-time amber">11h15</div>
-    <div><div class="agenda-title">T3 · Atelier "O Meu Projeto IA"</div><div class="agenda-desc">Grupos por tipo de trabalho · Documentos · Dados · Processos · Atendimento</div></div>
+    <div class="agenda-time amber">11h05</div>
+    <div><div class="agenda-title">Fase 4 · Financiamento</div><div class="agenda-desc">Pesquisa web · verificar fontes</div></div>
+  </div>
+  <div class="agenda-block">
+    <div class="agenda-time amber">11h20</div>
+    <div><div class="agenda-title">Fase 5 · Dados fictícios</div><div class="agenda-desc">Few-shot · CSV para o Excel</div></div>
+  </div>
+  <div class="agenda-block">
+    <div class="agenda-time amber">11h35</div>
+    <div><div class="agenda-title">Fase 6 · Relatório</div><div class="agenda-desc">Análise de ficheiros · indicadores · gráfico</div></div>
+  </div>
+  <div class="agenda-block">
+    <div class="agenda-time amber">11h50</div>
+    <div><div class="agenda-title">Fase 7 · Divulgação</div><div class="agenda-desc">Newsletter · LinkedIn · email · guião de slides</div></div>
   </div>
   <div class="agenda-block">
     <div class="agenda-time amber">12h05</div>
-    <div><div class="agenda-title">T4 · Encerramento e questionário pós</div><div class="agenda-desc">Ética · literacia em IA · recursos para continuar · Q&amp;A · questionário final (QR code)</div></div>
+    <div><div class="agenda-title">Fecho · assistente reutilizável + questionário pós</div><div class="agenda-desc">Transformar a conversa num Project / GPT / Gem / Agente · partilha · avaliação</div></div>
   </div>
 
   <div style="margin-top:1.5rem" class="alert alert-cyan">
@@ -970,6 +998,283 @@ Transforma isto numa tabela com responsáveis, prazos e estado.</pre>
 
 
 <!-- ══════════════════════════════════════════════
+     SESSÃO 2 · SIMULAÇÃO EM 7 FASES
+══════════════════════════════════════════════ -->
+<section id="sim">
+  <div class="sec-header">
+    <div class="label">Sessão 2 · sexta, 13 nov · 09h30 – 12h30</div>
+    <h2>Simulação: o meu projeto em 7 fases</h2>
+    <p>Uma única conversa com a IA, do primeiro esboço ao relatório e à divulgação. Em cada fase: um pouco de teoria, um prompt para preencher e uma verificação.</p>
+  </div>
+
+  <div class="alert alert-cyan">🎯 <strong>Como funciona:</strong> escolhe uma iniciativa (real ou inventada) para o teu serviço. Abre <strong>uma conversa nova</strong> e cola o prompt inicial. Depois, a cada fase, cola o prompt seguinte na <strong>mesma conversa</strong>. Preenche os <code>[ ]</code> como quiseres.</div>
+  <div class="alert alert-amber">🔐 Projeto real ou fictício — mas <strong>sem dados pessoais reais</strong>. Se a conversa ficar lenta ou atingir o limite, usa o <strong>cartão do projeto</strong> para continuar num chat novo.</div>
+  <p style="font-size:.85rem;color:var(--slate6);margin:-.25rem 0 1rem">📽️ Slides desta sessão: <a href="slides/2026-11/S2_Simulacao.html" target="_blank" rel="noopener" style="color:var(--cyan);font-weight:700">abrir deck da sessão 2 →</a></p>
+
+  <div class="divider-label">ARRANQUE · 09h30 · RETOMAR A TRÍADE (M3 · SLIDE 9)</div>
+  <div class="card">
+    <h3>Um bom prompt separa o contexto, o papel e o resultado</h3>
+    <div class="grid3" style="margin-top:.6rem">
+      <div class="card" style="border-top:3px solid var(--cyan);margin-bottom:0"><span class="badge badge-cyan">CONTEXTO</span><p style="font-size:.85rem">O que o modelo precisa de saber para não adivinhar: material, finalidade, destinatário, fontes, limites.</p></div>
+      <div class="card" style="border-top:3px solid var(--amber);margin-bottom:0"><span class="badge badge-amber">PAPEL</span><p style="font-size:.85rem">A lente de análise: função, domínio, critérios de qualidade, limites.</p></div>
+      <div class="card" style="border-top:3px solid var(--green);margin-bottom:0"><span class="badge badge-green">EXPECTATIVA</span><p style="font-size:.85rem">A definição de sucesso: tarefa, formato, extensão, secções, o que fazer perante lacunas.</p></div>
+    </div>
+    <p style="font-size:.8rem;color:var(--slate6);margin-top:.6rem">Revê os slides 9–25 do M3 em <a href="slides/2026-11/S1_M3_Prompt_Engineering.pdf#page=9" target="_blank" rel="noopener" style="color:var(--cyan)">PDF</a>.</p>
+  </div>
+
+  <div class="card" style="border-top:3px solid var(--navy)">
+    <span class="badge badge-navy">PROMPT INICIAL · COPIA, PREENCHE OS [ ] E COLA NUMA CONVERSA NOVA</span>
+    <h3>O meu projeto</h3>
+    <p style="font-size:.85rem;color:var(--slate6)">Repara: <strong style="color:var(--cyan)">contexto</strong> (1.º parágrafo) · <strong style="color:var(--amber)">papel</strong> (2.º) · <strong style="color:var(--green)">expectativa</strong> (regras) · e no fim a <strong>interação invertida</strong>: a IA pergunta antes de produzir.</p>
+    <div class="prompt-box" style="border-left-color:var(--navy)">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>Quero propor uma nova iniciativa no meu [serviço / departamento / faculdade / unidade orgânica] da Universidade do Porto, em torno de [gestão financeira / tratamento de reclamações / apoio à investigação / acolhimento de estudantes / ...].
+A minha função atual é [técnico superior / assistente técnico / professor / jurista / ...].
+
+Atua como especialista na implementação deste tipo de iniciativas em universidades públicas portuguesas, em particular na Universidade do Porto.
+
+Vou produzir vários documentos e recursos de forma faseada. Eu digo-te qual é a fase seguinte.
+Regras para toda a conversa:
+- português europeu, tom institucional, respostas concisas;
+- não inventes regulamentos, nomes, valores ou programas: assinala [a confirmar];
+- não uses dados pessoais reais.
+
+Antes de começarmos, faz-me até 5 perguntas para perceberes o contexto. Uma de cada vez.</pre>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card" style="border-left:4px solid var(--green)">
+      <span class="badge badge-green">NO FIM DE CADA FASE · CARTÃO DO PROJETO</span>
+      <p style="font-size:.85rem;color:var(--slate6)">Guarda o estado do projeto. Copia o cartão para um documento teu.</p>
+    <div class="prompt-box" style="border-left-color:var(--green)">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>Atualiza o CARTÃO DO PROJETO (máximo 150 palavras):
+título · objetivo · unidade e função · decisões tomadas · números-chave · próximos passos · pendentes [a confirmar].</pre>
+    </div>
+    </div>
+    <div class="card" style="border-left:4px solid var(--amber)">
+      <span class="badge badge-amber">SE PRECISARES DE RECOMEÇAR NUM CHAT NOVO</span>
+      <p style="font-size:.85rem;color:var(--slate6)">Gerir o contexto também é uma técnica: o cartão leva o essencial, sem o ruído.</p>
+    <div class="prompt-box" style="border-left-color:var(--amber)">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>Estou a trabalhar numa iniciativa e vou colar o cartão do projeto.
+Lê-o e confirma em 3 linhas o que percebeste. Depois aguarda a fase seguinte.
+Mantém as regras: PT-PT, tom institucional, não inventar, assinalar [a confirmar].
+
+[cola aqui o cartão]</pre>
+    </div>
+    </div>
+  </div>
+
+  <div class="divider-label">FASE 1 · 09h55 · 15 MIN</div>
+  <div class="card phase" id="fase1" style="border-top:3px solid var(--cyan)">
+    <span class="badge badge-cyan">FASE 1 · ESCOLHA MÚLTIPLA + ITERAÇÃO</span>
+    <h3>Ideação do projeto</h3>
+    <p style="font-size:.88rem;color:var(--slate6)">Pedir opções em vez de uma resposta única evita ficar preso à primeira ideia. Depois, itera.</p>
+    <ul class="theory"><li>Pede 3 opções contrastantes e não deixes a IA escolher.</li><li>Escolhe uma e refina com uma instrução concreta (&quot;só muda X&quot;).</li><li>Fecha com um objetivo verificável: o que muda, para quem, até quando.</li></ul>
+    <p class="ref">📎 Teoria: M3 · slides 49–51</p>
+    <div class="prompt-box" style="border-left-color:var(--cyan)">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>FASE 1 · IDEAÇÃO
+Apresenta-me 3 ideias diferentes para esta iniciativa:
+A. ambiciosa; B. de baixo custo; C. testável num mês.
+Para cada uma: nome curto · problema que resolve · como funciona (3 frases) · quem beneficia · principal risco.
+Não escolhas por mim.</pre>
+    </div>
+    <p style="font-size:.8rem;font-weight:700;color:var(--slate6);margin-top:.6rem">DEPOIS · ITERA</p>
+    <div class="prompt-box">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>Escolho a [A/B/C]. Ajusta-a a esta restrição: [ex.: sem orçamento novo / só 2 pessoas].
+Formula: título institucional · objetivo numa frase (o que muda, para quem, até quando) · 3 benefícios mensuráveis.</pre>
+    </div>
+    <div class="verify"><strong>✔ Verifica antes de avançar</strong><ul><li><label><input type="checkbox"> As 3 ideias são mesmo diferentes entre si?</label></li><li><label><input type="checkbox"> O objetivo é verificável (tem número e prazo)?</label></li><li><label><input type="checkbox"> A IA inventou algum serviço ou regulamento da U.Porto?</label></li></ul></div>
+    <p class="cardnote">🗂️ No fim: pede o <strong>cartão do projeto</strong>.</p>
+  </div>
+
+  <div class="divider-label">FASE 2 · 10h10 · 20 MIN</div>
+  <div class="card phase" id="fase2" style="border-top:3px solid var(--amber)">
+    <span class="badge badge-amber">FASE 2 · PERSONA-AUDIÊNCIA</span>
+    <h3>Pedidos de autorização</h3>
+    <p style="font-size:.88rem;color:var(--slate6)">O mesmo projeto explica-se de forma diferente a quem decide, a quem protege dados e a quem avalia a ética.</p>
+    <ul class="theory"><li>Define o destinatário: cargo, o que valoriza, o que receia, que decisão tem de tomar.</li><li>Muda o tom, a extensão e os argumentos — não os factos.</li><li>RGPD e AI Act: a IA prepara as perguntas, não substitui o parecer do EPD.</li></ul>
+    <p class="ref">📎 Teoria: M3 · slides 28–29 e 33–34</p>
+    <div class="prompt-box" style="border-left-color:var(--amber)">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>FASE 2 · PEDIDOS DE AUTORIZAÇÃO
+Redige 3 versões do pedido, uma por destinatário, adaptando tom, extensão e argumentos:
+1. [chefia direta / direção da unidade] — ofício formal: benefícios, recursos, prazo; máximo 1 página.
+2. Encarregado de Proteção de Dados (EPD) — que dados pessoais serão tratados, finalidade, minimização, conservação, ferramentas usadas; termina com 3 perguntas para o EPD.
+3. [comissão de ética / RH / UPdigital / outro: ...] — o que esta entidade precisa de saber para dar parecer.
+Não inventes artigos de lei: onde houver dúvida, escreve [a validar].</pre>
+    </div>
+    <p style="font-size:.8rem;font-weight:700;color:var(--slate6);margin-top:.6rem">DEPOIS · ITERA</p>
+    <div class="prompt-box">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>Revê o pedido 2 como se fosses o EPD: que 3 objeções levantarias? Reescreve o pedido para responder a cada uma.</pre>
+    </div>
+    <div class="verify"><strong>✔ Verifica antes de avançar</strong><ul><li><label><input type="checkbox"> Os três textos mantêm os mesmos factos?</label></li><li><label><input type="checkbox"> Há artigos de lei citados? Confirma-os ou apaga-os.</label></li><li><label><input type="checkbox"> Algum dado pessoal real entrou na conversa?</label></li></ul></div>
+    <p class="cardnote">🗂️ No fim: pede o <strong>cartão do projeto</strong>.</p>
+  </div>
+
+  <div class="divider-label">FASE 3 · 10h30 · 20 MIN</div>
+  <div class="card phase" id="fase3" style="border-top:3px solid var(--green)">
+    <span class="badge badge-green">FASE 3 · CHAIN-OF-THOUGHT + FORMATOS DE SAÍDA</span>
+    <h3>SWOT, recursos, orçamento e calendário</h3>
+    <p style="font-size:.88rem;color:var(--slate6)">Problemas com várias dependências pedem análise por etapas e uma resposta final auditável, em tabelas.</p>
+    <ul class="theory"><li>&quot;Analisa passo a passo&quot; e pede na resposta: síntese, pressupostos, riscos, recomendação.</li><li>Define o formato antes: tabelas com colunas nomeadas poupam reescrita.</li><li>Contas feitas pela IA verificam-se sempre — pede que as confirme.</li></ul>
+    <p class="ref">📎 Teoria: M3 · slides 39–40 e Formatos de saída</p>
+    <div class="prompt-box" style="border-left-color:var(--green)">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>FASE 3 · ANÁLISE
+Analisa o projeto passo a passo e apresenta, em tabelas:
+1. SWOT (3–4 pontos por quadrante);
+2. Recursos necessários: item · quantidade · custo unitário · custo total · observação (usa [custo/hora de referência] = [valor]);
+3. Orçamento com subtotais e total;
+4. Calendário de 6 meses: fase · meses · entregável · responsável (por função, sem nomes).
+No fim: pressupostos usados e 3 riscos com mitigação.
+Antes de responder, confirma as somas do orçamento.</pre>
+    </div>
+    <p style="font-size:.8rem;font-weight:700;color:var(--slate6);margin-top:.6rem">DEPOIS · ITERA</p>
+    <div class="prompt-box">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>Refaz o orçamento num cenário com 30% menos verba. O que cortas e que impacto tem no calendário?</pre>
+    </div>
+    <div class="verify"><strong>✔ Verifica antes de avançar</strong><ul><li><label><input type="checkbox"> As somas batem certo? Confirma 1 linha à mão.</label></li><li><label><input type="checkbox"> Os pressupostos são realistas para o teu serviço?</label></li><li><label><input type="checkbox"> O calendário cabe no ano letivo (férias, picos de trabalho)?</label></li></ul></div>
+    <p class="cardnote">🗂️ No fim: pede o <strong>cartão do projeto</strong>.</p>
+  </div>
+
+  <div class="agenda-block agenda-pause" style="margin:1rem 0"><div class="agenda-time amber">10h50</div><div><div class="agenda-title">Pausa · 15 min</div></div></div>
+
+  <div class="divider-label">FASE 4 · 11h05 · 15 MIN</div>
+  <div class="card phase" id="fase4" style="border-top:3px solid var(--navy)">
+    <span class="badge badge-navy">FASE 4 · PESQUISA WEB + VERIFICAÇÃO DE FONTES</span>
+    <h3>Proposta de financiamento</h3>
+    <p style="font-size:.88rem;color:var(--slate6)">É aqui que a IA mais inventa: programas, prazos e taxas plausíveis mas falsos. Só conta o que tiver fonte oficial.</p>
+    <ul class="theory"><li>Liga a pesquisa web (ou Deep Research) e exige o link da fonte oficial.</li><li>Separa o confirmado do [não confirmado].</li><li>Abre pelo menos 2 links e confirma: o aviso existe? está aberto?</li></ul>
+    <p class="ref">📎 Teoria: M2 · Alucinações · T2 · Deep Research</p>
+    <div class="prompt-box" style="border-left-color:var(--navy)">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>FASE 4 · FINANCIAMENTO
+Com pesquisa web, identifica até 5 fontes de financiamento possíveis para este projeto numa universidade pública portuguesa (fundos internos U.Porto, Portugal 2030, FCT, Erasmus+, Digital Europe, Horizon Europe, fundações, mecenato).
+Tabela: programa · entidade · elegibilidade · tipo e taxa de apoio · próximo prazo conhecido · link da fonte oficial.
+Inclui só o que confirmares numa fonte; o resto marca como [não confirmado].
+Depois, para a fonte mais adequada, redige o resumo da candidatura (máximo 250 palavras).</pre>
+    </div>
+    <p style="font-size:.8rem;font-weight:700;color:var(--slate6);margin-top:.6rem">DEPOIS · ITERA</p>
+    <div class="prompt-box">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>Para essa fonte, lista os critérios de avaliação publicados no aviso e diz como o resumo responde a cada um. Se não encontrares os critérios, diz que não os encontraste.</pre>
+    </div>
+    <div class="verify"><strong>✔ Verifica antes de avançar</strong><ul><li><label><input type="checkbox"> Abriste 2 links? Existem e dizem o que a IA afirma?</label></li><li><label><input type="checkbox"> Os prazos são futuros ou de avisos já fechados?</label></li><li><label><input type="checkbox"> O PRR aparece? Já não financia projetos novos.</label></li></ul></div>
+    <p class="cardnote">🗂️ No fim: pede o <strong>cartão do projeto</strong>.</p>
+  </div>
+
+  <div class="divider-label">FASE 5 · 11h20 · 15 MIN</div>
+  <div class="card phase" id="fase5" style="border-top:3px solid var(--cyan)">
+    <span class="badge badge-cyan">FASE 5 · FEW-SHOT (EXEMPLOS)</span>
+    <h3>Dados fictícios para simular o piloto</h3>
+    <p style="font-size:.88rem;color:var(--slate6)">Dois exemplos bem escolhidos valem mais do que uma descrição longa: a IA copia estrutura, formato e estilo.</p>
+    <ul class="theory"><li>Mostra 2 a 4 linhas de exemplo com o formato exato que queres.</li><li>Pede variação realista (sazonalidade, valores em falta).</li><li>Dados fictícios assinalam-se como tal — sempre.</li></ul>
+    <p class="ref">📎 Teoria: M3 · slides 30–32</p>
+    <div class="prompt-box" style="border-left-color:var(--cyan)">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>FASE 5 · DADOS FICTÍCIOS
+Gera dados fictícios que simulem os primeiros 6 meses do piloto.
+Formato CSV, separador ponto e vírgula, 60 linhas, com colunas e estilo como nestes exemplos:
+data;unidade;tipo_pedido;canal;tempo_resposta_dias;estado;satisfacao_1a5
+2027-01-08;FEUP;Reclamação;Email;4;Resolvido;4
+2027-01-09;FMUP;Pedido de informação;Presencial;1;Resolvido;5
+Adapta as colunas ao meu projeto. Inclui variação realista (meses com mais pedidos, 2–3 valores em falta).
+Nenhum nome de pessoa. Indica antes da tabela que os dados são fictícios.</pre>
+    </div>
+    <p style="font-size:.8rem;font-weight:700;color:var(--slate6);margin-top:.6rem">DEPOIS · ITERA</p>
+    <div class="prompt-box">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>Dá-me os dados como ficheiro .csv para descarregar (ou diz-me como colar no Excel em colunas).</pre>
+    </div>
+    <div class="verify"><strong>✔ Verifica antes de avançar</strong><ul><li><label><input type="checkbox"> Abre no Excel: as colunas separam bem?</label></li><li><label><input type="checkbox"> Os valores fazem sentido (sem datas impossíveis, notas fora de 1–5)?</label></li><li><label><input type="checkbox"> Ficou claro que são dados fictícios?</label></li></ul></div>
+    <p class="cardnote">🗂️ No fim: pede o <strong>cartão do projeto</strong>.</p>
+  </div>
+
+  <div class="divider-label">FASE 6 · 11h35 · 15 MIN</div>
+  <div class="card phase" id="fase6" style="border-top:3px solid var(--amber)">
+    <span class="badge badge-amber">FASE 6 · ANÁLISE DE FICHEIROS + ITERAÇÃO</span>
+    <h3>Relatório de acompanhamento</h3>
+    <p style="font-size:.88rem;color:var(--slate6)">A IA analisa folhas de cálculo — se fizer as contas com código e mostrar a tabela usada.</p>
+    <ul class="theory"><li>Anexa o ficheiro e pede cálculos &quot;com código&quot;.</li><li>Pede indicadores com valor e variação — e as limitações dos dados.</li><li>Itera para cada público: dirigente (meia página), equipa (detalhe).</li></ul>
+    <p class="ref">📎 Teoria: T1 · Folhas de cálculo · M3 · slide 51</p>
+    <div class="prompt-box" style="border-left-color:var(--amber)">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>FASE 6 · RELATÓRIO
+Com base nos dados (anexo o CSV / usa os que geraste), produz um relatório de acompanhamento para [a chefia / a direção]:
+1. 5 indicadores-chave com valor e variação mensal (faz as contas com código e mostra a tabela usada);
+2. 1 gráfico de evolução mensal;
+3. 3 conclusões e 2 recomendações;
+4. limitações dos dados.
+Máximo 1 página.</pre>
+    </div>
+    <p style="font-size:.8rem;font-weight:700;color:var(--slate6);margin-top:.6rem">DEPOIS · ITERA</p>
+    <div class="prompt-box">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>Reduz para meia página, para a reitoria. Coloca a recomendação principal na primeira frase.</pre>
+    </div>
+    <div class="verify"><strong>✔ Verifica antes de avançar</strong><ul><li><label><input type="checkbox"> Confirma 1 indicador no Excel (ex.: média do tempo de resposta).</label></li><li><label><input type="checkbox"> As conclusões decorrem dos números ou são opinião?</label></li><li><label><input type="checkbox"> O relatório diz que os dados são fictícios?</label></li></ul></div>
+    <p class="cardnote">🗂️ No fim: pede o <strong>cartão do projeto</strong>.</p>
+  </div>
+
+  <div class="divider-label">FASE 7 · 11h50 · 15 MIN</div>
+  <div class="card phase" id="fase7" style="border-top:3px solid var(--green)">
+    <span class="badge badge-green">FASE 7 · PERSONA-AUDIÊNCIA + FORMATOS</span>
+    <h3>Conteúdos de divulgação</h3>
+    <p style="font-size:.88rem;color:var(--slate6)">Agora que há resultados, comunica-os: o mesmo conteúdo, quatro formatos, quatro públicos.</p>
+    <ul class="theory"><li>Para cada peça: público, canal, extensão, tom.</li><li>Pede variantes e escolhe; itera só o que precisa.</li><li>Transparência: indica que o texto teve apoio de IA (AI Act, art. 50.º).</li></ul>
+    <p class="ref">📎 Teoria: M3 · slides 33–34 e 49–50</p>
+    <div class="prompt-box" style="border-left-color:var(--green)">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>FASE 7 · DIVULGAÇÃO
+Cria os materiais de divulgação, cada um adaptado ao seu público:
+1. notícia para a newsletter interna da U.Porto (150 palavras);
+2. post para o LinkedIn institucional (80 palavras, 3 hashtags);
+3. email aos colegas do serviço a convidar para o piloto (tom próximo, 120 palavras);
+4. guião de 5 slides para apresentar à direção (título + 3 bullets por slide).
+Onde se aplique, indica que o texto foi preparado com apoio de IA.</pre>
+    </div>
+    <p style="font-size:.8rem;font-weight:700;color:var(--slate6);margin-top:.6rem">DEPOIS · ITERA</p>
+    <div class="prompt-box">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>Dá-me 3 títulos alternativos para a notícia: um informativo, um com número, um com pergunta.</pre>
+    </div>
+    <div class="verify"><strong>✔ Verifica antes de avançar</strong><ul><li><label><input type="checkbox"> Os números citados são os do relatório (e fictícios)?</label></li><li><label><input type="checkbox"> O tom de cada peça serve o público?</label></li><li><label><input type="checkbox"> Está indicado o apoio de IA onde é público?</label></li></ul></div>
+    <p class="cardnote">🗂️ No fim: pede o <strong>cartão do projeto</strong>.</p>
+  </div>
+
+  <div class="divider-label">FECHO · 12h05 · DE CONVERSA A ASSISTENTE</div>
+  <div class="card" style="border-top:3px solid var(--navy)">
+    <span class="badge badge-navy">INSTRUÇÕES REUTILIZÁVEIS · M3 · SLIDE 41</span>
+    <h3>Transforma a conversa num assistente do teu serviço</h3>
+    <p style="font-size:.85rem;color:var(--slate6)">Cola o resultado num Project (Claude/ChatGPT), GPT, Gem (Gemini) ou Agente (Copilot). Na próxima vez, não começas do zero.</p>
+    <div class="prompt-box" style="border-left-color:var(--navy)">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>Transforma esta conversa num assistente reutilizável para gerir esta iniciativa nos próximos meses.
+Escreve as instruções para um Project / GPT / Gem / Agente do Copilot com:
+(1) objetivo do assistente; (2) informação que deve pedir antes de começar; (3) passos que segue;
+(4) formatos de saída; (5) o que nunca deve fazer.
+Máximo 250 palavras. Inclui no fim o cartão do projeto atual.</pre>
+    </div>
+  </div>
+  <div class="card">
+    <h3>Partilha no Meet — 3 frases</h3>
+    <div class="prompt-box" style="border-left-color:var(--navy)"><pre>1. O meu projeto chama-se [título] e quer [objetivo numa frase].
+2. A fase em que a IA mais me ajudou foi [fase] — e onde tive de corrigir foi [fase], porque [razão].
+3. Amanhã, no meu serviço, vou experimentar [ação concreta].</pre></div>
+  </div>
+  <div class="card" style="background:var(--navy);border-color:var(--navy);color:var(--white);text-align:center">
+    <p style="font-size:1rem;margin:0;color:#E2E8F0">📋 Antes de sair: <a href="#" class="js-form-pos" target="_blank" rel="noopener" style="color:var(--cyan);font-weight:700">questionário pós-formação</a> (3 min)</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
      T1
 ══════════════════════════════════════════════ -->
 <section id="t1">
@@ -1365,16 +1670,16 @@ Sem jargão técnico.</pre>
   </div>
 
   <div class="divider-label">SLIDES DO WORKSHOP</div>
-  <div class="alert alert-cyan">📎 Os slides ficam disponíveis aqui após cada sessão.</div>
-  <div class="grid3">
-    <div class="tool-card"><div class="tc-name">M0 · Acolhimento</div><div class="tc-desc">Disponível após a sessão</div></div>
-    <div class="tool-card"><div class="tc-name">M1 · Enquadramento</div><div class="tc-desc">Disponível após a sessão</div></div>
-    <div class="tool-card"><div class="tc-name">M2 · Limites e Alucinações</div><div class="tc-desc">Disponível após a sessão</div></div>
-    <div class="tool-card"><div class="tc-name">M3 · Prompt Engineering</div><div class="tc-desc">Disponível após a sessão</div></div>
-    <div class="tool-card"><div class="tc-name">T1 · Folhas de Cálculo</div><div class="tc-desc">Disponível após a sessão</div></div>
-    <div class="tool-card"><div class="tc-name">T2 · Ferramentas Avançadas</div><div class="tc-desc">Disponível após a sessão</div></div>
-    <div class="tool-card"><div class="tc-name">T3 · Atelier</div><div class="tc-desc">Disponível após a sessão</div></div>
-    <div class="tool-card"><div class="tc-name">T4 · Encerramento</div><div class="tc-desc">Disponível após a sessão</div></div>
+  <div class="divider-label" style="margin-top:.25rem">SESSÃO 1 · 6 NOV</div>
+  <div class="grid2">
+    <div class="tool-card"><div class="tc-name">M0 · Acolhimento</div><div class="tc-desc">4 slides</div><div><a href="slides/2026-11/S1_M0_Acolhimento.pdf" target="_blank" rel="noopener">PDF ↓</a> <a href="slides/2026-11/S1_M0_Acolhimento.pptx" download>PPTX ↓</a></div></div>
+    <div class="tool-card"><div class="tc-name">M1 · Enquadramento</div><div class="tc-desc">9 slides</div><div><a href="slides/2026-11/S1_M1_Enquadramento.pdf" target="_blank" rel="noopener">PDF ↓</a> <a href="slides/2026-11/S1_M1_Enquadramento.pptx" download>PPTX ↓</a></div></div>
+    <div class="tool-card"><div class="tc-name">M2 · Limites e Alucinações</div><div class="tc-desc">11 slides</div><div><a href="slides/2026-11/S1_M2_Limites_Alucinacoes.pdf" target="_blank" rel="noopener">PDF ↓</a> <a href="slides/2026-11/S1_M2_Limites_Alucinacoes.pptx" download>PPTX ↓</a></div></div>
+    <div class="tool-card"><div class="tc-name">M3 · Prompt Engineering</div><div class="tc-desc">56 slides · PPTX com 20 MB</div><div><a href="slides/2026-11/S1_M3_Prompt_Engineering.pdf" target="_blank" rel="noopener">PDF ↓</a> <a href="slides/2026-11/S1_M3_Prompt_Engineering.pptx" download>PPTX ↓</a></div></div>
+  </div>
+  <div class="divider-label">SESSÃO 2 · 13 NOV</div>
+  <div class="grid2">
+    <div class="tool-card"><div class="tc-name">S2 · Simulação em 7 fases</div><div class="tc-desc">Deck HTML · setas para navegar · F para ecrã inteiro</div><a href="slides/2026-11/S2_Simulacao.html" target="_blank" rel="noopener">Abrir →</a></div>
   </div>
 
   <div class="divider-label">PARA APRENDER MAIS</div>
@@ -1513,7 +1818,7 @@ function copyPrompt(btn) {
 }
 
 applyTurma(defaultTurma());
-showSection(location.hash.slice(1) || "agenda");
+showSection(location.hash.slice(1) || (defaultTurma() === "B" ? "sim" : "agenda"));
 </script>
 </body>
 </html>

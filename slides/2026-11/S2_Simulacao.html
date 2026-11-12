@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sessão 2 · O meu projeto IA em 7 fases</title>
+<meta name="description" content="Slides da sessão 2 (13 nov 2026) do workshop IA Aplicada ao Trabalho Administrativo, U.Porto: simulação prática em 7 fases.">
+<style>
+:root{--navy:#0D2D52;--cyan:#0891B2;--amber:#F59E0B;--green:#10B981;--red:#DC2626;--text:#111928;--muted:#5B6474;--border:#E2E8F0;--soft:#F1F5F9;--bg:#fff;--accent:#0891B2;--text-muted:#5B6474;
+ --sans:'Segoe UI',system-ui,-apple-system,'Inter',sans-serif;--mono:'Consolas','JetBrains Mono','Courier New',monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#0B1220}
+body{font-family:var(--sans);color:var(--text);overflow:hidden}
+.stage{position:absolute;top:50%;left:50%;width:1280px;height:720px;transform-origin:center center}
+.slide{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;align-items:flex-start;padding:46px 72px 58px;background:var(--bg);gap:14px}
+.slide.active{display:flex}
+.foot{position:absolute;left:72px;right:72px;bottom:18px;display:flex;justify-content:space-between;font-size:12px;color:#94A3B8}
+.eyebrow{font-size:13px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan)}
+h2{font-size:36px;font-weight:800;color:var(--navy);line-height:1.15}
+.accent{color:var(--cyan)}.c1{color:var(--cyan)}.c2{color:#D97706}.c3{color:#059669}
+.lead{font-size:20px;color:var(--muted);max-width:1050px;line-height:1.5}
+.take{background:var(--navy);color:#fff;border-radius:10px;padding:14px 22px;font-size:17px;font-weight:600;width:100%;text-align:center;margin-top:6px}
+/* capa */
+.cover{background:linear-gradient(135deg,#0D2D52 0%,#0B3B66 60%,#0891B2 140%);color:#E8F0FE;justify-content:flex-end;padding-bottom:70px}
+.cover .kick{position:absolute;top:50px;font-size:13px;letter-spacing:.25em;text-transform:uppercase;color:#67E8F9}
+.cover h1{font-size:72px;font-weight:800;line-height:1.05;color:#fff}.cover h1 span{color:#67E8F9}
+.cover .sub{font-size:22px;color:#B8D4E8;max-width:860px;line-height:1.5}
+.cover .meta{font-size:15px;color:#B8D4E8}.cover .url{font-size:14px;color:#67E8F9;font-weight:700}
+/* transparência */
+.tech-slide{background:var(--soft)}
+.tech{display:grid;grid-template-columns:1fr 1.35fr;gap:22px;align-items:start;margin-top:2px;width:100%}
+.tcard,.gloss{background:#fff;border:1px solid var(--border);border-radius:16px;padding:18px 20px}
+.tcard dl{display:grid;grid-template-columns:auto 1fr;gap:10px 14px}
+.tcard dt{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--accent);padding-top:3px;white-space:nowrap}
+.tcard dd{font-size:15px;color:var(--text);opacity:.9;line-height:1.4}
+.gloss h3{color:var(--accent);margin-bottom:10px;font-size:18px}
+.gloss dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 18px}
+.gloss .gi{font-size:14px;color:var(--text-muted);line-height:1.3}.gloss .gi b{color:var(--text);margin-right:6px}
+.hl{background:color-mix(in srgb,var(--accent) 22%,transparent);padding:0 3px;border-radius:3px}.dim{color:var(--text-muted)}
+/* agenda */
+.aglist{display:grid;grid-template-columns:1fr 1fr;gap:10px 18px;width:100%}
+.ag{display:flex;gap:14px;align-items:flex-start;border:1px solid var(--border);border-radius:10px;padding:10px 14px}
+.ag .dot{width:32px;height:32px;border-radius:50%;background:var(--cyan);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;flex-shrink:0}
+.ag b{font-size:15px;color:var(--navy)}.ag p{font-size:13px;color:var(--muted);margin-top:2px}
+.ag.pz{background:var(--soft)}.ag.pz .dot{background:#CBD5E1}
+/* formato */
+.flow{display:flex;flex-wrap:wrap;gap:10px;width:100%}
+.chip{display:flex;align-items:center;gap:8px;background:var(--soft);border:1px solid var(--border);border-radius:99px;padding:8px 16px 8px 8px;font-size:16px;font-weight:600;color:var(--navy)}
+.chip span{width:28px;height:28px;border-radius:50%;background:var(--cyan);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px}
+.chip.seed span{background:var(--navy)}
+.cols3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;width:100%}
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:20px;width:100%}
+.mini{background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px 18px}.mini b{font-size:17px;color:var(--navy)}.mini p{font-size:15px;color:var(--muted);margin-top:6px}
+/* tríade */
+.tri{border-radius:12px;padding:20px;border-top:5px solid}.tri b{font-size:22px}.tri p{font-size:17px;margin:8px 0;color:var(--text)}.tri small{font-size:14px;color:var(--muted)}
+.t1{border-color:var(--cyan);background:#ECFEFF}.t1 b{color:var(--cyan)}.t2{border-color:var(--amber);background:#FFFBEB}.t2 b{color:#B45309}.t3{border-color:var(--green);background:#ECFDF5}.t3 b{color:#047857}
+/* prompts */
+.prompt{background:var(--soft)}
+.pbox{background:#0D1B2A;border-radius:12px;padding:22px 24px 18px;width:100%;position:relative}
+.pbadge{position:absolute;top:-12px;left:16px;background:var(--cyan);color:#fff;font-size:11px;font-weight:800;letter-spacing:.15em;padding:4px 10px;border-radius:4px}
+.pbox code{font-family:var(--mono);font-size:15.5px;color:#BAE6FD;white-space:pre-wrap;line-height:1.55;display:block}
+.seedslide .pbox code{font-size:15px}
+.card2 .pbox code{font-size:14.5px}
+.cp{position:absolute;top:10px;right:12px;background:rgba(255,255,255,.1);color:#E2E8F0;border:1px solid rgba(255,255,255,.2);border-radius:6px;font-size:12px;padding:3px 10px;cursor:pointer}
+.cp:hover{background:var(--cyan)}
+.pbox.plain code{font-size:18px}
+.steps{display:flex;gap:14px;flex-wrap:wrap}.steps span{font-size:15px;font-weight:700;color:var(--cyan);background:#E0F2FE;padding:8px 16px;border-radius:8px}
+.lbl{font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.hint{font-size:14px;color:var(--muted);margin-top:8px}
+/* fase */
+.phase-intro{padding-right:300px}
+.pnum{position:absolute;right:70px;top:50%;transform:translateY(-50%);font-size:300px;font-weight:900;color:#E0F2FE;line-height:1}
+.techtag{font-size:18px;color:var(--navy);background:#E0F2FE;border-left:4px solid var(--cyan);padding:8px 14px;border-radius:0 8px 8px 0}
+.theory{font-size:20px;line-height:1.5;margin-left:24px;color:var(--text)}.theory li{margin:4px 0}
+.ref{font-size:15px;color:var(--muted);font-style:italic}
+.pp{display:grid;grid-template-columns:1fr 290px;gap:22px;width:100%;align-items:start}
+.phase-prompt .pbox code{font-size:14.5px;line-height:1.5}
+.phase-prompt h2{font-size:30px}
+.follow{font-family:var(--mono);font-size:13.5px;color:var(--navy);background:#fff;border:1px dashed #94A3B8;border-radius:10px;padding:10px 14px;white-space:pre-wrap;line-height:1.45}
+.vbox{background:#ECFDF5;border:1px solid #A7F3D0;border-radius:12px;padding:16px 18px}.vbox b{font-size:17px;color:#047857}
+.vbox ul{margin:10px 0 0 18px;font-size:15px;line-height:1.45;color:var(--text)}.vbox li{margin:6px 0}
+.cardrem{margin-top:12px;font-size:14px;font-weight:700;color:var(--navy);background:#fff;border-radius:8px;padding:8px 10px}
+/* transição */
+.transition{background:var(--navy);color:#E8F0FE}
+.transition .done{font-size:14px;color:#67E8F9;letter-spacing:.15em;text-transform:uppercase}
+.transition .next{background:rgba(255,255,255,.06);border-left:4px solid #67E8F9;border-radius:4px;padding:28px 32px;width:100%}
+.transition .lbl2{font-size:12px;letter-spacing:.25em;text-transform:uppercase;color:#67E8F9;margin-bottom:10px}
+.transition h2{color:#fff;font-size:40px}.transition p{color:#B8D4E8;font-size:19px;margin-top:8px}
+.transition .brk{font-size:17px;color:#B8D4E8;background:rgba(255,255,255,.06);padding:12px 20px;border-radius:8px}
+/* fecho */
+.rules{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;width:100%}
+.rules div{background:var(--soft);border-top:4px solid var(--cyan);border-radius:8px;padding:12px;font-size:14px;color:var(--muted)}.rules b{display:block;color:var(--navy);font-size:17px;margin-bottom:4px}
+/* UI */
+.ui{position:fixed;top:10px;right:14px;display:flex;gap:10px;align-items:center;color:#94A3B8;font:13px var(--sans);z-index:5;opacity:0;transition:opacity .2s;background:rgba(2,6,23,.85);padding:6px 8px;border-radius:8px}
+.ui:hover{opacity:1}
+.ui button{background:rgba(255,255,255,.08);border:1px solid #334155;color:#CBD5E1;border-radius:6px;padding:5px 12px;cursor:pointer;font-size:14px}
+.notes{position:fixed;left:0;right:0;bottom:0;background:rgba(2,6,23,.94);color:#E2E8F0;font:17px/1.5 var(--sans);padding:16px 24px;display:none;z-index:6;border-top:2px solid var(--cyan)}
+.notes.on{display:block}.notes small{color:#67E8F9;display:block;margin-bottom:4px;letter-spacing:.1em;text-transform:uppercase;font-size:12px}
+</style>
+</head>
+<body>
+<div class="stage">
+<section class="slide cover" data-title="Capa" data-notes="Bom dia. Hoje não há sequência de slides para decorar: cada um vai construir um projeto seu, numa só conversa com a IA. A teoria aparece quando é precisa.">
+<div class="kick">Universidade do Porto · Reitoria · Auditório Ruy Luís Gomes</div>
+<h1>O meu projeto IA<br><span>em 7 fases</span></h1>
+<p class="sub">Sessão 2 · simulação prática — do primeiro esboço ao relatório e à divulgação, numa só conversa com a IA.</p>
+<div class="meta">Ricardo Correia · Hélder Palheira · Jannine Nascimento &nbsp;·&nbsp; sexta, 13 de novembro de 2026 &nbsp;·&nbsp; 09h30 – 12h30</div>
+<div class="url">ricardojccorreia.github.io/GenAI/workshops.html</div>
+
+</section>
+<section class="slide tech-slide" data-title="Como foi feito" data-notes="TRANSPARÊNCIA — 30 a 45 s. Estes slides foram feitos com IA, e está aqui escrito como: ferramenta, modelo, fontes, data e versão. É o mesmo padrão de declaração que peço aos meus alunos. Não ler; passar.">
+<p class="eyebrow">Transparência</p>
+<h2>Como estes slides <span class="accent">foram feitos</span></h2>
+<div class="tech">
+  <div class="tcard"><dl>
+    <dt>Solução</dt><dd>Claude, da Anthropic, no Claude Code (sessão na cloud)</dd>
+    <dt>Modelo</dt><dd>claude-opus-5-5 <span class="dim">(identificador configurado na sessão)</span></dd>
+    <dt>Fontes</dt><dd>Slides da sessão 1 (M0–M3, 6 nov 2026) e hub do workshop, do autor · fontes públicas: AI Act (Reg. (UE) 2024/1689 e 2026/1744)</dd>
+    <dt>Processo</dt><dd>Formato, fases e prompt inicial: <b class="hl">decisão e revisão do autor</b>; redação, prompts das fases e código gerados por IA; verificado em Chromium a 1366×768 e 1920×1080</dd>
+    <dt>Data · versão</dt><dd>12 de novembro de 2026 · <b class="hl">versão 1.0</b></dd>
+  </dl></div>
+  <div class="gloss"><h3>Siglas</h3><dl><div class="gi"><b>AI Act</b>Regulamento europeu da IA (Reg. (UE) 2024/1689)</div><div class="gi"><b>CSV</b>Comma-separated values — ficheiro de dados em texto</div><div class="gi"><b>EPD</b>Encarregado de Proteção de Dados</div><div class="gi"><b>FCT</b>Fundação para a Ciência e a Tecnologia</div><div class="gi"><b>FEUP</b>Faculdade de Engenharia da U.Porto</div><div class="gi"><b>FMUP</b>Faculdade de Medicina da U.Porto</div><div class="gi"><b>GPT</b>Assistente personalizado do ChatGPT</div><div class="gi"><b>IA</b>Inteligência artificial</div><div class="gi"><b>PRR</b>Plano de Recuperação e Resiliência</div><div class="gi"><b>PT-PT</b>Português europeu</div><div class="gi"><b>QR</b>Quick Response — código de leitura rápida</div><div class="gi"><b>RGPD</b>Regulamento Geral sobre a Proteção de Dados</div><div class="gi"><b>RH</b>Recursos Humanos</div><div class="gi"><b>SWOT</b>Forças, fraquezas, oportunidades e ameaças</div><div class="gi"><b>UE</b>União Europeia</div></dl></div>
+</div>
+<div class="foot"><span>IA Aplicada ao Trabalho Administrativo · U.Porto · Sessão 2 · 13 nov 2026</span><span>Ricardo Correia · linkedin.com/in/ricardojccorreia</span></div>
+</section>
+<section class="slide agenda" data-title="Agenda" data-notes="Mostrar o ritmo: cerca de 15 a 20 minutos por fase. Quem se atrasar salta a fase 6 ou 7 — o hub tem tudo para continuar em casa.">
+<p class="eyebrow">Hoje · 3 horas</p><h2>Programa da sessão 2</h2><div class="aglist"><div class="ag"><div class="dot">0</div><div><b>09h30 · Arranque · retomar a Tríade</b><p>Slide 9 do M3 · Contexto, Papel, Expectativa · prompt inicial · cartão do projeto</p></div></div><div class="ag"><div class="dot">1</div><div><b>09h55 · Fase 1 · Ideação</b><p>Escolha múltipla + iteração</p></div></div><div class="ag"><div class="dot">2</div><div><b>10h10 · Fase 2 · Pedidos de autorização</b><p>Persona-audiência · chefia, EPD, ética</p></div></div><div class="ag"><div class="dot">3</div><div><b>10h30 · Fase 3 · SWOT, recursos, orçamento, calendário</b><p>Chain-of-thought · tabelas · verificar contas</p></div></div><div class="ag pz"><div class="dot">☕</div><div><b>10h50 · Pausa</b><p></p></div></div><div class="ag"><div class="dot">4</div><div><b>11h05 · Fase 4 · Financiamento</b><p>Pesquisa web · verificar fontes</p></div></div><div class="ag"><div class="dot">5</div><div><b>11h20 · Fase 5 · Dados fictícios</b><p>Few-shot · CSV para o Excel</p></div></div><div class="ag"><div class="dot">6</div><div><b>11h35 · Fase 6 · Relatório</b><p>Análise de ficheiros · indicadores · gráfico</p></div></div><div class="ag"><div class="dot">7</div><div><b>11h50 · Fase 7 · Divulgação</b><p>Newsletter · LinkedIn · email · guião de slides</p></div></div><div class="ag"><div class="dot">✓</div><div><b>12h05 · Fecho · assistente reutilizável + questionário pós</b><p>Transformar a conversa num Project / GPT / Gem / Agente · partilha · avaliação</p></div></div></div>
+<div class="foot"><span>IA Aplicada ao Trabalho Administrativo · U.Porto · Sessão 2 · 13 nov 2026</span><span>Ricardo Correia · linkedin.com/in/ricardojccorreia</span></div>
+</section>
+<section class="slide format" data-title="Formato" data-notes="Explicar as regras do jogo em 2 minutos. Uma só conversa, do princípio ao fim. Se a conversa morrer, o cartão do projeto salva-os.">
+<p class="eyebrow">O formato de hoje</p>
+<h2>Uma conversa. <span class="accent">Um projeto.</span> Sete fases.</h2>
+<div class="flow"><div class="chip seed"><span>0</span>Prompt inicial</div><div class="chip"><span>1</span>Ideação</div><div class="chip"><span>2</span>Autorizações</div><div class="chip"><span>3</span>SWOT · orçamento · calendário</div><div class="chip"><span>4</span>Financiamento</div><div class="chip"><span>5</span>Dados fictícios</div><div class="chip"><span>6</span>Relatório</div><div class="chip"><span>7</span>Divulgação</div></div>
+<div class="cols3">
+  <div class="mini"><b>1 · Teoria curta</b><p>Uma técnica do M3 por fase, quando é precisa.</p></div>
+  <div class="mini"><b>2 · Prompt com [ ]</b><p>Copias do hub, preenches como quiseres, colas na mesma conversa.</p></div>
+  <div class="mini"><b>3 · Verificação</b><p>3 perguntas antes de avançar. No fim: o cartão do projeto.</p></div>
+</div>
+<div class="take">Projeto real ou fictício — sem dados pessoais reais. Hub: <b>ricardojccorreia.github.io/GenAI</b> → Sessão 2 ★</div>
+<div class="foot"><span>IA Aplicada ao Trabalho Administrativo · U.Porto · Sessão 2 · 13 nov 2026</span><span>Ricardo Correia · linkedin.com/in/ricardojccorreia</span></div>
+</section>
+<section class="slide triad" data-title="Tríade" data-notes="Retomamos exatamente onde ficámos: slide 9. Não voltar aos slides 10 a 25 — o prompt inicial que vão usar a seguir é a tríade aplicada. Perguntar: quem se lembra do que vai no Contexto?">
+<p class="eyebrow">Retomar · M3 · slide 9</p>
+<h2>A Tríade base</h2>
+<p class="lead">Um bom prompt separa claramente o <span class="c1">contexto</span>, o <span class="c2">papel</span> e o <span class="c3">resultado</span>.</p>
+<div class="cols3">
+  <div class="tri t1"><b>Contexto</b><p>O que o modelo precisa de saber para não adivinhar.</p><small>material · finalidade · destinatário · fontes · limites · lacunas</small></div>
+  <div class="tri t2"><b>Papel</b><p>A lente com que olha para a tarefa.</p><small>função · domínio · responsabilidades · perspetiva · critérios · limites</small></div>
+  <div class="tri t3"><b>Expectativa</b><p>A definição de sucesso.</p><small>tarefa · formato · extensão · tom · secções · critérios · lacunas</small></div>
+</div>
+<div class="take">Mais tempo no prompt = menos tempo nas iterações.</div>
+<div class="foot"><span>IA Aplicada ao Trabalho Administrativo · U.Porto · Sessão 2 · 13 nov 2026</span><span>Ricardo Correia · linkedin.com/in/ricardojccorreia</span></div>
+</section>
+<section class="slide prompt seedslide" data-title="Prompt inicial" data-notes="Dar 8 a 10 minutos. Circular pela sala. A última linha é a interação invertida (slides 35–38): a IA pergunta antes de produzir — serve de revisão sem voltar aos slides. Pedir 2 pessoas para dizerem em voz alta o projeto que escolheram.">
+<p class="eyebrow">Arranque · 09h30 · abre uma conversa nova</p>
+<h2>Prompt inicial — <span class="c1">contexto</span> · <span class="c2">papel</span> · <span class="c3">expectativa</span> · interação invertida</h2>
+<div class="pbox"><div class="pbadge">PROMPT INICIAL</div><button class="cp" onclick="cp(this)">Copiar</button><code>Quero propor uma nova iniciativa no meu [serviço / departamento / faculdade / unidade orgânica] da Universidade do Porto, em torno de [gestão financeira / tratamento de reclamações / apoio à investigação / acolhimento de estudantes / ...].
+A minha função atual é [técnico superior / assistente técnico / professor / jurista / ...].
+
+Atua como especialista na implementação deste tipo de iniciativas em universidades públicas portuguesas, em particular na Universidade do Porto.
+
+Vou produzir vários documentos e recursos de forma faseada. Eu digo-te qual é a fase seguinte.
+Regras para toda a conversa:
+- português europeu, tom institucional, respostas concisas;
+- não inventes regulamentos, nomes, valores ou programas: assinala [a confirmar];
+- não uses dados pessoais reais.
+
+Antes de começarmos, faz-me até 5 perguntas para perceberes o contexto. Uma de cada vez.</code></div>
+<div class="steps"><span>① Copia do hub</span><span>② Preenche os [ ]</span><span>③ Responde às 5 perguntas da IA</span></div>
+<div class="foot"><span>IA Aplicada ao Trabalho Administrativo · U.Porto · Sessão 2 · 13 nov 2026</span><span>Ricardo Correia · linkedin.com/in/ricardojccorreia</span></div>
+</section>
+<section class="slide prompt card2" data-title="Cartão do projeto" data-notes="Conversas longas degradam-se e as contas gratuitas têm limite de mensagens. O cartão é a solução — e é uma técnica avançada: gerir o contexto.">
+<p class="eyebrow">Gerir o contexto</p>
+<h2>O cartão do projeto</h2>
+<div class="cols2">
+  <div><p class="lbl">No fim de cada fase</p><div class="pbox"><div class="pbadge">CARTÃO</div><button class="cp" onclick="cp(this)">Copiar</button><code>Atualiza o CARTÃO DO PROJETO (máximo 150 palavras):
+título · objetivo · unidade e função · decisões tomadas · números-chave · próximos passos · pendentes [a confirmar].</code></div><p class="hint">Copia o cartão para um documento teu.</p></div>
+  <div><p class="lbl">Se a conversa ficar lenta ou atingir o limite</p><div class="pbox"><div class="pbadge">RECOMEÇAR</div><button class="cp" onclick="cp(this)">Copiar</button><code>Estou a trabalhar numa iniciativa e vou colar o cartão do projeto.
+Lê-o e confirma em 3 linhas o que percebeste. Depois aguarda a fase seguinte.
+Mantém as regras: PT-PT, tom institucional, não inventar, assinalar [a confirmar].
+
+[cola aqui o cartão]</code></div><p class="hint">O cartão leva o essencial, sem o ruído.</p></div>
+</div>
+<div class="foot"><span>IA Aplicada ao Trabalho Administrativo · U.Porto · Sessão 2 · 13 nov 2026</span><span>Ricardo Correia · linkedin.com/in/ricardojccorreia</span></div>
+</section>
+<section class="slide phase-intro" data-title="Fase 1 · teoria" data-notes="FASE 1 — teoria em 2–3 minutos, depois prompt. Pedir opções em vez de uma resposta única evita ficar preso à primeira ideia. Depois, itera.">
+<div class="pnum">1</div>
+<p class="eyebrow">Fase 1 · 09h55 · 15 min</p>
+<h2>Ideação do projeto</h2>
+<div class="techtag">Técnica: <b>Escolha múltipla + iteração</b></div>
+<p class="lead">Pedir opções em vez de uma resposta única evita ficar preso à primeira ideia. Depois, itera.</p>
+<ul class="theory"><li>Pede 3 opções contrastantes e não deixes a IA escolher.</li><li>Escolhe uma e refina com uma instrução concreta (&quot;só muda X&quot;).</li><li>Fecha com um objetivo verificável: o que muda, para quem, até quando.</li></ul>
+<p class="ref">📎 M3 · slides 49–51</p>
+<div class="foot"><span>IA Aplicada ao Trabalho Administrativo · U.Porto · Sessão 2 · 13 nov 2026</span><span>Ricardo Correia · linkedin.com/in/ricardojccorreia</span></div>
+</section>
+<section class="slide prompt phase-prompt" data-title="Fase 1 · prompt" data-notes="Dar 12 minutos. Escolher 2 participantes para mostrar no Meet. Insistir na verificação.">
+<p class="eyebrow">Fase 1 · na mesma conversa</p>
+<h2>Ideação do projeto</h2>
+<div class="pp">
+  <div><div class="pbox"><div class="pbadge">FASE 1</div><button class="cp" onclick="cp(this)">Copiar</button><code>FASE 1 · IDEAÇÃO
+Apresenta-me 3 ideias diferentes para esta iniciativa:
+A. ambiciosa; B. de baixo custo; C. testável num mês.
+Para cada uma: nome curto · problema que resolve · como funciona (3 frases) · quem beneficia · principal risco.
+Não escolhas por mim.</code></div><p class="lbl" style="margin-top:12px">Depois · itera</p><div class="follow">Escolho a [A/B/C]. Ajusta-a a esta restrição: [ex.: sem orçamento novo / só 2 pessoas].
+Formula: título institucional · objetivo numa frase (o que muda, para quem, até quando) · 3 benefícios mensuráveis.</div></div>
+  <div class="vbox"><b>✔ Verifica</b><ul><li>As 3 ideias são mesmo diferentes entre si?</li><li>O objetivo é verificável (tem número e prazo)?</li><li>A IA inventou algum serviço ou regulamento da U.Porto?</li></ul><div class="cardrem">🗂️ No fim: cartão do projeto</div></div>
+</div>
+<div class="foot"><span>IA Aplicada ao Trabalho Administrativo · U.Porto · Sessão 2 · 13 nov 2026</span><span>Ricardo Correia · linkedin.com/in/ricardojccorreia</span></div>
+</section>
+<section class="slide phase-intro" data-title="Fase 2 · teoria" data-notes="FASE 2 — teoria em 2–3 minutos, depois prompt. O mesmo projeto explica-se de forma diferente a quem decide, a quem protege dados e a quem avalia a ética.">
+<div class="pnum">2</div>
+<p class="eyebrow">Fase 2 · 10h10 · 20 min</p>
+<h2>Pedidos de autorização</h2>
+<div class="techtag">Técnica: <b>Persona-audiência</b></div>
+<p class="lead">O mesmo projeto explica-se de forma diferente a quem decide, a quem protege dados e a quem avalia a ética.</p>
+<ul class="theory"><li>Define o destinatário: cargo, o que valoriza, o que receia, que decisão tem de tomar.</li><li>Muda o tom, a extensão e os argumentos — não os factos.</li><li>RGPD e AI Act: a IA prepara as perguntas, não substitui o parecer do EPD.</li></ul>
+<p class="ref">📎 M3 · slides 28–29 e 33–34</p>
+<div class="foot"><span>IA Aplicada ao Trabalho Administrativo · U.Porto · Sessão 2 · 13 nov 2026</span><span>Ricardo Correia · linkedin.com/in/ricardojccorreia</span></div>
+</section>
+<section class="slide prompt phase-prompt" data-title="Fase 2 · prompt" data-notes="Dar 17 minutos. Escolher 2 participantes para mostrar no Meet. Insistir na verificação.">
+<p class="eyebrow">Fase 2 · na mesma conversa</p>
+<h2>Pedidos de autorização</h2>
+<div class="pp">
+  <div><div class="pbox"><div class="pbadge">FASE 2</div><button class="cp" onclick="cp(this)">Copiar</button><code>FASE 2 · PEDIDOS DE AUTORIZAÇÃO
+Redige 3 versões do pedido, uma por destinatário, adaptando tom, extensão e argumentos:
+1. [chefia direta / direção da unidade] — ofício formal: benefícios, recursos, prazo; máximo 1 página.
+2. Encarregado de Proteção de Dados (EPD) — que dados pessoais serão tratados, finalidade, minimização, conservação, ferramentas usadas; termina com 3 perguntas para o EPD.
+3. [comissão de ética / RH / UPdigital / outro: ...] — o que esta entidade precisa de saber para dar parecer.
+Não inventes artigos de lei: onde houver dúvida, escreve [a validar].</code></div><p class="lbl" style="margin-top:12px">Depois · itera</p><div class="follow">Revê o pedido 2 como se fosses o EPD: que 3 objeções levantarias? Reescreve o pedido para responder a cada uma.</div></div>
+  <div class="vbox"><b>✔ Verifica</b><ul><li>Os três textos mantêm os mesmos factos?</li><li>Há artigos de lei citados? Confirma-os ou apaga-os.</li><li>Algum dado pessoal real entrou na conversa?</li></ul><div class="cardrem">🗂️ No fim: cartão do projeto</div></div>
+</div>
+<div class="foot"><span>IA Aplicada ao Trabalho Administrativo · U.Porto · Sessão 2 · 13 nov 2026</span><span>Ricardo Correia · linkedin.com/in/ricardojccorreia</span></div>
+</section>
+<section class="slide phase-intro" data-title="Fase 3 · teoria" data-notes="FASE 3 — teoria em 2–3 minutos, depois prompt. Problemas com várias dependências pedem análise por etapas e uma resposta final auditável, em tabelas.">
+<div class="pnum">3</div>
+<p class="eyebrow">Fase 3 · 10h30 · 20 min</p>
+<h2>SWOT, recursos, orçamento e calendário</h2>
+<div class="techtag">Técnica: <b>Chain-of-thought + formatos de saída</b></div>
+<p class="lead">Problemas com várias dependências pedem análise por etapas e uma resposta final auditável, em tabelas.</p>
+<ul class="theory"><li>&quot;Analisa passo a passo&quot; e pede na resposta: síntese, pressupostos, riscos, recomendação.</li><li>Define o formato antes: tabelas com colunas nomeadas poupam reescrita.</li><li>Contas feitas pela IA verificam-se sempre — pede que as confirme.</li></ul>
+<p class="ref">📎 M3 · slides 39–40 e Formatos de saída</p>
+<div class="foot"><span>IA Aplicada ao Trabalho Administrativo · U.Porto · Sessão 2 · 13 nov 2026</span><span>Ricardo Correia · linkedin.com/in/ricardojccorreia</span></div>
+</section>
+<section class="slide prompt phase-prompt" data-title="Fase 3 · prompt" data-notes="Dar 17 minutos. Escolher 2 participantes para mostrar no Meet. Insistir na verificação.">
+<p class="eyebrow">Fase 3 · na mesma conversa</p>
+<h2>SWOT, recursos, orçamento e calendário</h2>
+<div class="pp">
+  <div><div class="pbox"><div class="pbadge">FASE 3</div><button class="cp" onclick="cp(this)">Copiar</button><code>FASE 3 · ANÁLISE
+Analisa o projeto passo a passo e apresenta, em tabelas:
+1. SWOT (3–4 pontos por quadrante);
+2. Recursos necessários: item · quantidade · custo unitário · custo total · observação (usa [custo/hora de referência] = [valor]);
+3. Orçamento com subtotais e total;
+4. Calendário de 6 meses: fase · meses · entregável · responsável (por função, sem nomes).
+No fim: pressupostos usados e 3 riscos com mitigação.
+Antes de responder, confirma as somas do orçamento.</code></div><p class="lbl" style="margin-top:12px">Depois · itera</p><div class="follow">Refaz o orçamento num cenário com 30% menos verba. O que cortas e que impacto tem no calendário?</div></div>
+  <div class="vbox"><b>✔ Verifica</b><ul><li>As somas batem certo? Confirma 1 linha à mão.</li><li>Os pressupostos são realistas para o teu serviço?</li><li>O calendário cabe no ano letivo (férias, picos de trabalho)?</li></ul><div class="cardrem">🗂️ No fim: cartão do projeto</div></div>
+</div>
+<div class="foot"><span>IA Aplicada ao Trabalho Administrativo · U.Porto · Sessão 2 · 13 nov 2026</span><span>Ricardo Correia · linkedin.com/in/ricardojccorreia</span></div>
+</section>
+<section class="slide transition" data-title="Pausa" data-notes="Pausa. Lembrar: pedir o cartão do projeto antes de fechar o portátil.">
+<div class="done">✓ Fases 1 a 3 concluídas · ideia, autorizações, análise</div>
+<div class="next"><div class="lbl2">A seguir</div><h2>Fase 4 — Financiamento</h2><p>Onde a IA mais inventa: só conta o que tiver fonte oficial.</p></div>
+<div class="brk">☕ Pausa de 15 minutos · regresso às 11h05 · pede o cartão do projeto antes de sair</div>
+
+</section>
+<section class="slide phase-intro" data-title="Fase 4 · teoria" data-notes="FASE 4 — teoria em 2–3 minutos, depois prompt. É aqui que a IA mais inventa: programas, prazos e taxas plausíveis mas falsos. Só conta o que tiver fonte oficial.">
+<div class="pnum">4</div>
+<p class="eyebrow">Fase 4 · 11h05 · 15 min</p>
+<h2>Proposta de financiamento</h2>
+<div class="techtag">Técnica: <b>Pesquisa web + verificação de fontes</b></div>
+<p class="lead">É aqui que a IA mais inventa: programas, prazos e taxas plausíveis mas falsos. Só conta o que tiver fonte oficial.</p>
+<ul class="theory"><li>Liga a pesquisa web (ou Deep Research) e exige o link da fonte oficial.</li><li>Separa o confirmado do [não confirmado].</li><li>Abre pelo menos 2 links e confirma: o aviso existe? está aberto?</li></ul>
+<p class="ref">📎 M2 · Alucinações · T2 · Deep Research</p>
+<div class="foot"><span>IA Aplicada ao Trabalho Administrativo · U.Porto · Sessão 2 · 13 nov 2026</span><span>Ricardo Correia · linkedin.com/in/ricardojccorreia</span></div>
+</section>
+<section class="slide prompt phase-prompt" data-title="Fase 4 · prompt" data-notes="Dar 12 minutos. Escolher 2 participantes para mostrar no Meet. Insistir na verificação.">
+<p class="eyebrow">Fase 4 · na mesma conversa</p>
+<h2>Proposta de financiamento</h2>
+<div class="pp">
+  <div><div class="pbox"><div class="pbadge">FASE 4</div><button class="cp" onclick="cp(this)">Copiar</button><code>FASE 4 · FINANCIAMENTO
+Com pesquisa web, identifica até 5 fontes de financiamento possíveis para este projeto numa universidade pública portuguesa (fundos internos U.Porto, Portugal 2030, FCT, Erasmus+, Digital Europe, Horizon Europe, fundações, mecenato).
+Tabela: programa · entidade · elegibilidade · tipo e taxa de apoio · próximo prazo conhecido · link da fonte oficial.
+Inclui só o que confirmares numa fonte; o resto marca como [não confirmado].
+Depois, para a fonte mais adequada, redige o resumo da candidatura (máximo 250 palavras).</code></div><p class="lbl" style="margin-top:12px">Depois · itera</p><div class="follow">Para essa fonte, lista os critérios de avaliação publicados no aviso e diz como o resumo responde a cada um. Se não encontrares os critérios, diz que não os encontraste.</div></div>
+  <div class="vbox"><b>✔ Verifica</b><ul><li>Abriste 2 links? Existem e dizem o que a IA afirma?</li><li>Os prazos são futuros ou de avisos já fechados?</li><li>O PRR aparece? Já não financia projetos novos.</li></ul><div class="cardrem">🗂️ No fim: cartão do projeto</div></div>
+</div>
+<div class="foot"><span>IA Aplicada ao Trabalho Administrativo · U.Porto · Sessão 2 · 13 nov 2026</span><span>Ricardo Correia · linkedin.com/in/ricardojccorreia</span></div>
+</section>
+<section class="slide phase-intro" data-title="Fase 5 · teoria" data-notes="FASE 5 — teoria em 2–3 minutos, depois prompt. Dois exemplos bem escolhidos valem mais do que uma descrição longa: a IA copia estrutura, formato e estilo.">
+<div class="pnum">5</div>
+<p class="eyebrow">Fase 5 · 11h20 · 15 min</p>
+<h2>Dados fictícios para simular o piloto</h2>
+<div class="techtag">Técnica: <b>Few-shot (exemplos)</b></div>
+<p class="lead">Dois exemplos bem escolhidos valem mais do que uma descrição longa: a IA copia estrutura, formato e estilo.</p>
+<ul class="theory"><li>Mostra 2 a 4 linhas de exemplo com o formato exato que queres.</li><li>Pede variação realista (sazonalidade, valores em falta).</li><li>Dados fictícios assinalam-se como tal — sempre.</li></ul>
+<p class="ref">📎 M3 · slides 30–32</p>
+<div class="foot"><span>IA Aplicada ao Trabalho Administrativo · U.Porto · Sessão 2 · 13 nov 2026</span><span>Ricardo Correia · linkedin.com/in/ricardojccorreia</span></div>
+</section>
+<section class="slide prompt phase-prompt" data-title="Fase 5 · prompt" data-notes="Dar 12 minutos. Escolher 2 participantes para mostrar no Meet. Insistir na verificação.">
+<p class="eyebrow">Fase 5 · na mesma conversa</p>
+<h2>Dados fictícios para simular o piloto</h2>
+<div class="pp">
+  <div><div class="pbox"><div class="pbadge">FASE 5</div><button class="cp" onclick="cp(this)">Copiar</button><code>FASE 5 · DADOS FICTÍCIOS
+Gera dados fictícios que simulem os primeiros 6 meses do piloto.
+Formato CSV, separador ponto e vírgula, 60 linhas, com colunas e estilo como nestes exemplos:
+data;unidade;tipo_pedido;canal;tempo_resposta_dias;estado;satisfacao_1a5
+2027-01-08;FEUP;Reclamação;Email;4;Resolvido;4
+2027-01-09;FMUP;Pedido de informação;Presencial;1;Resolvido;5
+Adapta as colunas ao meu projeto. Inclui variação realista (meses com mais pedidos, 2–3 valores em falta).
+Nenhum nome de pessoa. Indica antes da tabela que os dados são fictícios.</code></div><p class="lbl" style="margin-top:12px">Depois · itera</p><div class="follow">Dá-me os dados como ficheiro .csv para descarregar (ou diz-me como colar no Excel em colunas).</div></div>
+  <div class="vbox"><b>✔ Verifica</b><ul><li>Abre no Excel: as colunas separam bem?</li><li>Os valores fazem sentido (sem datas impossíveis, notas fora de 1–5)?</li><li>Ficou claro que são dados fictícios?</li></ul><div class="cardrem">🗂️ No fim: cartão do projeto</div></div>
+</div>
+<div class="foot"><span>IA Aplicada ao Trabalho Administrativo · U.Porto · Sessão 2 · 13 nov 2026</span><span>Ricardo Correia · linkedin.com/in/ricardojccorreia</span></div>
+</section>
+<section class="slide phase-intro" data-title="Fase 6 · teoria" data-notes="FASE 6 — teoria em 2–3 minutos, depois prompt. A IA analisa folhas de cálculo — se fizer as contas com código e mostrar a tabela usada.">
+<div class="pnum">6</div>
+<p class="eyebrow">Fase 6 · 11h35 · 15 min</p>
+<h2>Relatório de acompanhamento</h2>
+<div class="techtag">Técnica: <b>Análise de ficheiros + iteração</b></div>
+<p class="lead">A IA analisa folhas de cálculo — se fizer as contas com código e mostrar a tabela usada.</p>
+<ul class="theory"><li>Anexa o ficheiro e pede cálculos &quot;com código&quot;.</li><li>Pede indicadores com valor e variação — e as limitações dos dados.</li><li>Itera para cada público: dirigente (meia página), equipa (detalhe).</li></ul>
+<p class="ref">📎 T1 · Folhas de cálculo · M3 · slide 51</p>
+<div class="foot"><span>IA Aplicada ao Trabalho Administrativo · U.Porto · Sessão 2 · 13 nov 2026</span><span>Ricardo Correia · linkedin.com/in/ricardojccorreia</span></div>
+</section>
+<section class="slide prompt phase-prompt" data-title="Fase 6 · prompt" data-notes="Dar 12 minutos. Escolher 2 participantes para mostrar no Meet. Insistir na verificação.">
+<p class="eyebrow">Fase 6 · na mesma conversa</p>
+<h2>Relatório de acompanhamento</h2>
+<div class="pp">
+  <div><div class="pbox"><div class="pbadge">FASE 6</div><button class="cp" onclick="cp(this)">Copiar</button><code>FASE 6 · RELATÓRIO
+Com base nos dados (anexo o CSV / usa os que geraste), produz um relatório de acompanhamento para [a chefia / a direção]:
+1. 5 indicadores-chave com valor e variação mensal (faz as contas com código e mostra a tabela usada);
+2. 1 gráfico de evolução mensal;
+3. 3 conclusões e 2 recomendações;
+4. limitações dos dados.
+Máximo 1 página.</code></div><p class="lbl" style="margin-top:12px">Depois · itera</p><div class="follow">Reduz para meia página, para a reitoria. Coloca a recomendação principal na primeira frase.</div></div>
+  <div class="vbox"><b>✔ Verifica</b><ul><li>Confirma 1 indicador no Excel (ex.: média do tempo de resposta).</li><li>As conclusões decorrem dos números ou são opinião?</li><li>O relatório diz que os dados são fictícios?</li></ul><div class="cardrem">🗂️ No fim: cartão do projeto</div></div>
+</div>
+<div class="foot"><span>IA Aplicada ao Trabalho Administrativo · U.Porto · Sessão 2 · 13 nov 2026</span><span>Ricardo Correia · linkedin.com/in/ricardojccorreia</span></div>
+</section>
+<section class="slide phase-intro" data-title="Fase 7 · teoria" data-notes="FASE 7 — teoria em 2–3 minutos, depois prompt. Agora que há resultados, comunica-os: o mesmo conteúdo, quatro formatos, quatro públicos.">
+<div class="pnum">7</div>
+<p class="eyebrow">Fase 7 · 11h50 · 15 min</p>
+<h2>Conteúdos de divulgação</h2>
+<div class="techtag">Técnica: <b>Persona-audiência + formatos</b></div>
+<p class="lead">Agora que há resultados, comunica-os: o mesmo conteúdo, quatro formatos, quatro públicos.</p>
+<ul class="theory"><li>Para cada peça: público, canal, extensão, tom.</li><li>Pede variantes e escolhe; itera só o que precisa.</li><li>Transparência: indica que o texto teve apoio de IA (AI Act, art. 50.º).</li></ul>
+<p class="ref">📎 M3 · slides 33–34 e 49–50</p>
+<div class="foot"><span>IA Aplicada ao Trabalho Administrativo · U.Porto · Sessão 2 · 13 nov 2026</span><span>Ricardo Correia · linkedin.com/in/ricardojccorreia</span></div>
+</section>
+<section class="slide prompt phase-prompt" data-title="Fase 7 · prompt" data-notes="Dar 12 minutos. Escolher 2 participantes para mostrar no Meet. Insistir na verificação.">
+<p class="eyebrow">Fase 7 · na mesma conversa</p>
+<h2>Conteúdos de divulgação</h2>
+<div class="pp">
+  <div><div class="pbox"><div class="pbadge">FASE 7</div><button class="cp" onclick="cp(this)">Copiar</button><code>FASE 7 · DIVULGAÇÃO
+Cria os materiais de divulgação, cada um adaptado ao seu público:
+1. notícia para a newsletter interna da U.Porto (150 palavras);
+2. post para o LinkedIn institucional (80 palavras, 3 hashtags);
+3. email aos colegas do serviço a convidar para o piloto (tom próximo, 120 palavras);
+4. guião de 5 slides para apresentar à direção (título + 3 bullets por slide).
+Onde se aplique, indica que o texto foi preparado com apoio de IA.</code></div><p class="lbl" style="margin-top:12px">Depois · itera</p><div class="follow">Dá-me 3 títulos alternativos para a notícia: um informativo, um com número, um com pergunta.</div></div>
+  <div class="vbox"><b>✔ Verifica</b><ul><li>Os números citados são os do relatório (e fictícios)?</li><li>O tom de cada peça serve o público?</li><li>Está indicado o apoio de IA onde é público?</li></ul><div class="cardrem">🗂️ No fim: cartão do projeto</div></div>
+</div>
+<div class="foot"><span>IA Aplicada ao Trabalho Administrativo · U.Porto · Sessão 2 · 13 nov 2026</span><span>Ricardo Correia · linkedin.com/in/ricardojccorreia</span></div>
+</section>
+<section class="slide prompt" data-title="Assistente" data-notes="Fechar o ciclo: o que fizeram hoje pode ser um procedimento documentado do serviço. Cola nas instruções de um Project, GPT, Gem ou Agente.">
+<p class="eyebrow">Fecho · 12h05 · M3 · slide 41</p>
+<h2>De conversa a <span class="accent">assistente do serviço</span></h2>
+<div class="pbox"><div class="pbadge">ASSISTENTE</div><button class="cp" onclick="cp(this)">Copiar</button><code>Transforma esta conversa num assistente reutilizável para gerir esta iniciativa nos próximos meses.
+Escreve as instruções para um Project / GPT / Gem / Agente do Copilot com:
+(1) objetivo do assistente; (2) informação que deve pedir antes de começar; (3) passos que segue;
+(4) formatos de saída; (5) o que nunca deve fazer.
+Máximo 250 palavras. Inclui no fim o cartão do projeto atual.</code></div>
+<div class="steps"><span>Project · Claude / ChatGPT</span><span>GPT · ChatGPT</span><span>Gem · Gemini</span><span>Agente · Copilot</span></div>
+<div class="foot"><span>IA Aplicada ao Trabalho Administrativo · U.Porto · Sessão 2 · 13 nov 2026</span><span>Ricardo Correia · linkedin.com/in/ricardojccorreia</span></div>
+</section>
+<section class="slide closing" data-title="Encerramento" data-notes="Recolher 3 a 4 partilhas. Questionário pós. Agradecer aos RH (SPUP).">
+<p class="eyebrow">Para levar</p>
+<h2>Partilha no Meet — 3 frases</h2>
+<div class="pbox plain"><code>1. O meu projeto chama-se [título] e quer [objetivo numa frase].
+2. A fase em que a IA mais me ajudou foi [fase] — e onde tive de corrigir foi [fase], porque [razão].
+3. Amanhã, no meu serviço, vou experimentar [ação concreta].</code></div>
+<div class="rules">
+  <div><b>Verificar</b>tudo o que pode ser verificado</div>
+  <div><b>Proteger</b>nunca dados pessoais num chatbot público</div>
+  <div><b>Atribuir</b>quando usas IA, diz-se</div>
+  <div><b>Supervisionar</b>a IA propõe, uma pessoa aprova</div>
+  <div><b>Decidir</b>a responsabilidade é tua</div>
+</div>
+<div class="take">📋 Questionário pós-formação — QR code no hub, secção Ferramentas · 3 minutos · obrigado!</div>
+<div class="foot"><span>IA Aplicada ao Trabalho Administrativo · U.Porto · Sessão 2 · 13 nov 2026</span><span>Ricardo Correia · linkedin.com/in/ricardojccorreia</span></div>
+</section>
+</div>
+<div class="notes" id="notes"></div>
+<div class="ui"><button id="prev" aria-label="Anterior">←</button><span id="counter">1 / 24</span><button id="next" aria-label="Seguinte">→</button><button id="nbtn" title="Notas (N)">Notas</button><button id="fbtn" title="Ecrã inteiro (F)">⛶</button></div>
+<script>
+const slides=[...document.querySelectorAll('.slide')];const stage=document.querySelector('.stage');
+const counter=document.getElementById('counter');const notes=document.getElementById('notes');let cur=0;
+function fit(){const s=Math.min(innerWidth/1280,innerHeight/720);stage.style.transform=`translate(-50%,-50%) scale(${s})`;}
+function goTo(n){slides[cur].classList.remove('active');cur=Math.max(0,Math.min(slides.length-1,n));slides[cur].classList.add('active');
+ counter.textContent=`${cur+1} / ${slides.length}`;notes.innerHTML='<small>Notas · '+slides[cur].dataset.title+'</small>'+slides[cur].dataset.notes;history.replaceState(null,'','#'+(cur+1));}
+document.getElementById('next').onclick=()=>goTo(cur+1);document.getElementById('prev').onclick=()=>goTo(cur-1);
+document.getElementById('nbtn').onclick=()=>notes.classList.toggle('on');
+document.getElementById('fbtn').onclick=()=>document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();
+document.addEventListener('keydown',e=>{if(['ArrowRight','ArrowDown','PageDown',' '].includes(e.key)){e.preventDefault();goTo(cur+1)}
+ if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();goTo(cur-1)}
+ if(e.key==='Home')goTo(0);if(e.key==='End')goTo(slides.length-1);
+ if(e.key==='n'||e.key==='N')notes.classList.toggle('on');
+ if(e.key==='f'||e.key==='F')document.getElementById('fbtn').click();});
+let tx=0;document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX});
+document.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50)goTo(cur+(dx<0?1:-1))});
+function cp(b){const t=b.nextElementSibling.textContent;const ok=()=>{b.textContent='✓ Copiado';setTimeout(()=>b.textContent='Copiar',1800)};
+ if(navigator.clipboard&&isSecureContext)navigator.clipboard.writeText(t).then(ok);else{const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();document.execCommand('copy');a.remove();ok()}}
+addEventListener('resize',fit);fit();goTo((parseInt(location.hash.slice(1))||1)-1);
+</script>
+</body>
+</html>

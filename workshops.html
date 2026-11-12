@@ -41,54 +41,131 @@
   .note { margin-top:2rem; background:var(--white); border:1px solid var(--slate2); border-left:4px solid var(--amber); border-radius:.5rem; padding:1rem 1.25rem; font-size:.87rem; color:var(--slate6); }
   footer { background:var(--navy); color:#8AA9C4; text-align:center; font-size:.8rem; padding:1.5rem 1rem; }
   footer a { color:#B8D4E8; }
+  header { position:relative; }
+  nav.top { position:absolute; top:.9rem; left:1rem; right:1rem; display:flex; justify-content:space-between; align-items:center; }
+  nav.top a { font-size:.8rem; font-weight:700; color:#8AA9C4; text-decoration:none; }
+  nav.top a:hover { color:var(--white); }
+  #lang { background:transparent; color:var(--white); border:1px solid rgba(255,255,255,.35); border-radius:99px; font:inherit; font-size:.75rem; font-weight:800; padding:.2rem .7rem; cursor:pointer; min-height:32px; }
+  #lang:hover { background:var(--cyan); border-color:var(--cyan); }
+  @media(max-width:640px){ header { padding-top:3.2rem; } }
 </style>
 </head>
 <body>
 <header>
-  <div class="tag">Universidade do Porto · Formação em IA Generativa</div>
-  <h1>IA Aplicada ao Trabalho Administrativo</h1>
-  <p>Workshops práticos para técnicos e dirigentes dos serviços da U.Porto. Cada edição tem o seu hub com agenda, ferramentas e todos os prompts dos exercícios.</p>
+  <nav class="top"><a id="home" href="../">← Ricardo Cruz-Correia</a><button id="lang" type="button">EN</button></nav>
+  <div class="tag" data-i18n="tag"></div>
+  <h1 data-i18n="h1"></h1>
+  <p data-i18n="lede"></p>
 </header>
 
 <main>
-  <div class="label">Edições</div>
+  <div class="label" data-i18n="eds"></div>
   <div class="grid">
     <div class="ed current">
-      <span class="badge b-now">2.ª edição · a decorrer</span>
-      <div class="date">6 e 13 de novembro de 2026 · 09h30 – 12h30</div>
-      <h2>Reitoria da U.Porto · Auditório Ruy Luís Gomes</h2>
-      <p>~65 participantes, em duas manhãs (6 h). Conteúdos atualizados: agentes, instruções reutilizáveis, prompt injection e o AI Act em vigor.</p>
+      <span class="badge b-now" data-i18n="e2badge"></span>
+      <div class="date" data-i18n="e2date"></div>
+      <h2 data-i18n="e2place"></h2>
+      <p data-i18n="e2desc"></p>
       <ul>
-        <li><strong>Sessão 1</strong> · sexta, 6 nov · Enquadramento · Limites · Prompt Engineering</li>
-        <li><strong>Sessão 2</strong> · sexta, 13 nov · Folhas de cálculo · Ferramentas · Atelier · Encerramento</li>
+        <li data-i18n="e2s1"></li>
+        <li data-i18n="e2s2"></li>
       </ul>
       <div class="turmas">
-        <a href="workshop-nov2026.html?turma=A">Sessão 1 →</a>
-        <a class="alt" href="workshop-nov2026.html?turma=B">Sessão 2 →</a>
+        <a href="workshop-nov2026.html?turma=A" data-i18n="e2b1"></a>
+        <a class="alt" href="workshop-nov2026.html?turma=B" data-i18n="e2b2"></a>
       </div>
     </div>
 
     <a class="ed past" href="workshop.html">
-      <span class="badge b-past">1.ª edição · concluída</span>
-      <div class="date">16 de junho de 2026</div>
+      <span class="badge b-past" data-i18n="e1badge"></span>
+      <div class="date" data-i18n="e1date"></div>
       <h2>Auditório Ruy Luís Gomes</h2>
-      <p>Primeira edição do workshop, num dia: enquadramento, limites e alucinações, prompt engineering, folhas de cálculo, ferramentas avançadas e atelier por unidade.</p>
+      <p data-i18n="e1desc"></p>
       <ul>
-        <li><strong>Manhã</strong> · M1 Enquadramento · M2 Limites · M3 Prompt Engineering</li>
-        <li><strong>Tarde</strong> · T1 Folhas de cálculo · T2 Ferramentas · T3 Atelier · T4 Encerramento</li>
+        <li data-i18n="e1am"></li>
+        <li data-i18n="e1pm"></li>
       </ul>
-      <span class="cta">Abrir hub de junho →</span>
+      <span class="cta" data-i18n="e1cta"></span>
     </a>
   </div>
 
-  <div class="note">
-    💡 Os prompts das duas edições podem ser copiados e adaptados livremente. Regra de ouro: <strong>verificar, proteger, atribuir, supervisionar, decidir</strong>.
-  </div>
+  <div class="note" data-i18n="note"></div>
 </main>
 
 <footer>
   <p>Ricardo Correia · Helder Palheira · Jannine Nascimento</p>
-  <p style="margin-top:.3rem"><a href="../intervencoes/?tema=GenAI">Outras apresentações e intervenções →</a></p>
+  <p style="margin-top:.3rem"><a id="talks" href="../intervencoes/?tema=GenAI" data-i18n="talks"></a></p>
 </footer>
+<script>
+const T = {
+  pt: {
+    title: "Workshops IA · U.Porto",
+    tag: "Universidade do Porto · Formação em IA Generativa",
+    h1: "IA Aplicada ao Trabalho Administrativo",
+    lede: "Workshops práticos para técnicos e dirigentes dos serviços da U.Porto. Cada edição tem o seu hub com agenda, ferramentas e todos os prompts dos exercícios.",
+    eds: "Edições",
+    e2badge: "2.ª edição · a decorrer",
+    e2date: "6 e 13 de novembro de 2026 · 09h30 – 12h30",
+    e2place: "Reitoria da U.Porto · Auditório Ruy Luís Gomes",
+    e2desc: "~65 participantes, em duas manhãs (6 h). Conteúdos atualizados: agentes, instruções reutilizáveis, prompt injection e o AI Act em vigor.",
+    e2s1: "<strong>Sessão 1</strong> · sexta, 6 nov · Enquadramento · Limites · Prompt Engineering",
+    e2s2: "<strong>Sessão 2</strong> · sexta, 13 nov · Folhas de cálculo · Ferramentas · Atelier · Encerramento",
+    e2b1: "Sessão 1 →", e2b2: "Sessão 2 →",
+    e1badge: "1.ª edição · concluída",
+    e1date: "16 de junho de 2026",
+    e1desc: "Primeira edição do workshop, num dia: enquadramento, limites e alucinações, prompt engineering, folhas de cálculo, ferramentas avançadas e atelier por unidade.",
+    e1am: "<strong>Manhã</strong> · M1 Enquadramento · M2 Limites · M3 Prompt Engineering",
+    e1pm: "<strong>Tarde</strong> · T1 Folhas de cálculo · T2 Ferramentas · T3 Atelier · T4 Encerramento",
+    e1cta: "Abrir hub de junho →",
+    note: "💡 Os prompts das duas edições podem ser copiados e adaptados livremente. Regra de ouro: <strong>verificar, proteger, atribuir, supervisionar, decidir</strong>.",
+    talks: "Outras apresentações e intervenções →"
+  },
+  en: {
+    title: "AI Workshops · U.Porto",
+    tag: "University of Porto · Generative AI Training",
+    h1: "Applied AI for Administrative Work",
+    lede: "Hands-on workshops for staff and managers of the University of Porto services. Each edition has its own hub with the agenda, tools and every exercise prompt (hubs in Portuguese).",
+    eds: "Editions",
+    e2badge: "2nd edition · in progress",
+    e2date: "6 and 13 November 2026 · 09:30 – 12:30",
+    e2place: "Rectorate of U.Porto · Ruy Luís Gomes Auditorium",
+    e2desc: "~65 participants over two mornings (6 h). Updated content: AI agents, reusable instructions, prompt injection and the EU AI Act now in force.",
+    e2s1: "<strong>Session 1</strong> · Friday, 6 Nov · Overview · Limits · Prompt engineering",
+    e2s2: "<strong>Session 2</strong> · Friday, 13 Nov · Spreadsheets · Advanced tools · Workshop · Closing",
+    e2b1: "Session 1 →", e2b2: "Session 2 →",
+    e1badge: "1st edition · completed",
+    e1date: "16 June 2026",
+    e1desc: "First edition, in one day: overview, limits and hallucinations, prompt engineering, spreadsheets, advanced tools and a hands-on workshop by faculty.",
+    e1am: "<strong>Morning</strong> · M1 Overview · M2 Limits · M3 Prompt engineering",
+    e1pm: "<strong>Afternoon</strong> · T1 Spreadsheets · T2 Tools · T3 Workshop · T4 Closing",
+    e1cta: "Open June hub →",
+    note: "💡 Prompts from both editions may be freely copied and adapted. Golden rule: <strong>verify, protect, disclose, supervise, decide</strong>.",
+    talks: "Other talks and presentations →"
+  }
+};
+const store = { get: k => { try { return localStorage.getItem(k); } catch (e) { return null; } },
+                set: (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} } };
+const q = new URLSearchParams(location.search).get("lang");
+let lang = (q === "pt" || q === "en") ? q
+  : (store.get("site_lang") || ((navigator.language || "").toLowerCase().startsWith("pt") ? "pt" : "en"));
+if (lang !== "pt" && lang !== "en") lang = "pt";
+function render() {
+  const t = T[lang];
+  document.documentElement.lang = lang;
+  document.title = t.title;
+  document.querySelectorAll("[data-i18n]").forEach(el => el.innerHTML = t[el.dataset.i18n]);
+  const b = document.getElementById("lang");
+  b.textContent = lang === "pt" ? "EN" : "PT";
+  b.setAttribute("aria-label", lang === "pt" ? "Switch to English" : "Mudar para português");
+  document.getElementById("home").href = "../?lang=" + lang;
+  document.getElementById("talks").href = "../intervencoes/?tema=GenAI&lang=" + lang;
+}
+document.getElementById("lang").addEventListener("click", () => {
+  lang = lang === "pt" ? "en" : "pt"; store.set("site_lang", lang);
+  const u = new URL(location.href); u.searchParams.set("lang", lang); history.replaceState(null, "", u);
+  render();
+});
+render();
+</script>
 </body>
 </html>

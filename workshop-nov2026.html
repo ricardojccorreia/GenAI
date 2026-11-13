@@ -200,6 +200,9 @@
   .verify ul { list-style:none; margin-top:.3rem; }
   .verify li { margin:.2rem 0; }
   .verify input { margin-right:.35rem; accent-color:var(--green); }
+  .demo { background:#EFF6FF; border:1px solid #BFDBFE; border-radius:.5rem; padding:.6rem .9rem; margin-top:.75rem; font-size:.84rem; }
+  .demo p { font-size:.8rem; color:var(--slate6); margin:.2rem 0; }
+  .demo ol { margin:.3rem 0 0 1.2rem; }
   .cardnote { font-size:.8rem; color:var(--slate6); margin-top:.5rem; }
   #sim code { background:rgba(0,0,0,.06); padding:0 .25rem; border-radius:.2rem; }
 </style>
@@ -283,7 +286,7 @@
   <div class="alert alert-amber" style="font-size:.85rem">Formato novo: cada um constrói o seu projeto numa só conversa com a IA. <a href="#sim" data-goto="sim" style="color:#92400E;font-weight:800">Ver a simulação →</a></div>
   <div class="agenda-block">
     <div class="agenda-time amber">09h30</div>
-    <div><div class="agenda-title">Arranque · entrar no Copilot · retomar a Tríade</div><div class="agenda-desc">Copilot Chat com conta U.Porto · slide 9 do M3 · prompt inicial · cartão do projeto</div></div>
+    <div><div class="agenda-title">Arranque · criar o projeto no chatbot · retomar a Tríade</div><div class="agenda-desc">Copilot com conta U.Porto · slide 9 do M3 · instruções do projeto · primeira mensagem · cartão</div></div>
   </div>
   <div class="agenda-block">
     <div class="agenda-time amber">09h55</div>
@@ -307,15 +310,15 @@
   </div>
   <div class="agenda-block">
     <div class="agenda-time amber">11h25</div>
-    <div><div class="agenda-title">Fase 5 · Dados fictícios</div><div class="agenda-desc">Few-shot · CSV para o Excel</div></div>
+    <div><div class="agenda-title">Fase 5 · Dados fictícios</div><div class="agenda-desc">Few-shot · CSV · demonstração do formador: Copilot no Excel</div></div>
   </div>
   <div class="agenda-block">
     <div class="agenda-time amber">11h40</div>
-    <div><div class="agenda-title">Fase 7 · Divulgação</div><div class="agenda-desc">Newsletter · LinkedIn · email · slides · tradução</div></div>
+    <div><div class="agenda-title">Fase 7 · Divulgação</div><div class="agenda-desc">Textos para 4 públicos · cartaz com uma &quot;skill&quot; gráfica · tradução</div></div>
   </div>
   <div class="agenda-block">
     <div class="agenda-time amber">12h00</div>
-    <div><div class="agenda-title">Fecho · assistente reutilizável + questionário pós</div><div class="agenda-desc">Transformar a conversa num agente / Project · partilha · avaliação · (Fase 6, relatório: opcional, em casa)</div></div>
+    <div><div class="agenda-title">Fecho · melhorar as instruções do projeto + questionário pós</div><div class="agenda-desc">O projeto fica no teu chatbot · partilha · avaliação · (Fase 6, relatório: opcional, em casa)</div></div>
   </div>
 
   <div style="margin-top:1.5rem" class="alert alert-cyan">
@@ -994,6 +997,9 @@ Transforma isto numa tabela com responsáveis, prazos e estado.</pre>
 
 
 
+
+
+
 <!-- ══════════════════════════════════════════════
      SESSÃO 2 · SIMULAÇÃO EM 7 FASES
 ══════════════════════════════════════════════ -->
@@ -1025,10 +1031,37 @@ Transforma isto numa tabela com responsáveis, prazos e estado.</pre>
   </div>
 
   <div class="card" style="border-top:3px solid var(--navy)">
-    <span class="badge badge-navy">PROMPT INICIAL · COPIA, PREENCHE OS [ ] E COLA NUMA CONVERSA NOVA</span>
-    <h3>O meu projeto</h3>
-    <p style="font-size:.85rem;color:var(--slate6)">Repara: <strong style="color:var(--cyan)">contexto</strong> (1.º parágrafo) · <strong style="color:var(--amber)">papel</strong> (2.º) · <strong style="color:var(--green)">expectativa</strong> (regras) · e no fim a <strong>interação invertida</strong>: a IA pergunta antes de produzir.</p>
+    <span class="badge badge-navy">PASSO 1 · CRIA UM PROJETO NO TEU CHATBOT</span>
+    <h3>O contexto estável vai para as instruções do projeto</h3>
+    <p style="font-size:.85rem;color:var(--slate6)">Regra do M3 (slide 44): o que não muda (papel, regras, formato) vai para a configuração; o que é desta tarefa vai para a conversa. Cola este texto nas <strong>instruções</strong> do projeto:</p>
     <div class="prompt-box" style="border-left-color:var(--navy)">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>És especialista na implementação de iniciativas de melhoria e inovação em universidades públicas portuguesas, em particular na Universidade do Porto.
+Vais acompanhar-me a desenhar uma iniciativa para o meu serviço, de forma faseada: eu digo-te qual é a fase seguinte.
+
+Regras para todas as conversas deste projeto:
+- português europeu, tom institucional, respostas concisas e estruturadas;
+- não inventes regulamentos, nomes, valores, prazos ou programas: assinala [a confirmar];
+- não uses dados pessoais reais;
+- quando faltar informação, pergunta antes de avançar;
+- no fim de cada fase, propõe o &quot;cartão do projeto&quot; atualizado (máximo 150 palavras).</pre>
+    </div>
+    <table class="simple" style="margin-top:.6rem"><tr><td style="white-space:nowrap"><strong>Copilot (conta U.Porto)</strong></td><td>Cria um <b>agente</b> (Agentes → Criar agente) e cola o texto nas instruções. Se a opção não te aparecer, usa a alternativa abaixo.</td></tr><tr><td style="white-space:nowrap"><strong>ChatGPT</strong></td><td>Barra lateral → <b>Projetos → Novo projeto</b> → Instruções.</td></tr><tr><td style="white-space:nowrap"><strong>Claude</strong></td><td><b>Projects → New project</b> → Project instructions.</td></tr><tr><td style="white-space:nowrap"><strong>Gemini</strong></td><td><b>Gems → Novo Gem</b> → Instruções.</td></tr></table>
+  </div>
+
+  <div class="card" style="border-top:3px solid var(--cyan)">
+    <span class="badge badge-cyan">PASSO 2 · PRIMEIRA MENSAGEM, DENTRO DO PROJETO</span>
+    <h3>O meu projeto</h3>
+    <p style="font-size:.85rem;color:var(--slate6)">Preenche os <code>[ ]</code>. No fim está a <strong>interação invertida</strong>: a IA pergunta antes de produzir.</p>
+    <div class="prompt-box" style="border-left-color:var(--cyan)">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>Quero propor uma nova iniciativa no meu [serviço / departamento / faculdade / unidade orgânica], em torno de [gestão financeira / tratamento de reclamações / apoio à investigação / acolhimento de estudantes / ...].
+A minha função atual é [técnico superior / assistente técnico / professor / jurista / ...].
+
+Antes de começarmos, faz-me até 5 perguntas para perceberes o contexto. Uma de cada vez.</pre>
+    </div>
+    <details style="margin-top:.6rem;font-size:.85rem"><summary style="cursor:pointer;font-weight:700;color:var(--slate6)">Sem opção de projeto? Usa o prompt inicial completo numa conversa nova</summary>
+    <div class="prompt-box">
       <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
       <pre>Quero propor uma nova iniciativa no meu [serviço / departamento / faculdade / unidade orgânica] da Universidade do Porto, em torno de [gestão financeira / tratamento de reclamações / apoio à investigação / acolhimento de estudantes / ...].
 A minha função atual é [técnico superior / assistente técnico / professor / jurista / ...].
@@ -1043,12 +1076,13 @@ Regras para toda a conversa:
 
 Antes de começarmos, faz-me até 5 perguntas para perceberes o contexto. Uma de cada vez.</pre>
     </div>
+    </details>
   </div>
 
   <div class="grid2">
     <div class="card" style="border-left:4px solid var(--green)">
       <span class="badge badge-green">NO FIM DE CADA FASE · CARTÃO DO PROJETO</span>
-      <p style="font-size:.85rem;color:var(--slate6)">Guarda o estado do projeto. Copia o cartão para um documento teu.</p>
+      <p style="font-size:.85rem;color:var(--slate6)">Guarda o estado do projeto. Copia o cartão para um documento e, se puderes, carrega-o nos <strong>ficheiros do projeto</strong>.</p>
     <div class="prompt-box" style="border-left-color:var(--green)">
       <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
       <pre>Atualiza o CARTÃO DO PROJETO (máximo 150 palavras):
@@ -1056,7 +1090,7 @@ título · objetivo · unidade e função · decisões tomadas · números-chave
     </div>
     </div>
     <div class="card" style="border-left:4px solid var(--amber)">
-      <span class="badge badge-amber">SE PRECISARES DE RECOMEÇAR NUM CHAT NOVO</span>
+      <span class="badge badge-amber">SE PRECISARES DE RECOMEÇAR (NOVA CONVERSA NO MESMO PROJETO)</span>
       <p style="font-size:.85rem;color:var(--slate6)">Gerir o contexto também é uma técnica: o cartão leva o essencial, sem o ruído.</p>
     <div class="prompt-box" style="border-left-color:var(--amber)">
       <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
@@ -1197,6 +1231,7 @@ Nenhum nome de pessoa. Indica antes da tabela que os dados são fictícios.</pre
       <pre>Dá-me os dados como ficheiro .csv para descarregar.
 (Se não der: copia a tabela para o Excel → Dados → Texto para Colunas → separador ponto e vírgula.)</pre>
     </div>
+    <div class="demo"><strong>🖥️ Demonstração do formador · Copilot no Excel</strong><p>Só no ecrã do formador (exige licença Microsoft 365 Copilot). Acompanha: o mesmo se faz no chat, com a tabela colada.</p><ol><li>Abre o CSV no Excel e converte-o em tabela.</li><li>&quot;Acrescenta uma coluna com o mês a partir da data.&quot;</li><li>&quot;Cria uma tabela dinâmica com o tempo médio de resposta por unidade e por mês.&quot;</li><li>&quot;Faz um gráfico de linhas da evolução mensal dos pedidos.&quot;</li><li>&quot;Destaca os valores em falta e explica a fórmula que usaste.&quot;</li></ol></div>
     <div class="verify"><strong>✔ Verifica antes de avançar</strong><ul><li><label><input type="checkbox"> Abre no Excel: as colunas separam bem?</label></li><li><label><input type="checkbox"> Os valores fazem sentido (sem datas impossíveis, notas fora de 1–5)?</label></li><li><label><input type="checkbox"> Ficou claro que são dados fictícios?</label></li></ul></div>
     <p class="cardnote">🗂️ No fim: pede o <strong>cartão do projeto</strong>.</p>
   </div>
@@ -1249,22 +1284,35 @@ Onde se aplique, indica que o texto foi preparado com apoio de IA.</pre>
       <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
       <pre>Traduz a notícia para inglês, para o site internacional da U.Porto. Mantém o registo institucional e assinala termos sem equivalente direto.</pre>
     </div>
+    <p style="font-size:.8rem;font-weight:700;color:var(--slate6);margin-top:.8rem">FASE 7B · PEÇA VISUAL COM UMA "SKILL" GRÁFICA</p>
+    <p style="font-size:.85rem;color:var(--slate6)">Uma <strong>skill</strong> é um conjunto de instruções reutilizáveis que o assistente aplica sempre que a tarefa o pede (M3 · slide 41). Aqui, a skill é uma mini-guia de marca.</p>
+    <div class="prompt-box" style="border-left-color:var(--amber)">
+      <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+      <pre>FASE 7B · PEÇA VISUAL
+Usa esta mini-guia de identidade visual (a minha &quot;skill&quot; de marca) em todas as peças gráficas deste projeto:
+- cores: [ex.: azul-escuro #0D2D52, ciano #0891B2, branco]; fundo limpo, muito espaço livre;
+- tipografia: sem serifas, títulos curtos e grandes;
+- estilo: ilustração plana ou fotografia realista de espaços de trabalho; sem pessoas reconhecíveis, sem logótipos de terceiros;
+- texto na imagem: no máximo 8 palavras, em português, sem erros;
+- incluir sempre, num canto, a menção &quot;Imagem gerada com IA&quot;.
+
+Cria um cartaz digital (formato 4:5, para LinkedIn e ecrãs internos) que anuncie o piloto do projeto, com o título da notícia que escrevemos.</pre>
+    </div>
+    <ul class="theory" style="font-size:.82rem"><li><b>Copilot / ChatGPT / Gemini:</b> geram a imagem na própria conversa.</li><li><b>Claude:</b> se tiveres uma <b>skill</b> de design ou de marca ativa, pede "usa a skill de [marca]"; sem skill, a mini-guia acima faz o mesmo papel.</li><li>Imagem gerada por IA para público: identifica-a como tal (AI Act, art. 50.º).</li></ul>
     <div class="verify"><strong>✔ Verifica antes de avançar</strong><ul><li><label><input type="checkbox"> Os números citados vêm da fase 3 ou 5 (e são fictícios)?</label></li><li><label><input type="checkbox"> O tom de cada peça serve o público?</label></li><li><label><input type="checkbox"> Está indicado o apoio de IA onde é público?</label></li></ul></div>
     <p class="cardnote">🗂️ No fim: pede o <strong>cartão do projeto</strong>.</p>
   </div>
 
-  <div class="divider-label">FECHO · 12h05 · DE CONVERSA A ASSISTENTE</div>
+  <div class="divider-label">FECHO · 12h00 · O PROJETO FICA PARA O TEU SERVIÇO</div>
   <div class="card" style="border-top:3px solid var(--navy)">
     <span class="badge badge-navy">INSTRUÇÕES REUTILIZÁVEIS · M3 · SLIDE 41</span>
-    <h3>Transforma a conversa num assistente do teu serviço</h3>
-    <p style="font-size:.85rem;color:var(--slate6)">Cola o resultado num Project (Claude/ChatGPT), GPT, Gem (Gemini) ou Agente (Copilot). Na próxima vez, não começas do zero.</p>
+    <h3>Melhora as instruções do projeto que criaste no passo 1</h3>
+    <p style="font-size:.85rem;color:var(--slate6)">O projeto continua no teu chatbot. Atualiza as instruções com o que aprendeste e, na próxima vez, não começas do zero.</p>
     <div class="prompt-box" style="border-left-color:var(--navy)">
       <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
-      <pre>Transforma esta conversa num assistente reutilizável para gerir esta iniciativa nos próximos meses.
-Escreve as instruções para um Project / GPT / Gem / Agente do Copilot com:
-(1) objetivo do assistente; (2) informação que deve pedir antes de começar; (3) passos que segue;
-(4) formatos de saída; (5) o que nunca deve fazer.
-Máximo 250 palavras. Inclui no fim o cartão do projeto atual.</pre>
+      <pre>Com base em tudo o que fizemos hoje, propõe uma versão melhorada das instruções deste projeto, para eu as colar nas definições.
+Mantém: papel, regras e formato do cartão. Acrescenta: o que aprendemos sobre o meu serviço, os formatos que funcionaram e o que nunca deves fazer.
+Máximo 250 palavras.</pre>
     </div>
   </div>
   <div class="card">
